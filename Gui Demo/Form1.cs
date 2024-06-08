@@ -3,6 +3,8 @@
  *  Creating a Line Chart:
  *  create a lable of size 1,1  or 3,3 (Size may need to reflect the line width ) with a color
  *  then draw a line from the controls center to the next to create the graph lines
+ *  
+ *  
  */
 
 
@@ -68,8 +70,8 @@ namespace Gui_Demo
         private void LoadList()
         {
             ChartElements.Add(new ChartControls("Entertainment", 50, Color.Blue));
-            ChartElements.Add(new ChartControls("Housing", 500, Color.Red));
-            ChartElements.Add(new ChartControls("Grocieries", 600, Color.Orange));
+            ChartElements.Add(new ChartControls("Housing", 800, Color.Red));
+            ChartElements.Add(new ChartControls("Grocieries", 1600, Color.Orange));
             ChartElements.Add(new ChartControls("Utilities", 350, Color.Green));
             ChartElements.Add(new ChartControls("Fuel", 500, Color.Teal));
             ChartElements.Add(new ChartControls("Auto Maintenance", 150, Color.Aqua));
@@ -199,8 +201,8 @@ namespace Gui_Demo
 
                 pnlKey.Controls.Add(xLabel);
 
-                xLabel.MouseEnter += XLabel_MouseEnter;
-                xLabel.MouseLeave += XLabel_MouseLeave;
+               // xLabel.MouseEnter += XLabel_MouseEnter;
+              //  xLabel.MouseLeave += XLabel_MouseLeave;
 
             }
 
@@ -452,7 +454,7 @@ namespace Gui_Demo
                 }
 
 
-                for (int i = 1; i <= panel_Chart.Height - 30; i++)
+                for (int i = 1; i <= panel_Chart.Height - 30; i++)//Create Lines
                 {
                     xLabel = new Label();
                     xLabel.Text = string.Empty;

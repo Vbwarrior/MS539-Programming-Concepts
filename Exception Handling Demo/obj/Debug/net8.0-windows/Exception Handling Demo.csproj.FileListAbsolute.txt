@@ -1,0 +1,16 @@
+C:\Coding Projects\School Projects\Exception Handling Demo\bin\Debug\net8.0-windows\Exception Handling Demo.exe
+C:\Coding Projects\School Projects\Exception Handling Demo\bin\Debug\net8.0-windows\Exception Handling Demo.deps.json
+C:\Coding Projects\School Projects\Exception Handling Demo\bin\Debug\net8.0-windows\Exception Handling Demo.runtimeconfig.json
+C:\Coding Projects\School Projects\Exception Handling Demo\bin\Debug\net8.0-windows\Exception Handling Demo.dll
+C:\Coding Projects\School Projects\Exception Handling Demo\bin\Debug\net8.0-windows\Exception Handling Demo.pdb
+C:\Coding Projects\School Projects\Exception Handling Demo\obj\Debug\net8.0-windows\Exception_Handling_Demo.frmMain.resources
+C:\Coding Projects\School Projects\Exception Handling Demo\obj\Debug\net8.0-windows\Exception Handling Demo.csproj.GenerateResource.cache
+C:\Coding Projects\School Projects\Exception Handling Demo\obj\Debug\net8.0-windows\Exception Handling Demo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Coding Projects\School Projects\Exception Handling Demo\obj\Debug\net8.0-windows\Exception Handling Demo.AssemblyInfoInputs.cache
+C:\Coding Projects\School Projects\Exception Handling Demo\obj\Debug\net8.0-windows\Exception Handling Demo.AssemblyInfo.cs
+C:\Coding Projects\School Projects\Exception Handling Demo\obj\Debug\net8.0-windows\Exception Handling Demo.csproj.CoreCompileInputs.cache
+C:\Coding Projects\School Projects\Exception Handling Demo\obj\Debug\net8.0-windows\Exception Handling Demo.dll
+C:\Coding Projects\School Projects\Exception Handling Demo\obj\Debug\net8.0-windows\refint\Exception Handling Demo.dll
+C:\Coding Projects\School Projects\Exception Handling Demo\obj\Debug\net8.0-windows\Exception Handling Demo.pdb
+C:\Coding Projects\School Projects\Exception Handling Demo\obj\Debug\net8.0-windows\Exception Handling Demo.genruntimeconfig.cache
+C:\Coding Projects\School Projects\Exception Handling Demo\obj\Debug\net8.0-windows\ref\Exception Handling Demo.dll

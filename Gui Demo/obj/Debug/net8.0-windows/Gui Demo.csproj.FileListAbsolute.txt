@@ -15,3 +15,21 @@ C:\Coding Projects\C#.Net\Gui Demo\obj\Debug\net8.0-windows\refint\Gui Demo.dll
 C:\Coding Projects\C#.Net\Gui Demo\obj\Debug\net8.0-windows\Gui Demo.pdb
 C:\Coding Projects\C#.Net\Gui Demo\obj\Debug\net8.0-windows\Gui Demo.genruntimeconfig.cache
 C:\Coding Projects\C#.Net\Gui Demo\obj\Debug\net8.0-windows\ref\Gui Demo.dll
+C:\Coding Projects\MS539\Gui Demo\bin\Debug\net8.0-windows\Gui Demo.exe
+C:\Coding Projects\MS539\Gui Demo\bin\Debug\net8.0-windows\Gui Demo.deps.json
+C:\Coding Projects\MS539\Gui Demo\bin\Debug\net8.0-windows\Gui Demo.runtimeconfig.json
+C:\Coding Projects\MS539\Gui Demo\bin\Debug\net8.0-windows\Gui Demo.dll
+C:\Coding Projects\MS539\Gui Demo\bin\Debug\net8.0-windows\Gui Demo.pdb
+C:\Coding Projects\MS539\Gui Demo\obj\Debug\net8.0-windows\Gui_Demo.frmMain.resources
+C:\Coding Projects\MS539\Gui Demo\obj\Debug\net8.0-windows\Gui_Demo.Properties.Resources.resources
+C:\Coding Projects\MS539\Gui Demo\obj\Debug\net8.0-windows\Gui Demo.csproj.GenerateResource.cache
+C:\Coding Projects\MS539\Gui Demo\obj\Debug\net8.0-windows\Gui Demo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Coding Projects\MS539\Gui Demo\obj\Debug\net8.0-windows\Gui Demo.AssemblyInfoInputs.cache
+C:\Coding Projects\MS539\Gui Demo\obj\Debug\net8.0-windows\Gui Demo.AssemblyInfo.cs
+C:\Coding Projects\MS539\Gui Demo\obj\Debug\net8.0-windows\Gui Demo.csproj.CoreCompileInputs.cache
+C:\Coding Projects\MS539\Gui Demo\obj\Debug\net8.0-windows\Gui Demo.sourcelink.json
+C:\Coding Projects\MS539\Gui Demo\obj\Debug\net8.0-windows\Gui Demo.dll
+C:\Coding Projects\MS539\Gui Demo\obj\Debug\net8.0-windows\refint\Gui Demo.dll
+C:\Coding Projects\MS539\Gui Demo\obj\Debug\net8.0-windows\Gui Demo.pdb
+C:\Coding Projects\MS539\Gui Demo\obj\Debug\net8.0-windows\Gui Demo.genruntimeconfig.cache
+C:\Coding Projects\MS539\Gui Demo\obj\Debug\net8.0-windows\ref\Gui Demo.dll
