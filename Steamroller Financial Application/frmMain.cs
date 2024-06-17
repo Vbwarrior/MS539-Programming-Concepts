@@ -64,7 +64,7 @@ namespace Steamroller_Financial_Application
 
         GlobalDataAndFunctions globals = new GlobalDataAndFunctions();
 
-        private SQL_Database db = new SQL_Database(); //db = new SQL_Database();
+        public SQL_Database db = new SQL_Database(); //db = new SQL_Database();
 
 
         private ComboBox comboBoxBudgetDataCategories;
@@ -76,7 +76,7 @@ namespace Steamroller_Financial_Application
         private List<TextBox> xTextBoxs = new List<TextBox>();
         private List<Label> xLabels = new List<Label>();
         private List<TreeView> xTreeViews = new List<TreeView>();
-        private Dictionary<string, string> dictVariables = new Dictionary<string, string>();
+        public Dictionary<string, string> dictVariables = new Dictionary<string, string>();
 
 
 
@@ -1433,7 +1433,11 @@ namespace Steamroller_Financial_Application
                     pnlNewPayee.Visible = true;
                     break;
                 case "btnMainMenuPanel_OpenBudget":
-                    CustomExceptionHandler();
+                    frmBudget budgetForm = new frmBudget();
+                    budgetForm.MdiParent = this;
+                    //  budgetForm.StartPosition = FormStartPosition.CenterParent;
+
+                    budgetForm.Show();
 
                     break;
                 case "btnMainMenuPanel_AdjustBalances":
@@ -1445,6 +1449,7 @@ namespace Steamroller_Financial_Application
 
                     break;
             }
+
 
 
 
@@ -1713,5 +1718,9 @@ namespace Steamroller_Financial_Application
 
 
 
+        private void pnlBottom_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }//end class
 }//end NameSpace

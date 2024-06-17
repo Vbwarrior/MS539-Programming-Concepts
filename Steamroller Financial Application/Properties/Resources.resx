@@ -121,56 +121,14 @@
   <data name="AssignLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AssignLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="vectorstock_17026562" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vectorstock_17026562.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BlankCheckGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BlankCheckGreen.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AssignRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AssignRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="vectorstock_1143062_transparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vectorstock_1143062_transparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PiggyBank" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PiggyBank.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Left_Pointer_Black1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Left_Pointer_Black1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CreditCardLogos" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CreditCardLogos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="vectorstock_51448106" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vectorstock_51448106.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Right_Pointer_Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Right_Pointer_Black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Grid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Grid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Under Construction" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Under Construction.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="vectorstock_46727522" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vectorstock_46727522.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Bank and Pig" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Bank and Pig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Right_Pointer_Black1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Right_Pointer_Black1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Cancel1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Cancel1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Left_Pointer_Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Left_Pointer_Black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="vectorstock_31211011" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vectorstock_31211011.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CreditCard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CreditCard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="vectorstock_17026562" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vectorstock_17026562.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Add2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Add2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,10 +136,70 @@
   <data name="Calendar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Calendar1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="vectorstock_1143062_transparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vectorstock_1143062_transparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Right_Pointer_Black1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Right_Pointer_Black1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Black Metal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Black Metal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="CalendarPic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CalendarPic.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Return Logo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Return Logo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CreditCardLogos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CreditCardLogos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AssignRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AssignRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BlankCheckGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BlankCheckGreen.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Metal Band" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Metal Band.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Grid1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Grid1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Left_Pointer_Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Left_Pointer_Black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Left_Pointer_Black1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Left_Pointer_Black1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cancel1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Cancel1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="vectorstock_31211011" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vectorstock_31211011.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="vectorstock_51448106" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vectorstock_51448106.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SliderControlKnob" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SliderControlKnob.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CreditCard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CreditCard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Right_Pointer_Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Right_Pointer_Black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="vectorstock_46727522" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vectorstock_46727522.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bank and Pig" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bank and Pig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="PiggyBank" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PiggyBank1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Thumbs Up Left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Thumbs Up Left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

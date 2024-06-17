@@ -103,6 +103,16 @@ namespace Steamroller_Financial_Application.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Black_Metal {
+            get {
+                object obj = ResourceManager.GetObject("Black Metal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap BlankCheckGreen {
             get {
                 object obj = ResourceManager.GetObject("BlankCheckGreen", resourceCulture);
@@ -163,6 +173,26 @@ namespace Steamroller_Financial_Application.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Grid {
+            get {
+                object obj = ResourceManager.GetObject("Grid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Grid1 {
+            get {
+                object obj = ResourceManager.GetObject("Grid1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Left_Pointer_Black {
             get {
                 object obj = ResourceManager.GetObject("Left_Pointer_Black", resourceCulture);
@@ -183,9 +213,29 @@ namespace Steamroller_Financial_Application.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Metal_Band {
+            get {
+                object obj = ResourceManager.GetObject("Metal Band", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap PiggyBank {
             get {
                 object obj = ResourceManager.GetObject("PiggyBank", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Return_Logo1 {
+            get {
+                object obj = ResourceManager.GetObject("Return Logo1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -206,6 +256,26 @@ namespace Steamroller_Financial_Application.Properties {
         internal static System.Drawing.Bitmap Right_Pointer_Black1 {
             get {
                 object obj = ResourceManager.GetObject("Right_Pointer_Black1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SliderControlKnob {
+            get {
+                object obj = ResourceManager.GetObject("SliderControlKnob", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Thumbs_Up_Left {
+            get {
+                object obj = ResourceManager.GetObject("Thumbs Up Left", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
