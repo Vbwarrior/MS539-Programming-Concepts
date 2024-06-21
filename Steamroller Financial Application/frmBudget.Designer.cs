@@ -54,13 +54,13 @@ namespace Steamroller_Financial_Application
             lblRedBar = new Label();
             lblOrangeBar = new Label();
             ttBudget = new ToolTip(components);
+            btnTaxes = new Button();
             btnHousing = new Button();
             btnTravel = new Button();
             btnEntertainment = new Button();
             btnPersonalCare = new Button();
             btnsavings = new Button();
             btnEducation = new Button();
-            btnTaxes = new Button();
             btnInsurance = new Button();
             btnMedicalAndHealthCare = new Button();
             btnUtilities = new Button();
@@ -175,7 +175,7 @@ namespace Steamroller_Financial_Application
             // 
             // pnlBudgetCategory_Alocator
             // 
-            pnlBudgetCategory_Alocator.BackColor = Color.Black;
+            pnlBudgetCategory_Alocator.BackColor = Color.Transparent;
             pnlBudgetCategory_Alocator.Controls.Add(btnAccept);
             pnlBudgetCategory_Alocator.Controls.Add(btnReturn);
             pnlBudgetCategory_Alocator.Controls.Add(btnAddItemsToCategory);
@@ -272,7 +272,7 @@ namespace Steamroller_Financial_Application
             // 
             // picControlKnob
             // 
-            picControlKnob.BackColor = Color.Black;
+            picControlKnob.BackColor = Color.Transparent;
             picControlKnob.Image = Properties.Resources.SliderControlKnob;
             picControlKnob.Location = new Point(91, 123);
             picControlKnob.Name = "picControlKnob";
@@ -337,6 +337,8 @@ namespace Steamroller_Financial_Application
             // 
             // button1
             // 
+            button1.AutoSize = true;
+            button1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             button1.BackgroundImage = Properties.Resources.Black_Metal;
             button1.BackgroundImageLayout = ImageLayout.Stretch;
             button1.FlatAppearance.BorderSize = 0;
@@ -345,7 +347,7 @@ namespace Steamroller_Financial_Application
             button1.ForeColor = Color.Aquamarine;
             button1.Location = new Point(253, 247);
             button1.Name = "button1";
-            button1.Size = new Size(62, 26);
+            button1.Size = new Size(50, 25);
             button1.TabIndex = 7;
             button1.Text = "Name";
             button1.UseVisualStyleBackColor = true;
@@ -366,169 +368,212 @@ namespace Steamroller_Financial_Application
             lblOrangeBar.Size = new Size(600, 10);
             lblOrangeBar.TabIndex = 1;
             // 
-            // btnHousing
-            // 
-            btnHousing.Location = new Point(53, 72);
-            btnHousing.Name = "btnHousing";
-            btnHousing.Size = new Size(100, 100);
-            btnHousing.TabIndex = 11;
-            btnHousing.Tag = "Housing";
-            btnHousing.Text = "Housing";
-            btnHousing.UseVisualStyleBackColor = true;
-            btnHousing.Click += Category_Click;
-            // 
-            // btnTravel
-            // 
-            btnTravel.Location = new Point(341, 308);
-            btnTravel.Name = "btnTravel";
-            btnTravel.Size = new Size(100, 100);
-            btnTravel.TabIndex = 12;
-            btnTravel.Tag = "Travel";
-            btnTravel.Text = "Travel";
-            btnTravel.UseVisualStyleBackColor = true;
-            btnTravel.Click += Category_Click;
-            // 
-            // btnEntertainment
-            // 
-            btnEntertainment.Location = new Point(197, 308);
-            btnEntertainment.Name = "btnEntertainment";
-            btnEntertainment.Size = new Size(100, 100);
-            btnEntertainment.TabIndex = 13;
-            btnEntertainment.Tag = "Entertainment";
-            btnEntertainment.Text = "Entertainment";
-            btnEntertainment.UseVisualStyleBackColor = true;
-            btnEntertainment.Click += Category_Click;
-            // 
-            // btnPersonalCare
-            // 
-            btnPersonalCare.Location = new Point(53, 308);
-            btnPersonalCare.Name = "btnPersonalCare";
-            btnPersonalCare.Size = new Size(100, 100);
-            btnPersonalCare.TabIndex = 14;
-            btnPersonalCare.Tag = "Personal Care";
-            btnPersonalCare.Text = "Personal Care";
-            btnPersonalCare.UseVisualStyleBackColor = true;
-            btnPersonalCare.Click += Category_Click;
-            // 
-            // btnsavings
-            // 
-            btnsavings.Location = new Point(629, 190);
-            btnsavings.Name = "btnsavings";
-            btnsavings.Size = new Size(100, 100);
-            btnsavings.TabIndex = 15;
-            btnsavings.Tag = "Savings";
-            btnsavings.Text = "Savings";
-            btnsavings.UseVisualStyleBackColor = true;
-            btnsavings.Click += Category_Click;
-            // 
-            // btnEducation
-            // 
-            btnEducation.Location = new Point(485, 190);
-            btnEducation.Name = "btnEducation";
-            btnEducation.Size = new Size(100, 100);
-            btnEducation.TabIndex = 16;
-            btnEducation.Tag = "Education";
-            btnEducation.Text = "Education";
-            btnEducation.UseVisualStyleBackColor = true;
-            btnEducation.Click += Category_Click;
-            // 
             // btnTaxes
             // 
+            btnTaxes.BackgroundImage = Properties.Resources.Taxes1;
+            btnTaxes.BackgroundImageLayout = ImageLayout.Zoom;
+            btnTaxes.FlatAppearance.BorderSize = 0;
             btnTaxes.Location = new Point(341, 190);
             btnTaxes.Name = "btnTaxes";
             btnTaxes.Size = new Size(100, 100);
             btnTaxes.TabIndex = 17;
             btnTaxes.Tag = "Taxes";
-            btnTaxes.Text = "Taxes";
-            ttBudget.SetToolTip(btnTaxes, "Taxes && Fees");
+            ttBudget.SetToolTip(btnTaxes, "Taxes & Fees");
             btnTaxes.UseVisualStyleBackColor = true;
             btnTaxes.Click += Category_Click;
             // 
+            // btnHousing
+            // 
+            btnHousing.BackgroundImage = Properties.Resources.House;
+            btnHousing.BackgroundImageLayout = ImageLayout.Zoom;
+            btnHousing.FlatAppearance.BorderSize = 0;
+            btnHousing.Location = new Point(53, 72);
+            btnHousing.Name = "btnHousing";
+            btnHousing.Size = new Size(100, 100);
+            btnHousing.TabIndex = 11;
+            btnHousing.Tag = "Housing";
+            ttBudget.SetToolTip(btnHousing, "Housing &  Maintenance");
+            btnHousing.UseVisualStyleBackColor = true;
+            btnHousing.Click += Category_Click;
+            // 
+            // btnTravel
+            // 
+            btnTravel.BackgroundImage = Properties.Resources.Travel;
+            btnTravel.BackgroundImageLayout = ImageLayout.Zoom;
+            btnTravel.FlatAppearance.BorderSize = 0;
+            btnTravel.Location = new Point(341, 308);
+            btnTravel.Name = "btnTravel";
+            btnTravel.Size = new Size(100, 100);
+            btnTravel.TabIndex = 12;
+            btnTravel.Tag = "Travel";
+            ttBudget.SetToolTip(btnTravel, "Travel & Leisure");
+            btnTravel.UseVisualStyleBackColor = true;
+            btnTravel.Click += Category_Click;
+            // 
+            // btnEntertainment
+            // 
+            btnEntertainment.BackgroundImage = Properties.Resources.Entertainment;
+            btnEntertainment.BackgroundImageLayout = ImageLayout.Zoom;
+            btnEntertainment.FlatAppearance.BorderSize = 0;
+            btnEntertainment.Location = new Point(197, 308);
+            btnEntertainment.Name = "btnEntertainment";
+            btnEntertainment.Size = new Size(100, 100);
+            btnEntertainment.TabIndex = 13;
+            btnEntertainment.Tag = "Entertainment";
+            ttBudget.SetToolTip(btnEntertainment, "Entertainment");
+            btnEntertainment.UseVisualStyleBackColor = true;
+            btnEntertainment.Click += Category_Click;
+            // 
+            // btnPersonalCare
+            // 
+            btnPersonalCare.BackgroundImage = Properties.Resources.Personal_Care;
+            btnPersonalCare.BackgroundImageLayout = ImageLayout.Zoom;
+            btnPersonalCare.FlatAppearance.BorderSize = 0;
+            btnPersonalCare.Location = new Point(53, 308);
+            btnPersonalCare.Name = "btnPersonalCare";
+            btnPersonalCare.Size = new Size(100, 100);
+            btnPersonalCare.TabIndex = 14;
+            btnPersonalCare.Tag = "Personal Care";
+            ttBudget.SetToolTip(btnPersonalCare, "Personal Care & Grooming");
+            btnPersonalCare.UseVisualStyleBackColor = true;
+            btnPersonalCare.Click += Category_Click;
+            // 
+            // btnsavings
+            // 
+            btnsavings.BackgroundImage = Properties.Resources.PiggyBank;
+            btnsavings.BackgroundImageLayout = ImageLayout.Zoom;
+            btnsavings.FlatAppearance.BorderSize = 0;
+            btnsavings.Location = new Point(629, 190);
+            btnsavings.Name = "btnsavings";
+            btnsavings.Size = new Size(100, 100);
+            btnsavings.TabIndex = 15;
+            btnsavings.Tag = "Savings";
+            ttBudget.SetToolTip(btnsavings, "Savings & Investments");
+            btnsavings.UseVisualStyleBackColor = true;
+            btnsavings.Click += Category_Click;
+            // 
+            // btnEducation
+            // 
+            btnEducation.BackgroundImage = Properties.Resources.Education;
+            btnEducation.BackgroundImageLayout = ImageLayout.Zoom;
+            btnEducation.FlatAppearance.BorderSize = 0;
+            btnEducation.Location = new Point(485, 190);
+            btnEducation.Name = "btnEducation";
+            btnEducation.Size = new Size(100, 100);
+            btnEducation.TabIndex = 16;
+            btnEducation.Tag = "Education";
+            ttBudget.SetToolTip(btnEducation, "Education & After School Care");
+            btnEducation.UseVisualStyleBackColor = true;
+            btnEducation.Click += Category_Click;
+            // 
             // btnInsurance
             // 
+            btnInsurance.BackgroundImage = Properties.Resources.Insurance;
+            btnInsurance.BackgroundImageLayout = ImageLayout.Zoom;
+            btnInsurance.FlatAppearance.BorderSize = 0;
             btnInsurance.Location = new Point(197, 190);
             btnInsurance.Name = "btnInsurance";
             btnInsurance.Size = new Size(100, 100);
             btnInsurance.TabIndex = 18;
             btnInsurance.Tag = "Insurance";
-            btnInsurance.Text = "Insurance";
+            ttBudget.SetToolTip(btnInsurance, "Insurance");
             btnInsurance.UseVisualStyleBackColor = true;
             btnInsurance.Click += Category_Click;
             // 
             // btnMedicalAndHealthCare
             // 
+            btnMedicalAndHealthCare.BackgroundImage = Properties.Resources.HealthCare;
+            btnMedicalAndHealthCare.BackgroundImageLayout = ImageLayout.Zoom;
+            btnMedicalAndHealthCare.FlatAppearance.BorderSize = 0;
             btnMedicalAndHealthCare.Location = new Point(53, 190);
             btnMedicalAndHealthCare.Name = "btnMedicalAndHealthCare";
             btnMedicalAndHealthCare.Size = new Size(100, 100);
             btnMedicalAndHealthCare.TabIndex = 19;
             btnMedicalAndHealthCare.Tag = "Medical ";
-            btnMedicalAndHealthCare.Text = "Medical / Health Care";
+            ttBudget.SetToolTip(btnMedicalAndHealthCare, "Health Care");
             btnMedicalAndHealthCare.UseVisualStyleBackColor = true;
             btnMedicalAndHealthCare.Click += Category_Click;
             // 
             // btnUtilities
             // 
+            btnUtilities.BackgroundImage = Properties.Resources.Utilites;
+            btnUtilities.BackgroundImageLayout = ImageLayout.Zoom;
             btnUtilities.Location = new Point(629, 72);
             btnUtilities.Name = "btnUtilities";
             btnUtilities.Size = new Size(100, 100);
             btnUtilities.TabIndex = 20;
             btnUtilities.Tag = "Utilities";
-            btnUtilities.Text = "Utilities";
+            ttBudget.SetToolTip(btnUtilities, "Houehold Utilities");
             btnUtilities.UseVisualStyleBackColor = true;
             btnUtilities.Click += Category_Click;
             // 
             // btnClothing
             // 
+            btnClothing.BackgroundImage = Properties.Resources.Clothes;
+            btnClothing.BackgroundImageLayout = ImageLayout.Zoom;
+            btnClothing.FlatAppearance.BorderSize = 0;
             btnClothing.Location = new Point(485, 72);
             btnClothing.Name = "btnClothing";
             btnClothing.Size = new Size(100, 100);
             btnClothing.TabIndex = 21;
             btnClothing.Tag = "Clothing";
-            btnClothing.Text = "Clothing";
+            ttBudget.SetToolTip(btnClothing, "Clothing & Accessories");
             btnClothing.UseVisualStyleBackColor = true;
             btnClothing.Click += Category_Click;
             // 
             // btnGroceries
             // 
+            btnGroceries.BackgroundImage = Properties.Resources.Food;
+            btnGroceries.BackgroundImageLayout = ImageLayout.Zoom;
+            btnGroceries.FlatAppearance.BorderSize = 0;
             btnGroceries.Location = new Point(341, 72);
             btnGroceries.Name = "btnGroceries";
             btnGroceries.Size = new Size(100, 100);
             btnGroceries.TabIndex = 22;
             btnGroceries.Tag = "Groceries";
-            btnGroceries.Text = "Food";
+            ttBudget.SetToolTip(btnGroceries, "Groceries & Household Supplies");
             btnGroceries.UseVisualStyleBackColor = true;
             btnGroceries.Click += Category_Click;
             // 
             // btnTransportion
             // 
+            btnTransportion.BackgroundImage = Properties.Resources.Vehicle;
+            btnTransportion.BackgroundImageLayout = ImageLayout.Zoom;
+            btnTransportion.FlatAppearance.BorderSize = 0;
             btnTransportion.Location = new Point(197, 72);
             btnTransportion.Name = "btnTransportion";
             btnTransportion.Size = new Size(100, 100);
             btnTransportion.TabIndex = 23;
             btnTransportion.Tag = "Transportation";
-            btnTransportion.Text = "Transportation";
+            ttBudget.SetToolTip(btnTransportion, "Transportation &  Maintenance");
             btnTransportion.UseVisualStyleBackColor = true;
             btnTransportion.Click += Category_Click;
             // 
             // btnPets
             // 
+            btnPets.BackgroundImage = Properties.Resources.Pets;
+            btnPets.BackgroundImageLayout = ImageLayout.Zoom;
+            btnPets.FlatAppearance.BorderSize = 0;
             btnPets.Location = new Point(485, 308);
             btnPets.Name = "btnPets";
             btnPets.Size = new Size(100, 100);
             btnPets.TabIndex = 24;
             btnPets.Tag = "Pets";
-            btnPets.Text = "Pets / Pet Care";
+            ttBudget.SetToolTip(btnPets, "Pet Care & Accessories");
             btnPets.UseVisualStyleBackColor = true;
             btnPets.Click += Category_Click;
             // 
             // btnGifts
             // 
+            btnGifts.BackgroundImage = Properties.Resources.Gifts;
+            btnGifts.BackgroundImageLayout = ImageLayout.Zoom;
+            btnGifts.FlatAppearance.BorderSize = 0;
             btnGifts.Location = new Point(629, 308);
             btnGifts.Name = "btnGifts";
             btnGifts.Size = new Size(100, 100);
             btnGifts.TabIndex = 25;
             btnGifts.Tag = "Gifts";
-            btnGifts.Text = "Gifts / Charitable Contributions";
+            ttBudget.SetToolTip(btnGifts, "Gifts & Contributions");
             btnGifts.UseVisualStyleBackColor = true;
             btnGifts.Click += Category_Click;
             // 
@@ -537,7 +582,9 @@ namespace Steamroller_Financial_Application
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(812, 445);
+            BackgroundImage = Properties.Resources.Black_Metal;
+            ClientSize = new Size(812, 454);
+            Controls.Add(pnlBudgetCategory_Alocator);
             Controls.Add(btnGifts);
             Controls.Add(btnPets);
             Controls.Add(btnTransportion);
@@ -554,7 +601,6 @@ namespace Steamroller_Financial_Application
             Controls.Add(btnTravel);
             Controls.Add(btnHousing);
             Controls.Add(pnlHeader);
-            Controls.Add(pnlBudgetCategory_Alocator);
             FormBorderStyle = FormBorderStyle.None;
             MdiChildrenMinimizedAnchorBottom = false;
             Name = "frmBudget";

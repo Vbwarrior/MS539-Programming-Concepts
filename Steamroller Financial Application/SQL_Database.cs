@@ -18,14 +18,15 @@ namespace Steamroller_Financial_Application
     {
         public enum TABLE
         {
+            AccountTypes,
             BudgetAccounts,
             BudgetCategories,
             PaymentMethods,
             Transactions,
-            Vendors,
-            TypeOfAccount,
+            User_Access,
             Users,
-            User_Access
+            Vendors,
+            
         }
 
         public enum MODE
@@ -129,10 +130,13 @@ namespace Steamroller_Financial_Application
                     sqlStatment = "SELECT  [Group], [SubGroup], [Active] FROM BudgetCategories;";
                     break;
                 case "Budget_3":
-                    sqlStatment = string.Format("SELECT  [SubGroup]  FROM BudgetCategories WHERE [Group] = '{0}' ORDER BY  [SubGroup]  ASC;", Value1);
+                    sqlStatment = $"SELECT  [SubGroup]  FROM BudgetCategories WHERE [Group] = '{Value1}' ORDER BY  [SubGroup]  ASC;";
                     break;
                 case "Budget_4":
-                    sqlStatment = string.Format("INSERT INTO [BudgetCategories] ([Active],[Group], [SubGroup]) VALUES (1,'{0}', '{1}');", Value1, Value2);
+                    sqlStatment = $"INSERT INTO [BudgetCategories] ([Active],[Group], [SubGroup]) VALUES (1,'{Value1}', '{Value2}');";
+                    break;
+                case "NewSearch":
+                    sqlStatment = $"INSERT INTO [UserDefinedApplicationSettings]  ([isActive], [Parent], [Type], [Property], [Value]) VALUES (1, 'frmReports', 'Reports', {null}, '{Value1}');";
                     break;
 
             }

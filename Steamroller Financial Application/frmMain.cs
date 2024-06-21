@@ -49,7 +49,7 @@ using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using Microsoft.VisualBasic.Logging;
 using static System.Collections.Specialized.BitVector32;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace Steamroller_Financial_Application
 {
@@ -88,6 +88,12 @@ namespace Steamroller_Financial_Application
             dictVariables["intRightSideBarWidth"] = spnl_RightSideBar.Width.ToString();
             pnlBottom.Height = 331;
 
+            //Items to only display while in development
+#if DEBUG
+
+            btnDisplaySplashScreen.Visible = true;
+            btnTestControl.Visible = true;
+#endif
 
         }
 
@@ -110,7 +116,18 @@ namespace Steamroller_Financial_Application
             Center_Object(pnlerrorPanel, EventArgs.Empty);
 
         }
+        private void btnDisplaySplashScreen_Click(object sender, EventArgs e)
+        {
+#if DEBUG
+            frmSplashScreen sp = new frmSplashScreen();
+            sp.Show();
+#endif
+        }
 
+        private void btnTestControl_Click(object sender, EventArgs e)
+        {//Used to test specific controls
+
+        }
 
 
 
@@ -1404,27 +1421,37 @@ namespace Steamroller_Financial_Application
             switch (btn.Name)
             {
                 case "btnMainMenuPanel_RecordIncome":
-                    CustomExceptionHandler();
-                    //throw new NotImplementedException();
+                    frmIncome incomeForm = new frmIncome();
+                    incomeForm.MdiParent = this;
+                    incomeForm.Show();
                     break;
                 case "btnMainMenuPanel_PayBills":
                     CustomExceptionHandler();
 
                     break;
                 case "btnMainMenuPanel_NewTransaction":
-                    CustomExceptionHandler();
+                    frmNewTransaction transactionForm = new frmNewTransaction();
+                    transactionForm.MdiParent = this;
+                    transactionForm.Show();
 
                     break;
                 case "btnMainMenuPanel_DisPlayCalendar":
-                    CustomExceptionHandler();
+
+                    CreateCalendar();
 
                     break;
-                case "btnMainMenuPanel_DisplayCharts":
-                    CustomExceptionHandler();
+                case "btnMainMenuPanel_DisplayReports":
+                    frmReports reportForm = new frmReports(db);
+                    reportForm.MdiParent = this;
+                   
+                    reportForm.Show();
+                   
 
                     break;
-                case "btnMainMenuPanel_MoveToSavings":
-                    CustomExceptionHandler();
+                case "btnMainMenuPanel_Transfer":
+                    frmTransfer transferForm = new frmTransfer();
+                    transferForm.MdiParent = this;
+                    transferForm.Show();
 
                     break;
                 case "btnMainMenuPanel_NewBill":
@@ -1435,8 +1462,6 @@ namespace Steamroller_Financial_Application
                 case "btnMainMenuPanel_OpenBudget":
                     frmBudget budgetForm = new frmBudget();
                     budgetForm.MdiParent = this;
-                    //  budgetForm.StartPosition = FormStartPosition.CenterParent;
-
                     budgetForm.Show();
 
                     break;
@@ -1722,5 +1747,7 @@ namespace Steamroller_Financial_Application
         {
 
         }
+
+     
     }//end class
 }//end NameSpace
