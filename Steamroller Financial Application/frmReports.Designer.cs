@@ -58,6 +58,11 @@ namespace Steamroller_Financial_Application
             button6 = new Button();
             btnSaveQueryName = new Button();
             btnReturn = new Button();
+            btnTranactions = new Button();
+            btnIncome = new Button();
+            btnBills = new Button();
+            btnBudget = new Button();
+            txtName = new TextBox();
             pnlFilter = new Panel();
             rtbDirections = new RichTextBox();
             lblReportName = new Label();
@@ -73,20 +78,15 @@ namespace Steamroller_Financial_Application
             label11 = new Label();
             label10 = new Label();
             label9 = new Label();
-            lblFilterHeader = new Label();
             label2 = new Label();
+            lblFilterHeader = new Label();
             pnlData = new Panel();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
             pnlSaveInfo = new Panel();
             label7 = new Label();
-            txtName = new TextBox();
             lblColor = new Label();
             label4 = new Label();
             cdSelectColor = new ColorDialog();
+            flpnlCustomReports = new FlowLayoutPanel();
             pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgDataDisplay).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picDayMonthYearSlider).BeginInit();
@@ -125,6 +125,7 @@ namespace Steamroller_Financial_Application
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(25, 25);
             btnCancel.TabIndex = 1;
+            toolTip1.SetToolTip(btnCancel, "Cancel and Close");
             btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += btnCancel_Click;
             // 
@@ -418,7 +419,7 @@ namespace Steamroller_Financial_Application
             btnDeleteReport.Name = "btnDeleteReport";
             btnDeleteReport.Size = new Size(35, 33);
             btnDeleteReport.TabIndex = 46;
-            toolTip1.SetToolTip(btnDeleteReport, "Save Custom Search");
+            toolTip1.SetToolTip(btnDeleteReport, "Delete Custom Search");
             btnDeleteReport.UseVisualStyleBackColor = false;
             // 
             // button6
@@ -467,16 +468,95 @@ namespace Steamroller_Financial_Application
             btnReturn.UseVisualStyleBackColor = false;
             btnReturn.Click += btnReturn_Click;
             // 
+            // btnTranactions
+            // 
+            btnTranactions.BackgroundImage = Properties.Resources.Transactions;
+            btnTranactions.BackgroundImageLayout = ImageLayout.Zoom;
+            btnTranactions.Cursor = Cursors.Hand;
+            btnTranactions.FlatStyle = FlatStyle.Flat;
+            btnTranactions.Location = new Point(246, 80);
+            btnTranactions.Name = "btnTranactions";
+            btnTranactions.Size = new Size(84, 84);
+            btnTranactions.TabIndex = 11;
+            btnTranactions.Tag = "1:Transactions";
+            btnTranactions.TextAlign = ContentAlignment.BottomCenter;
+            toolTip1.SetToolTip(btnTranactions, "Transactions");
+            btnTranactions.UseVisualStyleBackColor = true;
+            btnTranactions.Click += PredefinedReports_Click;
+            // 
+            // btnIncome
+            // 
+            btnIncome.BackColor = Color.White;
+            btnIncome.BackgroundImage = Properties.Resources.Record_Income;
+            btnIncome.BackgroundImageLayout = ImageLayout.Zoom;
+            btnIncome.Cursor = Cursors.Hand;
+            btnIncome.FlatStyle = FlatStyle.Flat;
+            btnIncome.Location = new Point(335, 80);
+            btnIncome.Name = "btnIncome";
+            btnIncome.Size = new Size(84, 84);
+            btnIncome.TabIndex = 12;
+            btnIncome.Tag = "1:Income";
+            btnIncome.TextAlign = ContentAlignment.BottomCenter;
+            toolTip1.SetToolTip(btnIncome, "Income");
+            btnIncome.UseVisualStyleBackColor = false;
+            btnIncome.Click += PredefinedReports_Click;
+            // 
+            // btnBills
+            // 
+            btnBills.BackgroundImage = Properties.Resources.Bills;
+            btnBills.BackgroundImageLayout = ImageLayout.Zoom;
+            btnBills.Cursor = Cursors.Hand;
+            btnBills.FlatStyle = FlatStyle.Flat;
+            btnBills.Location = new Point(424, 80);
+            btnBills.Name = "btnBills";
+            btnBills.Size = new Size(84, 84);
+            btnBills.TabIndex = 13;
+            btnBills.Tag = "1:Bill";
+            btnBills.TextAlign = ContentAlignment.BottomCenter;
+            toolTip1.SetToolTip(btnBills, "Bills");
+            btnBills.UseVisualStyleBackColor = true;
+            btnBills.Click += PredefinedReports_Click;
+            // 
+            // btnBudget
+            // 
+            btnBudget.BackColor = Color.FromArgb(137, 115, 208);
+            btnBudget.BackgroundImage = Properties.Resources.Budget;
+            btnBudget.BackgroundImageLayout = ImageLayout.Zoom;
+            btnBudget.Cursor = Cursors.Hand;
+            btnBudget.FlatStyle = FlatStyle.Flat;
+            btnBudget.Location = new Point(513, 80);
+            btnBudget.Name = "btnBudget";
+            btnBudget.Size = new Size(84, 84);
+            btnBudget.TabIndex = 14;
+            btnBudget.Tag = "1:Budget";
+            btnBudget.TextAlign = ContentAlignment.BottomCenter;
+            toolTip1.SetToolTip(btnBudget, "Budget");
+            btnBudget.UseVisualStyleBackColor = false;
+            btnBudget.Click += PredefinedReports_Click;
+            // 
+            // txtName
+            // 
+            txtName.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtName.Location = new Point(76, 60);
+            txtName.Name = "txtName";
+            txtName.PlaceholderText = "Report Name";
+            txtName.ReadOnly = true;
+            txtName.Size = new Size(241, 39);
+            txtName.TabIndex = 4;
+            txtName.TextAlign = HorizontalAlignment.Center;
+            toolTip1.SetToolTip(txtName, "Display Name for Custom Report");
+            txtName.TextChanged += txtName_TextChanged;
+            // 
             // pnlFilter
             // 
             pnlFilter.BackColor = SystemColors.ActiveCaption;
-            pnlFilter.Controls.Add(rtbDirections);
-            pnlFilter.Controls.Add(btnDisplayHelp);
             pnlFilter.Controls.Add(btnReturn);
             pnlFilter.Controls.Add(btnDeleteReport);
+            pnlFilter.Controls.Add(btnSave);
+            pnlFilter.Controls.Add(rtbDirections);
+            pnlFilter.Controls.Add(btnDisplayHelp);
             pnlFilter.Controls.Add(lblReportName);
             pnlFilter.Controls.Add(btnSearchDatabase);
-            pnlFilter.Controls.Add(btnSave);
             pnlFilter.Controls.Add(label3);
             pnlFilter.Controls.Add(picSlider_1);
             pnlFilter.Controls.Add(txtAmount);
@@ -504,14 +584,14 @@ namespace Steamroller_Financial_Application
             pnlFilter.Controls.Add(picSlider_4);
             pnlFilter.Controls.Add(picSlider_3);
             pnlFilter.Controls.Add(picSlider_2);
-            pnlFilter.Controls.Add(lblFilterHeader);
             pnlFilter.Controls.Add(label2);
+            pnlFilter.Controls.Add(lblFilterHeader);
             pnlFilter.Dock = DockStyle.Bottom;
-            pnlFilter.Location = new Point(0, 533);
+            pnlFilter.Location = new Point(0, 225);
             pnlFilter.MaximumSize = new Size(843, 350);
             pnlFilter.MinimumSize = new Size(843, 40);
             pnlFilter.Name = "pnlFilter";
-            pnlFilter.Size = new Size(843, 42);
+            pnlFilter.Size = new Size(843, 350);
             pnlFilter.TabIndex = 4;
             pnlFilter.Visible = false;
             // 
@@ -521,10 +601,10 @@ namespace Steamroller_Financial_Application
             rtbDirections.Dock = DockStyle.Right;
             rtbDirections.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             rtbDirections.ForeColor = Color.White;
-            rtbDirections.Location = new Point(446, 40);
+            rtbDirections.Location = new Point(833, 40);
             rtbDirections.MaximumSize = new Size(397, 310);
             rtbDirections.Name = "rtbDirections";
-            rtbDirections.Size = new Size(397, 2);
+            rtbDirections.Size = new Size(10, 310);
             rtbDirections.TabIndex = 32;
             rtbDirections.Text = resources.GetString("rtbDirections.Text");
             rtbDirections.Visible = false;
@@ -665,6 +745,16 @@ namespace Steamroller_Financial_Application
             label9.TabIndex = 18;
             label9.Text = "Category";
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(309, 104);
+            label2.Name = "label2";
+            label2.Size = new Size(41, 21);
+            label2.TabIndex = 5;
+            label2.Text = "Last:";
+            // 
             // lblFilterHeader
             // 
             lblFilterHeader.BackColor = Color.FromArgb(64, 64, 64);
@@ -680,99 +770,15 @@ namespace Steamroller_Financial_Application
             lblFilterHeader.TextAlign = ContentAlignment.MiddleCenter;
             lblFilterHeader.Click += lblFilterHeader_Click;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(309, 104);
-            label2.Name = "label2";
-            label2.Size = new Size(41, 21);
-            label2.TabIndex = 5;
-            label2.Text = "Last:";
-            // 
             // pnlData
             // 
+            pnlData.BackColor = SystemColors.ButtonFace;
             pnlData.Controls.Add(dgDataDisplay);
             pnlData.Location = new Point(12, 58);
             pnlData.Name = "pnlData";
             pnlData.Size = new Size(144, 96);
             pnlData.TabIndex = 8;
             pnlData.Visible = false;
-            // 
-            // button1
-            // 
-            button1.BackgroundImage = Properties.Resources.GearsTransparent;
-            button1.BackgroundImageLayout = ImageLayout.Zoom;
-            button1.Cursor = Cursors.Hand;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(379, 171);
-            button1.Name = "button1";
-            button1.Size = new Size(84, 84);
-            button1.TabIndex = 10;
-            button1.TextAlign = ContentAlignment.BottomCenter;
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.BackgroundImage = Properties.Resources.Transactions;
-            button2.BackgroundImageLayout = ImageLayout.Zoom;
-            button2.Cursor = Cursors.Hand;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(246, 80);
-            button2.Name = "button2";
-            button2.Size = new Size(84, 84);
-            button2.TabIndex = 11;
-            button2.Tag = "1:Transactions";
-            button2.TextAlign = ContentAlignment.BottomCenter;
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += PredefinedReports_Click;
-            // 
-            // button3
-            // 
-            button3.BackColor = Color.White;
-            button3.BackgroundImage = Properties.Resources.Record_Income;
-            button3.BackgroundImageLayout = ImageLayout.Zoom;
-            button3.Cursor = Cursors.Hand;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Location = new Point(335, 80);
-            button3.Name = "button3";
-            button3.Size = new Size(84, 84);
-            button3.TabIndex = 12;
-            button3.Tag = "1:Income";
-            button3.TextAlign = ContentAlignment.BottomCenter;
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += PredefinedReports_Click;
-            // 
-            // button4
-            // 
-            button4.BackgroundImage = Properties.Resources.Bills;
-            button4.BackgroundImageLayout = ImageLayout.Zoom;
-            button4.Cursor = Cursors.Hand;
-            button4.FlatStyle = FlatStyle.Flat;
-            button4.Location = new Point(424, 80);
-            button4.Name = "button4";
-            button4.Size = new Size(84, 84);
-            button4.TabIndex = 13;
-            button4.Tag = "1:Bill";
-            button4.TextAlign = ContentAlignment.BottomCenter;
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += PredefinedReports_Click;
-            // 
-            // button5
-            // 
-            button5.BackColor = Color.FromArgb(137, 115, 208);
-            button5.BackgroundImage = Properties.Resources.Budget;
-            button5.BackgroundImageLayout = ImageLayout.Zoom;
-            button5.Cursor = Cursors.Hand;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.Location = new Point(513, 80);
-            button5.Name = "button5";
-            button5.Size = new Size(84, 84);
-            button5.TabIndex = 14;
-            button5.Tag = "1:Budget";
-            button5.TextAlign = ContentAlignment.BottomCenter;
-            button5.UseVisualStyleBackColor = false;
-            button5.Click += PredefinedReports_Click;
             // 
             // pnlSaveInfo
             // 
@@ -784,11 +790,12 @@ namespace Steamroller_Financial_Application
             pnlSaveInfo.Controls.Add(lblColor);
             pnlSaveInfo.Controls.Add(button6);
             pnlSaveInfo.Controls.Add(label4);
-            pnlSaveInfo.Location = new Point(251, 281);
+            pnlSaveInfo.Location = new Point(222, 293);
             pnlSaveInfo.MaximumSize = new Size(399, 118);
             pnlSaveInfo.Name = "pnlSaveInfo";
             pnlSaveInfo.Size = new Size(399, 118);
             pnlSaveInfo.TabIndex = 15;
+            pnlSaveInfo.Tag = "Used to Store Current Custom Report Control Name";
             pnlSaveInfo.Visible = false;
             // 
             // label7
@@ -802,14 +809,6 @@ namespace Steamroller_Financial_Application
             label7.Size = new Size(53, 21);
             label7.TabIndex = 5;
             label7.Text = "Name";
-            // 
-            // txtName
-            // 
-            txtName.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtName.Location = new Point(76, 60);
-            txtName.Name = "txtName";
-            txtName.Size = new Size(241, 39);
-            txtName.TabIndex = 4;
             // 
             // lblColor
             // 
@@ -834,6 +833,16 @@ namespace Steamroller_Financial_Application
             label4.Text = "Save Search";
             label4.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // flpnlCustomReports
+            // 
+            flpnlCustomReports.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            flpnlCustomReports.BackColor = Color.Transparent;
+            flpnlCustomReports.Location = new Point(12, 170);
+            flpnlCustomReports.Name = "flpnlCustomReports";
+            flpnlCustomReports.Size = new Size(819, 117);
+            flpnlCustomReports.TabIndex = 24;
+            flpnlCustomReports.Visible = false;
+            // 
             // frmReports
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -842,15 +851,15 @@ namespace Steamroller_Financial_Application
             BackgroundImageLayout = ImageLayout.Stretch;
             CancelButton = btnCancel;
             ClientSize = new Size(843, 575);
-            Controls.Add(pnlData);
             Controls.Add(pnlFilter);
+            Controls.Add(flpnlCustomReports);
+            Controls.Add(pnlData);
             Controls.Add(pnlHeader);
             Controls.Add(pnlSaveInfo);
-            Controls.Add(button5);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnBudget);
+            Controls.Add(btnBills);
+            Controls.Add(btnIncome);
+            Controls.Add(btnTranactions);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             MaximumSize = new Size(843, 575);
@@ -918,16 +927,14 @@ namespace Steamroller_Financial_Application
         private Label label3;
         private Button btnDisplayHelp;
         private PictureBox pictureBox1;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button button5;
+        private Button btnTranactions;
+        private Button btnIncome;
+        private Button btnBills;
+        private Button btnBudget;
         private Panel pnlSaveInfo;
         private Button button6;
         private Label label4;
         private Label label7;
-        private TextBox txtName;
         private Label lblColor;
         private Button btnSearchDatabase;
         private Button btnSave;
@@ -936,5 +943,7 @@ namespace Steamroller_Financial_Application
         private Button btnSaveQueryName;
         private Button btnReturn;
         private ColorDialog cdSelectColor;
+        private FlowLayoutPanel flpnlCustomReports;
+        protected internal TextBox txtName;
     }
 }

@@ -1,0 +1,29 @@
+﻿/*
+ *  
+ *  
+ *  Create Panel for new charges
+ *  Create Panel for Paying Bills- create a input box that searches with each keystroke using the AutoComplete functions of the text box
+ *          Add the Cash check or charge logo buttons and a Masked text box for amount.
+ *          
+ *          Add a transactions panel with a datagrid view and ability to search using a calendar control with options this should be similar to GURU Quote with search boxes ontop of every field
+ *          
+ *          lastly create a panel with the main functions as buttons 
+ *          
+ *          Add tutorial walk through with opur squerrels pics
+ *  
+ *   create SQL statments for all inputs and serches
+ *   add chart builder functions from GUI Demo project
+ *   
+ *   add payoff stack to right side
+ *  
+ *  Create Setup form for New Users
+ */
+
+
+ 
+/*
+ *  Get Custom Button setup from designer files to create a new one on demand.
+ *  On form load create a method to search for any custom reports and load them into a List
+ * Extract the strings from the list ans split them on ":" and generate buttons, add on click event 'Slider_Clock
+ * Create delete Event to run DeleteSQL Command
+ */

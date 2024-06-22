@@ -450,7 +450,7 @@
             pnlInputBox.Controls.Add(txtInputBox_Reply);
             pnlInputBox.Controls.Add(InputBoxHeader);
             pnlInputBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            pnlInputBox.Location = new Point(697, 555);
+            pnlInputBox.Location = new Point(650, 563);
             pnlInputBox.Name = "pnlInputBox";
             pnlInputBox.Size = new Size(413, 170);
             pnlInputBox.TabIndex = 12;
@@ -1685,9 +1685,9 @@
             pnlBottom.Controls.Add(label19);
             pnlBottom.Controls.Add(pnlCharts);
             pnlBottom.Dock = DockStyle.Bottom;
-            pnlBottom.Location = new Point(244, 1029);
+            pnlBottom.Location = new Point(244, 547);
             pnlBottom.Name = "pnlBottom";
-            pnlBottom.Size = new Size(1263, 27);
+            pnlBottom.Size = new Size(1263, 509);
             pnlBottom.TabIndex = 5;
             pnlBottom.Tag = "Permanant";
             pnlBottom.Paint += pnlBottom_Paint;
@@ -2583,10 +2583,10 @@
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(1704, 1056);
+            Controls.Add(pnlBottom);
             Controls.Add(pnlerrorPanel);
             Controls.Add(pnlMainMenu);
             Controls.Add(panel6);
-            Controls.Add(pnlBottom);
             Controls.Add(pnlInputBox);
             Controls.Add(pnlNewAccountSetup);
             Controls.Add(panel2);

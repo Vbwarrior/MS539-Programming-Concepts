@@ -56,12 +56,7 @@ namespace Steamroller_Financial_Application
 
     public partial class frmMain : Form
     {
-
-        //CalendarControl myCalendar = new CalendarControl();
-        //public int leftSideBarWidth = 0;
-        //public int rightSideBarWidth = 0;
-        //Color CalendarDayMouseEnterOriginalColor;
-
+      
         GlobalDataAndFunctions globals = new GlobalDataAndFunctions();
 
         public SQL_Database db = new SQL_Database(); //db = new SQL_Database();
@@ -77,7 +72,7 @@ namespace Steamroller_Financial_Application
         private List<Label> xLabels = new List<Label>();
         private List<TreeView> xTreeViews = new List<TreeView>();
         public Dictionary<string, string> dictVariables = new Dictionary<string, string>();
-
+  
 
 
         public frmMain()
@@ -102,6 +97,13 @@ namespace Steamroller_Financial_Application
             // Center_Object(pnlMainMenu,EventArgs.Empty,0,-600);
             pnlMainMenu.Visible = true;
             pnlMainMenu.Height = 35;
+
+#if !DEBUG
+            frmSplashScreen sp = new frmSplashScreen();
+            sp.Show();
+#endif
+
+
         }
 
         public void CustomExceptionHandler()
@@ -118,7 +120,7 @@ namespace Steamroller_Financial_Application
         }
         private void btnDisplaySplashScreen_Click(object sender, EventArgs e)
         {
-#if DEBUG
+#if !DEBUG
             frmSplashScreen sp = new frmSplashScreen();
             sp.Show();
 #endif
@@ -126,7 +128,7 @@ namespace Steamroller_Financial_Application
 
         private void btnTestControl_Click(object sender, EventArgs e)
         {//Used to test specific controls
-
+            GenerateRandomTestData();
         }
 
 
@@ -138,16 +140,6 @@ namespace Steamroller_Financial_Application
 
 
 
-
-        private void button1_Click(object sender, EventArgs e)// Test Button
-        {
-            // PopulateBudgetTree(ref treeView_BudgetData, "HOUSING");
-            //Center_Object(pnlMainMenu, EventArgs.Empty, 0, -730);
-
-            frmSplashScreen sp = new frmSplashScreen();
-            sp.Show();
-
-        }
 
         #region "Common Functions"
         private void Close_Object(object sender, EventArgs e)//Uneversal Closing Method for Panels and additional forms
@@ -368,19 +360,7 @@ namespace Steamroller_Financial_Application
 
             }
         }
-        private void TogglePanel_Slider_Click(object sender, EventArgs e)
-        {
-            if (!(sender is Label))
-            {
-                return;
-            }
-            Label slider = (Label)sender;
-
-            slider.Dock = (slider.Dock == DockStyle.Left) ? DockStyle.Right : DockStyle.Left;
-
-
-
-        }
+      
 
 
         private void pnlerrorPanel_VisibleChanged(object sender, EventArgs e)
@@ -1441,11 +1421,11 @@ namespace Steamroller_Financial_Application
 
                     break;
                 case "btnMainMenuPanel_DisplayReports":
-                    frmReports reportForm = new frmReports(db);
+                    frmReports reportForm = new frmReports(db, globals);
                     reportForm.MdiParent = this;
-                   
+
                     reportForm.Show();
-                   
+
 
                     break;
                 case "btnMainMenuPanel_Transfer":
@@ -1748,6 +1728,237 @@ namespace Steamroller_Financial_Application
 
         }
 
-     
-    }//end class
+
+
+
+
+
+
+        private void GenerateRandomTestData()
+        {
+            List<string> PaymentMethods = new List<string>();
+            List<string> CIV = new List<string>();//Category Item Vendor
+            List<string> CLH = new List<string>();//Category Low-High
+            Dictionary<string, Tuple<int, int>> PriceRange = new Dictionary<string, Tuple<int, int>>();
+            List<string> sqlStrings = new List<string>();
+
+            {
+                PaymentMethods.Add("Checking");
+                PaymentMethods.Add("ACH");
+                PaymentMethods.Add("Credit Card");
+                PaymentMethods.Add("Debit Card");
+                PaymentMethods.Add("Bank Draft");
+                PaymentMethods.Add("Funds Transfer");
+                PaymentMethods.Add("P2P Mobil Payment App");
+                PaymentMethods.Add("Apple Cash");
+                PaymentMethods.Add("Venmo");
+                PaymentMethods.Add("Cash App");
+                PaymentMethods.Add("Mobil Wallet App");
+                PaymentMethods.Add("Cash");
+                PaymentMethods.Add("Crypto");
+                PaymentMethods.Add("Auto Pay");
+                PaymentMethods.Add("Apple Pay");
+                PaymentMethods.Add("Google Pay");
+                PaymentMethods.Add("Samsung Pay");
+                PaymentMethods.Add("Prepaid Card");
+
+
+                CIV.Add("HOUSING:RENT:Macenturf Realtor");
+                CIV.Add("HOUSING:MORTGAGE:USAA");
+                CIV.Add("HOUSING:HOA Fees:Twin Cities RipOff");
+                CIV.Add("TRANSPORTATION:Gas:Shell");
+                CIV.Add("TRANSPORTATION:Gas:Circle-K");
+                CIV.Add("TRANSPORTATION:Gas:Sunoco");
+                CIV.Add("TRANSPORTATION:Gas:Piolt");
+                CIV.Add("TRANSPORTATION:Gas:Sheetz");
+                CIV.Add("TRANSPORTATION:Registration:BMV");
+                CIV.Add("TRANSPORTATION:Uber:Green Line");
+                CIV.Add("TRANSPORTATION:Lift:Dirty Rides");
+                CIV.Add("TRANSPORTATION:Bus Fare:SARTA");
+                CIV.Add("FOOD:Groceries:Makos");
+                CIV.Add("FOOD:Groceries:Giant Eagle");
+                CIV.Add("FOOD:Groceries:Walmart");
+                CIV.Add("FOOD:Groceries:Target");
+                CIV.Add("FOOD:Dining Out:Long Horn");
+                CIV.Add("FOOD:Dining Out:Bone-Fish-Grille");
+                CIV.Add("FOOD:Dining Out:I-Hop");
+                CIV.Add("FOOD:Dining Out:Waffel House");
+                CIV.Add("FOOD:Dining Out:AppleBees");
+                CIV.Add("FOOD:Dining Out:Lee's Famous Chicken");
+                CIV.Add("FOOD:Dining Out:Pizza Hut");
+                CIV.Add("FOOD:Dining Out:BJ’s Restaurant & Brewhouse");
+                CIV.Add("FOOD:Dining Out:Dave & Buster’s");
+                CIV.Add("FOOD:Dining Out:Bojangles");
+                CIV.Add("FOOD:Dining Out:Jersey Mike’s");
+                CIV.Add("FOOD:Dining Out:Wingstop");
+                CIV.Add("FOOD:Dining Out:Raising Cane’s Chicken Fingers");
+                CIV.Add("FOOD:Dining Out:Carl’s Jr.");
+                CIV.Add("FOOD:Dining Out:Red Robin");
+                CIV.Add("FOOD:Dining Out:Denny's");
+                CIV.Add("FOOD:Dining Out:Shoney's");
+                CIV.Add("FOOD:Dining Out:Bobs Big Boy");
+                CIV.Add("FOOD:Door Dash:Door Dash Driver");
+                CIV.Add("FOOD:Takeout / Drive-Thru:Jack in the Box");
+                CIV.Add("FOOD:Takeout / Drive-Thru:Chick-Fil-A");
+                CIV.Add("FOOD:Takeout / Drive-Thru:McDonald’s");
+                CIV.Add("FOOD:Takeout / Drive-Thru:Taco Bell");
+                CIV.Add("FOOD:Takeout / Drive-Thru:KFC");
+                CIV.Add("FOOD:Takeout / Drive-Thru:Dunkin’");
+                CIV.Add("FOOD:Takeout / Drive-Thru:Arrbys");
+                CIV.Add("FOOD:Takeout / Drive-Thru:SubWay");
+                CIV.Add("FOOD:Takeout / Drive-Thru:Piolt");
+                CIV.Add("FOOD:Alcohol:Smokeys");
+                CIV.Add("FOOD:AVI (Work Food System):[H]- Lunch");
+                CIV.Add("UTILITIES:Electric:AEP");
+                CIV.Add("UTILITIES:Gas:Dominion");
+                CIV.Add("UTILITIES:Water:Twin Cities");
+                CIV.Add("UTILITIES:Sewer:Twin Cities");
+                CIV.Add("UTILITIES:Trash:Kimble");
+                CIV.Add("UTILITIES:Internet:Spectrum");
+                CIV.Add("UTILITIES:Home Phone:Bell Ohio");
+                CIV.Add("UTILITIES:Cell Phones:Verizon");
+                CIV.Add("MEDICAL CARE:Co-Pay:Cleveland Clinic");
+                CIV.Add("MEDICAL CARE:Eye Exam:LensCrafters");
+                CIV.Add("MEDICAL CARE:Perscription Refill:CVS");
+                CIV.Add("INSURANCE:Car:AllState");
+                CIV.Add("INSURANCE:Life:MetLife");
+                CIV.Add("INSURANCE:Dental:Dental One");
+                CIV.Add("INSURANCE:Vision:EyeMed");
+                CIV.Add("INSURANCE:Renters:Secure Stor");
+                CIV.Add("INSURANCE:Home:USAA");
+                CIV.Add("INSURANCE:Flood:USAA");
+                CIV.Add("TAXES:Property:Tusc Co Auditor");
+                CIV.Add("TAXES:RITA:S. District");
+                CIV.Add("TAXES:County:Tusc Co Auditor");
+                CIV.Add("TAXES:City:Dover City");
+                CIV.Add("EDUCATION:Tuition:KSU");
+                CIV.Add("EDUCATION:Books:KSU Boof Store");
+                CIV.Add("EDUCATION:Supplies:Amazon");
+                CIV.Add("PERSONAL CARE:Hair Salon:Beck's Bufont Hair");
+                CIV.Add("PERSONAL CARE:Nails:Jin's #1 Nails");
+                CIV.Add("PERSONAL CARE:Spa Treatment:Alure Spa");
+                CIV.Add("ENTERTAINMENT:Streaming Services:Netflix");
+                CIV.Add("ENTERTAINMENT:Streaming Services:Prime");
+                CIV.Add("ENTERTAINMENT:Streaming Services:Paramount Plus");
+                CIV.Add("ENTERTAINMENT:Streaming Services:MAX");
+                CIV.Add("ENTERTAINMENT:Streaming Services:Disney Plus");
+                CIV.Add("ENTERTAINMENT:Streaming Services:Discovery");
+                CIV.Add("ENTERTAINMENT:Streaming Services:ESPN");
+                CIV.Add("ENTERTAINMENT:Streaming Services:HULU");
+                CIV.Add("ENTERTAINMENT:Streaming Services:Peacock");
+                CIV.Add("ENTERTAINMENT:Movies:AMC");
+                CIV.Add("ENTERTAINMENT:Tickets:Stub Hub");
+                CIV.Add("ENTERTAINMENT:Magazine Subscriptions:WoodWorking");
+                CIV.Add("SAVINGS:401K:Vangaurd");
+                CIV.Add("SAVINGS:Roth IRA:Insta Save");
+                CIV.Add("SAVINGS:Investments:Bonds");
+                CIV.Add("PETS:Boarding Fees:Kennel");
+                CIV.Add("PETS:Veterinary Visit:Dover Clinic");
+                CIV.Add("PETS:Food:Chewy");
+                CIV.Add("PETS:Vaccinations:Twin City Vet");
+                CIV.Add("PETS:Toys:Chewy");
+                CIV.Add("PETS:Treats:Chewy");
+                CIV.Add("TRAVEL:Air Fare:American Airlines");
+                CIV.Add("TRAVEL:Hotel:Price Line");
+                CIV.Add("TRAVEL:Car Rental:Price Line");
+                CIV.Add("TRAVEL:Baggage Fees:American Airlines");
+                CIV.Add("TRAVEL:Vallet Services:Vallet");
+                CIV.Add("CLOTHING:Clothes:Walmart");
+                CIV.Add("CLOTHING:Clothes:Target");
+                CIV.Add("CLOTHING:Clothes:Amazon");
+                CIV.Add("CLOTHING:Clothes:TEMU");
+                CIV.Add("CLOTHING:Clothes:GoodWill");
+                CIV.Add("CLOTHING:Clothes:Ross");
+                CIV.Add("CLOTHING:Shoes:Show Show");
+                CIV.Add("CLOTHING:Shoes:FinisLine Shoes");
+                CIV.Add("CLOTHING:Shoes:FootLocker");
+                CIV.Add("CLOTHING:Shoes:Dick's");
+                CIV.Add("CLOTHING:Accessories:Ross");
+                CIV.Add("CLOTHING:Accessories:Show Show");
+                CIV.Add("CLOTHING:Accessories:FinisLine Shoes");
+                CIV.Add("CLOTHING:Accessories:FootLocker");
+                CIV.Add("CLOTHING:Jewlery:Kay's");
+                CIV.Add("GIFTS:Birthday:Pat");
+                CIV.Add("GIFTS:Birthday:Jim");
+                CIV.Add("GIFTS:Birthday:Tina");
+                CIV.Add("GIFTS:Birthday:Beth");
+                CIV.Add("GIFTS:Birthday:Bodin");
+                CIV.Add("GIFTS:Aniversary:Walmart");
+                CIV.Add("GIFTS:Holiday:Christmas");
+                CIV.Add("GIFTS:Baby:Tereq");
+                CIV.Add("GIFTS:Wedding:Jona");
+                CIV.Add("GIFTS:Charitable Donation:1st Baptist Church in my Pocket");
+
+                CLH.Add("HOUSING:100:750");
+                CLH.Add("TRANSPORTATION:5:70");
+                CLH.Add("FOOD:1:500");
+                CLH.Add("UTILITIES:50:350");
+                CLH.Add("MEDICAL CARE:10:150");
+                CLH.Add("INSURANCE:50:500");
+                CLH.Add("TAXES:10:1000");
+                CLH.Add("EDUCATION:1:1000");
+                CLH.Add("PERSONAL CARE:1:75");
+                CLH.Add("ENTERTAINMENT:1:200");
+                CLH.Add("SAVINGS:1:300");
+                CLH.Add("PETS:1:300");
+                CLH.Add("TRAVEL:1:1200");
+                CLH.Add("CLOTHING:1:300");
+                CLH.Add("GIFTS:1:100");
+
+            }
+            Random rand = new Random();
+
+            string paymentMethod;
+            int cat;
+            string category;
+            int lowRange;
+            int highRange;
+            string item;
+            string Vendor;
+
+            PriceRange.Add("item1", new Tuple<int, int>(1, 5));
+
+            foreach (string xItem in CLH)
+            {
+                string[] parts = xItem.Split(':');
+                category = parts[0];
+                lowRange = int.Parse(parts[1]);
+                highRange = int.Parse(parts[2]);
+
+                PriceRange.Add(category, new Tuple<int, int>(lowRange, highRange));
+            }
+
+            for (int i = 0; i < 3000; i++)
+            {
+                cat = rand.Next(CIV.Count);
+
+                string[] parts = CIV[cat].Split(":");
+                category = parts[0];
+                item = parts[1];
+                Vendor = parts[2];
+
+
+                Tuple<int, int> range = PriceRange[category];
+
+                int Amount = rand.Next(range.Item1, range.Item2 + 1);
+
+                int PaymentType = rand.Next(PaymentMethods.Count);
+                paymentMethod = PaymentMethods[PaymentType];
+
+
+                DateTime startDate = new DateTime(2000, 1, 1);
+
+                int dateRange = (DateTime.Today - startDate).Days;
+                int randomDays = rand.Next(dateRange);
+                DateTime myDate = startDate.AddDays(randomDays);
+                string date  = myDate.ToString("yyyy-MM-dd");
+                // ([Amount], [Date], [PaymentMenthod], [VendorName], [Category], [Item],[isPastDue] 
+
+                sqlStrings.Add($"{Amount}, {date}, \'{paymentMethod}\', \'{Vendor}\', \'{category}\', \'{item}\',1");
+
+            }
+        }
+
+
+        }//end class
 }//end NameSpace

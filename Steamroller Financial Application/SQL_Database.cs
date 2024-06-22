@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ using (SQLiteDataReader reader = db.FetchData(db.sqlCommands(sqlCode: "Budget_1")))
+            {
+                while (reader.Read())
+                {
+                    xCombobox.Items.Add(reader["Group"].ToString());
+                }
+            }
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -136,7 +146,20 @@ namespace Steamroller_Financial_Application
                     sqlStatment = $"INSERT INTO [BudgetCategories] ([Active],[Group], [SubGroup]) VALUES (1,'{Value1}', '{Value2}');";
                     break;
                 case "NewSearch":
-                    sqlStatment = $"INSERT INTO [UserDefinedApplicationSettings]  ([isActive], [Parent], [Type], [Property], [Value]) VALUES (1, 'frmReports', 'Reports', {null}, '{Value1}');";
+                    sqlStatment = $"INSERT INTO [UserDefinedApplicationSettings]  ([isActive], [Parent], [Type], [Property], [Value]) VALUES (1, 'frmReports', 'Report', {null}, '{Value1}');";
+                    break;
+                case "DeleteSearch":
+                    sqlStatment = $"DELETE FROM [UserDefinedApplicationSettings] WHERE [isActive] = 1 AND [Parent] = 'frmReports' AND [Type] = 'Report' AND [Property] IS NULL AND [Value] = '{Value1}';";
+                    break;
+                case "GetCusomReports":
+                    sqlStatment = $"SELECT [Value] FROM [UserDefinedApplicationSettings] WHERE [isActive] = 1 AND [Parent] = 'frmReports' AND [Type] = 'Report';";
+                    break;
+
+
+
+                case "NewTransaction":
+                    sqlStatment = $"INSERT INTO [Transactions] ([Amount], [Date], [PaymentMenthod], [VendorName], [Category], [Item],[isPastDue] VALUES ({Value1});";
+
                     break;
 
             }

@@ -9,7 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace Steamroller_Financial_Application
 {
@@ -20,12 +21,15 @@ namespace Steamroller_Financial_Application
         private List<string> categories = new List<string>();
         private List<string> paymentMethod = new List<string>();
         private List<string> paidTo = new List<string>();
+        private Dictionary<string, Dictionary<string, string>> CustomReports = new Dictionary<string, Dictionary<string, string>>();//Holds Custom reports
         private DateTime startDate;
         private DateTime endDate;
         private bool hasBeenModified = false;
         private string rgbValue = string.Empty;
+        private string xTag;
 
-        public frmReports(SQL_Database db)
+
+        public frmReports(SQL_Database db, GlobalDataAndFunctions globals)
         {
             InitializeComponent();
 
@@ -38,12 +42,14 @@ namespace Steamroller_Financial_Application
 
             CreateInstructions();
 
-
+            LoadCustomReport();
         }
+
+        #region "Completed Code"
         private void btnSearchDatabase_Click(object sender, EventArgs e)
         {
-
-            using (SQLiteDataReader reader = data.FetchData(sqlQuery))
+            BuildSelectStatment();//Load Filter Data in SQLQuery
+            using (SQLiteDataReader reader = data.FetchData(sqlQuery))//Execurte Query
             {
 
                 dgDataDisplay.Rows.Clear();
@@ -75,7 +81,7 @@ namespace Steamroller_Financial_Application
             Dictionary<int, string> validationErrors = new Dictionary<int, string>();
             int errorCount = 0;
 
-            sql.Append("SELECT * FROM TRANSACTIONS");
+            sql.Append($"SELECT * FROM TRANSACTIONS WHERE BudgetID ={ }");
 
             if (picSlider_1.Tag.ToString().Contains('1'))
             {
@@ -87,7 +93,6 @@ namespace Steamroller_Financial_Application
             }
             else//Build Conditions List
             {
-
                 if (txtLastRangeValue.Text != string.Empty || txtLastRangeValue.Text.Length != 0)
                 {
                     bool isValid = int.TryParse(txtLastRangeValue.Text, out int value);
@@ -255,13 +260,13 @@ namespace Steamroller_Financial_Application
             }
             else//Build SQL Query
             {
-                sql.Append(" WHERE ");
+                sql.Append(" AND ");
 
                 for (int i = 0; i < Conditions.Count; i++)
                 {
                     sql.Append(Conditions[i].ToString());
 
-                    if (i < Conditions.Count - 1) { sql.Append("AND "); }
+                    if (i < Conditions.Count - 1) { sql.Append(" AND "); }
 
                 }
                 sql.Append(";");
@@ -270,9 +275,6 @@ namespace Steamroller_Financial_Application
                 btnSave.Enabled = true;
             }
         }
-
-        #region "Completed Code"
-
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -290,6 +292,8 @@ namespace Steamroller_Financial_Application
             int reportKey = int.Parse(reportTag[0]);
 
             ClearControls();//Reset Controls
+
+            if (reportKey != 1) { LoadCustomReport(); }
 
             switch (reportName)//Set the tags to the "On" Position before envoking Event to get correct action
             {
@@ -453,13 +457,6 @@ namespace Steamroller_Financial_Application
         }
 
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            Center_Object(pnlSaveInfo, EventArgs.Empty);
-            pnlSaveInfo.Visible = true;
-
-        }
-
         public void Center_Object(object sender, EventArgs e, int xOffset = 0, int yOffset = 0)//Uneversal Centering Method for Panels and additional forms
         {
 
@@ -521,38 +518,314 @@ namespace Steamroller_Financial_Application
             rtbDirections.Text = instructions.ToString();
 
         }
-        #endregion
 
-
-        private void btnSaveQueryName_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtName.Text.Length > 0 && txtName.Text.Length < 22)
-            {
-                if(rgbValue.Length > 0 && sqlQuery.Length > 0) 
-                {
-                    string fileName = rgbValue + ":" + txtName.Text + ":" + sqlQuery;//Color,Name,Query
+            int btnCount = flpnlCustomReports.Controls.Count;
+            string cntrlName = $"CustomSearch_{btnCount}";
+            pnlSaveInfo.Tag = cntrlName;//Store Control name in panel
+            CreateNewButton(cntrlName);
 
-                    data.ExecuteCommand(data.sqlCommands(sqlCode: "NewSearch", Value1: fileName));
+            Center_Object(pnlSaveInfo, EventArgs.Empty);
+            pnlSaveInfo.Visible = true;
 
-                }
-            }
-            else
-            {
-                if (txtName.Text.Length < 1) { MessageBox.Show("Name cannont be empty.")}
-                if (txtName.Text.Length > 22) { MessageBox.Show("Name cannont be longer than 22 characters.")}
-
-
-            }
         }
+
+
+
 
         private void lblColor_Click(object sender, EventArgs e)
         {
+            xTag = pnlSaveInfo.Tag.ToString();
+
             if (cdSelectColor.ShowDialog() == DialogResult.OK)
             {
                 lblColor.BackColor = cdSelectColor.Color;
                 Color color = cdSelectColor.Color;
+
+                Button CustomReport = this.flpnlCustomReports.Controls[xTag] as Button;//Assign new control its color
+                CustomReport.BackColor = color;
+
                 rgbValue = $"RGB({color.R}, {color.G}, {color.B})";
             }
         }
+
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+            Button CustomReport = this.flpnlCustomReports.Controls[xTag] as Button;//Assign new control its color
+            CustomReport.Text = txtName.Text;
+        }
+
+        private void CreateNewButton(string name)
+        {
+            Button xButton = new Button();
+
+            //Text and Color to be assigned later
+            xButton.BackgroundImage = Properties.Resources.GearsTransparent;
+            xButton.BackgroundImageLayout = ImageLayout.Zoom;
+            xButton.Cursor = Cursors.Hand;
+            xButton.FlatStyle = FlatStyle.Flat;
+            xButton.Location = new Point(379, 171);
+            xButton.Name = name;
+            xButton.Size = new Size(84, 84);
+            xButton.TabIndex = 10;
+            xButton.TextAlign = ContentAlignment.BottomCenter;
+            xButton.UseVisualStyleBackColor = true;
+
+
+            xButton.Click += CustomReport_Click;
+
+            flpnlCustomReports.Controls.Add(xButton);//add to flow layout panel
+
+            //Center flow panel to form as it grows
+            int Width = flpnlCustomReports.Width / 2;
+            int frmWith = this.Width / 2;
+            flpnlCustomReports.Left = frmWith - Width;
+
+
+
+        }
+
+
+        #endregion
+        private void btnSaveQueryName_Click(object sender, EventArgs e)//Gather all required Data and Upload to DB
+        {
+            if (txtName.Text.Length > 0 && txtName.Text.Length < 22)
+            {
+                if (rgbValue.Length > 0 && sqlQuery.Length > 0)
+                {
+                    string customReport = CreateCustomReportString();
+                    string fileName = $"RGB:={rgbValue}||NAME:={txtName.Text}||{customReport}"; //Uplodd String value
+
+                    data.ExecuteCommand(data.sqlCommands(sqlCode: "NewSearch", Value1: fileName));
+                }
+            }
+            else
+            {
+                if (txtName.Text.Length < 1) { MessageBox.Show("Name cannont be empty."); }
+                if (txtName.Text.Length > 22) { MessageBox.Show("Name cannont be longer than 22 characters."); }
+
+
+            }
+        }
+
+        private void CustomReport_Click(object? sender, EventArgs e)
+        {//Load Custom report filter and assign values to controls
+            Button report = new Button();
+            report = sender as Button;
+
+            LoadReportFilters(report.Name);
+        }
+
+        private string CreateCustomReportString()
+        {
+            //Create Control strings to save current state of each control and its values and save as string in dataBase so they can be recalled to update the filters for saved searches. Pictureboxes = Tag Value, Textboxes & Date Time Picker= Value, Values from Lists where user can add aditional Categories, Payment methods and Payees are saved as string Arrays
+
+            StringBuilder sbCategories = new StringBuilder();
+            StringBuilder sbPaymentMethods = new StringBuilder();
+            StringBuilder sbPaidTo = new StringBuilder();
+            StringBuilder sbControls = new StringBuilder();
+            string category = string.Empty;
+            string methods = string.Empty;
+            string payee = string.Empty;
+            string controls = string.Empty;
+            string customFilter = string.Empty;
+
+            foreach (Control control in pnlFilter.Controls)//ControlName:=Value::
+            {
+                if (control is PictureBox pictureBox)
+                {
+                    sbControls.AppendLine($"{pictureBox.Name}:= {pictureBox.Tag}::");
+                }
+                else if (control is TextBox textBox)
+                {
+                    sbControls.AppendLine($"{textBox.Name}:= {textBox.Text}::");
+                }
+                else if (control is DateTimePicker dateTimePicker)
+                {
+                    sbControls.AppendLine($"{dateTimePicker.Name}:= {dateTimePicker.Value}::");
+                }
+            }
+            //Extract Data from Lists
+            for (int i = 0; i < categories.Count; i++)//Generate string for Categories
+            {
+                sbCategories.Append(categories[i]);
+                if (i < categories.Count - 1)
+                {
+                    sbCategories.Append(", ");
+                }
+            }
+
+            for (int i = 0; i < paymentMethod.Count; i++)//Generate string for paymentMethod
+            {
+                sbPaymentMethods.Append(paymentMethod[i]);
+                if (i < paymentMethod.Count - 1)
+                {
+                    sbPaymentMethods.Append(", ");
+                }
+            }
+
+            for (int i = 0; i < paidTo.Count; i++)//Generate string for paidTo
+            {
+                sbPaidTo.Append(paidTo[i]);
+                if (i < paidTo.Count - 1)
+                {
+                    sbPaidTo.Append(", ");
+                }
+            }
+
+            //Build Filter Strings *Null values (categories:=::) are required
+            controls = sbControls.ToString();
+            category = $"categories:={sbCategories.ToString()}";
+            methods = $"paymentMethod:={sbPaymentMethods.ToString()}";
+            payee = $"paidTo:={sbPaidTo.ToString()}";
+
+            customFilter = $"{controls}::{category}::{methods}::{payee}";
+
+            return customFilter;
+        }
+
+        public void LoadCustomReport()// Rip string value into its part and assign its value
+        {
+            // Color||Name||Filter  
+            //KVPs  Key:=Value
+            //Arrays  value,value
+            //   Dictionary Filters = Dictionary<ControlName, Value>
+            // Dictionary  CustomReports = Dictionary<ReportName, Filters>
+
+            Dictionary<string, string> Filters = new Dictionary<string, string>();//Used to Hold SQL Filter Strings
+            List<string> customReports = new List<string>();
+            string[] strCustomFilter;
+            int cntrlCount = 0;
+            //Check if there are any Custom Searches in DB
+            using (SQLiteDataReader reader = data.FetchData(data.sqlCommands("GetCusomReports")))
+            {
+                while (reader.Read())
+                {
+                    customReports.Add(reader["Value"].ToString());
+                }
+            }
+
+            if (!(customReports.Count > 0))
+            {
+                return;//no reports found
+            }
+            else  //Brake strings in list into parts to store in Dictionary values into dictionary values
+            {
+                foreach (string item in customReports)
+                {
+                    string cntrlColor = string.Empty;
+                    string cntrlText = string.Empty;
+                    string filters = string.Empty;
+                    string[] cntrls;
+                    string[] KVP;
+
+                    strCustomFilter = item.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);// Split into Major Componets (Color, Name, Filter)
+
+                    //Assign
+                    cntrlColor = strCustomFilter[0];
+                    cntrlText = strCustomFilter[1];
+                    filters = strCustomFilter[2];
+
+                    Filters.Add("Color", cntrlColor);
+                    Filters.Add("Text", cntrlText);
+
+                    cntrls = filters.Split(new string[] { "::" }, StringSplitOptions.RemoveEmptyEntries);//Seperate Control Filters into KVP Name:=Value 
+
+                    foreach (string cntrl in cntrls)
+                    {
+                        KVP = cntrl.Split(new string[] { "::" }, StringSplitOptions.RemoveEmptyEntries);
+                        Filters.Add(KVP[0], KVP[1]);
+                    }
+                    CustomReports.Add($"CustomReport_{cntrlCount}", Filters);
+                    cntrlCount++;
+                }
+            }
+
+        }
+
+        private void LoadReportFilters(string ReportName)
+        {
+            Dictionary<string, string> filters = new Dictionary<string, string>();
+
+            try
+            {
+                //Load Filters
+                if (CustomReports.ContainsKey(ReportName))
+                {
+                    filters = CustomReports[ReportName];
+                }
+                else
+                {
+                    throw new Exception("Report Not Found");
+
+                }
+
+                foreach (KeyValuePair<string, string> filter in filters)
+                {
+                    string key = filter.Key;
+                    string value = filter.Value;
+
+                    if (key == "categories" || key == "paymentMethod" || key == "paidTo")
+                    {
+                        if (key == "categories")
+                        {
+                            categories.AddRange(value.Split(','));
+                        }
+                        else if (key == "paymentMethod")
+                        {
+                            paymentMethod.AddRange(value.Split(','));
+                        }
+                        else//paidTo
+                        {
+                            paidTo.AddRange(value.Split(','));
+                        }
+                    }
+                    else
+                    {
+
+                        Control control = pnlFilter.Controls.Find(key, true).FirstOrDefault();
+
+                        if (control != null)
+                        {
+                            if (control is PictureBox pictureBox)
+                            {
+                                pictureBox.Tag = value;
+                            }
+                            else if (control is TextBox textBox)
+                            {
+                                textBox.Text = value;
+                            }
+                            else if (control is DateTimePicker dateTimePicker)
+                            {
+                                if (DateTime.TryParse(value, out DateTime date))
+                                {
+                                    dateTimePicker.Value = date;
+                                }
+                                else
+                                {
+                                    throw new Exception("Invalid Date Format");
+                                }
+                            }
+
+                            else
+                            {
+                                throw new Exception("Control Not Found");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                MessageBox.Show($"Error: {ex.Message}");
+#endif
+            }
+
+        }
+
+
     }
 }

@@ -22,7 +22,9 @@ namespace Steamroller_Financial_Application
         public static string conn = $"Data Source={System.IO.Path.Combine(path, dbName)};Version=3;";
         public static SQLiteConnection connection = new SQLiteConnection(conn);
         public Color CalendarDayMouseEnterOriginalColor;
-
+        public string BudgetID = string.Empty;
+        public string UserName = string.Empty;
+        
 
 
         /// <summary>
