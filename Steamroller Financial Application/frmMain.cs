@@ -99,7 +99,8 @@ namespace Steamroller_Financial_Application
             pnlMainMenu.Height = 35;
 
 #if !DEBUG
-            frmSplashScreen sp = new frmSplashScreen();
+frmSplashScreen sp = new frmSplashScreen(db, globals);
+                    reportForm.MdiParent = this;                 
             sp.Show();
 #endif
 

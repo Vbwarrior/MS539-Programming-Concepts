@@ -50,6 +50,7 @@ namespace Steamroller_Financial_Application
 
         SQLiteConnection sql3_conn;
         GlobalDataAndFunctions Globals = new GlobalDataAndFunctions();
+            List<SqlParameter> parameters = new List<SqlParameter>();
 
         public SQL_Database()
         {
@@ -82,8 +83,16 @@ namespace Steamroller_Financial_Application
             try
             {
                 SQLiteCommand myCommand = new SQLiteCommand(sql, sql3_conn);
+                if (parameters.Count > 0)
+                {
+                    foreach (var parameter in parameters)
+                    {
+                        myCommand.Parameters.Add(parameter);
+                    }
+                    // Clear the parameters list after use
+                    parameters.Clear();
+                }
                 myCommand.ExecuteNonQuery();
-
                 return true;
             }
             catch (System.Exception ex)
@@ -94,25 +103,25 @@ namespace Steamroller_Financial_Application
 
         }
 
-
-
-
-
-
-
         public SQLiteDataReader FetchData(string sqlQuery)
         {
             if (sql3_conn.State != ConnectionState.Open)
             {
                 sql3_conn.Open();
-
             }
 
             SQLiteCommand command = new SQLiteCommand(sqlQuery, sql3_conn);
+            if (parameters.Count > 0)
+            {
+                foreach (var parameter in parameters)
+                {
+                    command.Parameters.Add(parameter);
+                }
+                // Clear the parameters list after use
+                parameters.Clear();
+            }
             return command.ExecuteReader();
         }
-
-
 
         /// <summary>
         /// Generate an SQL string for Adding or Updating using the given parameters, conversion from string may be required
@@ -128,10 +137,19 @@ namespace Steamroller_Financial_Application
         {
             string sqlStatment = string.Empty;
 
+            if(fldName1 != "") {parameters.Add( new SqlParameter("fldName1", fldName1))   ; }
+            if(fldName2 != "") {parameters.Add( new SqlParameter("fldName2", fldName2))   ; }
+            if(Value1 != "") {parameters.Add( new SqlParameter("Value1", Value1))   ; }
+            if(Value2 != "") {parameters.Add( new SqlParameter("Value2", Value2))   ; }
+            if(condition != "") {parameters.Add( new SqlParameter("condition", condition))   ; }
+            if(orderBy != "") {parameters.Add( new SqlParameter("orderBy", orderBy))   ; }
+
 
             switch (sqlCode)
             {
-
+                case "Login":
+                    sqlStatment = $"SELECT * FROM Users WHERE UserName =:{Value1} AND Password = :{Value2};";
+                    break;
 
                 case "Budget_1":
                     sqlStatment = "SELECT DISTINCT [Group] FROM BudgetCategories ORDER BY [Group] ASC;";
@@ -140,25 +158,22 @@ namespace Steamroller_Financial_Application
                     sqlStatment = "SELECT  [Group], [SubGroup], [Active] FROM BudgetCategories;";
                     break;
                 case "Budget_3":
-                    sqlStatment = $"SELECT  [SubGroup]  FROM BudgetCategories WHERE [Group] = '{Value1}' ORDER BY  [SubGroup]  ASC;";
+                    sqlStatment = $"SELECT  [SubGroup]  FROM BudgetCategories WHERE [Group] = :'{Value1}' ORDER BY  [SubGroup]  ASC;";
                     break;
                 case "Budget_4":
-                    sqlStatment = $"INSERT INTO [BudgetCategories] ([Active],[Group], [SubGroup]) VALUES (1,'{Value1}', '{Value2}');";
+                    sqlStatment = $"INSERT INTO [BudgetCategories] ([Active],[Group], [SubGroup]) VALUES (1,:'{Value1}', :'{Value2}');";
                     break;
                 case "NewSearch":
-                    sqlStatment = $"INSERT INTO [UserDefinedApplicationSettings]  ([isActive], [Parent], [Type], [Property], [Value]) VALUES (1, 'frmReports', 'Report', {null}, '{Value1}');";
+                    sqlStatment = $"INSERT INTO [UserDefinedApplicationSettings]  ([isActive], [Parent], [Type], [Property], [Value]) VALUES (1, 'frmReports', 'Report', {null}, :'{Value1}');";
                     break;
                 case "DeleteSearch":
-                    sqlStatment = $"DELETE FROM [UserDefinedApplicationSettings] WHERE [isActive] = 1 AND [Parent] = 'frmReports' AND [Type] = 'Report' AND [Property] IS NULL AND [Value] = '{Value1}';";
+                    sqlStatment = $"DELETE FROM [UserDefinedApplicationSettings] WHERE [isActive] = 1 AND [Parent] = 'frmReports' AND [Type] = 'Report' AND [Property] IS NULL AND [Value] = :'{Value1}';";
                     break;
                 case "GetCusomReports":
                     sqlStatment = $"SELECT [Value] FROM [UserDefinedApplicationSettings] WHERE [isActive] = 1 AND [Parent] = 'frmReports' AND [Type] = 'Report';";
                     break;
-
-
-
                 case "NewTransaction":
-                    sqlStatment = $"INSERT INTO [Transactions] ([Amount], [Date], [PaymentMenthod], [VendorName], [Category], [Item],[isPastDue] VALUES ({Value1});";
+                    sqlStatment = $"INSERT INTO [Transactions] ([Amount], [Date], [PaymentMenthod], [VendorName], [Category], [Item],[isPastDue] VALUES (:{Value1});";
 
                     break;
 

@@ -17,6 +17,7 @@ namespace Steamroller_Financial_Application
     public partial class frmReports : Form
     {
         private SQL_Database data;//Refrence to Database Instance from Main Form
+        private GlobalDataAndFunctions globals;
         private string sqlQuery = string.Empty;
         private List<string> categories = new List<string>();
         private List<string> paymentMethod = new List<string>();
@@ -29,13 +30,14 @@ namespace Steamroller_Financial_Application
         private string xTag;
 
 
-        public frmReports(SQL_Database db, GlobalDataAndFunctions globals)
+        public frmReports(SQL_Database db, GlobalDataAndFunctions globalData)
         {
             InitializeComponent();
 
             this.SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
 
             data = db;
+            globals = globalData;
             pnlFilter.Visible = false;
 
             this.Location = new Point(200, 200);
@@ -81,7 +83,7 @@ namespace Steamroller_Financial_Application
             Dictionary<int, string> validationErrors = new Dictionary<int, string>();
             int errorCount = 0;
 
-            sql.Append($"SELECT * FROM TRANSACTIONS WHERE BudgetID ={ }");
+            sql.Append($"SELECT * FROM TRANSACTIONS WHERE BudgetID ={globals.BudgetID} ");
 
             if (picSlider_1.Tag.ToString().Contains('1'))
             {

@@ -12,10 +12,16 @@ namespace Steamroller_Financial_Application
 {
     public partial class frmSplashScreen : Form
     {
+        private SQL_Database data;//Refrence to Database Instance from Main Form
+        private GlobalDataAndFunctions globals;
         bool flag = false;
-        public frmSplashScreen()
+
+        public frmSplashScreen(SQL_Database db, GlobalDataAndFunctions globalData)
         {
             InitializeComponent();
+            data = db;
+            globals = globalData;
+
         }
 
         private void LoginTimer_Tick(object sender, EventArgs e)
@@ -50,7 +56,7 @@ namespace Steamroller_Financial_Application
             this.Close();
 #endif
         }
-       
+
         private void SplashTimer_Tick(object sender, EventArgs e)
         {
             float centerX1;
@@ -116,10 +122,16 @@ namespace Steamroller_Financial_Application
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-#if DEBUG
-            this.Close();
-#endif
-            //ToDo Validate user account
+//#if DEBUG
+//            this.Close();
+//#endif
+string userName = txtUserName.Text;
+            string password = txtPassword.Text;
+
+
+
+
+
 
         }
 
@@ -129,26 +141,3 @@ namespace Steamroller_Financial_Application
         }
     }
 }
-/* // Create a Graphics object from the image
-                    using (Graphics g = Graphics.FromImage(picDollarSign.Image))
-                    {
-                        // Draw the centered text
-                        using (Font font = new Font("Stencil", 200, FontStyle.Bold | FontStyle.Italic)) // Changed font size to 144
-                        {
-                            string text1 = "Steam Roller";
-                            string text2 = "Financial Application";
-
-                            // Calculate the center coordinates for the first line
-                            float centerX1 = (picDollarSign.Image.Width - g.MeasureString(text1, font).Width) / 2;
-                            float centerY1 = (picDollarSign.Image.Height - g.MeasureString(text1, font).Height) / 2;
-
-                            // Draw the first line of text
-                            g.DrawString(text1, font, Brushes.Black, new PointF(centerX1, centerY1));
-
-                            // Calculate the center coordinates for the second line, positioned under the first line
-                            float centerX2 = (picDollarSign.Image.Width - g.MeasureString(text2, font).Width) / 2;
-                            float centerY2 = centerY1 + g.MeasureString(text1, font).Height;
-
-                            // Draw the second line of text
-                            g.DrawString(text2, font, Brushes.LimeGreen, new PointF(centerX2, centerY2));
-                        }*/

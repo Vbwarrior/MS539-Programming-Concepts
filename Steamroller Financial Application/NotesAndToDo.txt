@@ -27,3 +27,28 @@
  * Extract the strings from the list ans split them on ":" and generate buttons, add on click event 'Slider_Clock
  * Create delete Event to run DeleteSQL Command
  */
+
+
+ /* // Create a Graphics object from the image
+                    using (Graphics g = Graphics.FromImage(picDollarSign.Image))
+                    {
+                        // Draw the centered text
+                        using (Font font = new Font("Stencil", 200, FontStyle.Bold | FontStyle.Italic)) // Changed font size to 144
+                        {
+                            string text1 = "Steam Roller";
+                            string text2 = "Financial Application";
+
+                            // Calculate the center coordinates for the first line
+                            float centerX1 = (picDollarSign.Image.Width - g.MeasureString(text1, font).Width) / 2;
+                            float centerY1 = (picDollarSign.Image.Height - g.MeasureString(text1, font).Height) / 2;
+
+                            // Draw the first line of text
+                            g.DrawString(text1, font, Brushes.Black, new PointF(centerX1, centerY1));
+
+                            // Calculate the center coordinates for the second line, positioned under the first line
+                            float centerX2 = (picDollarSign.Image.Width - g.MeasureString(text2, font).Width) / 2;
+                            float centerY2 = centerY1 + g.MeasureString(text1, font).Height;
+
+                            // Draw the second line of text
+                            g.DrawString(text2, font, Brushes.LimeGreen, new PointF(centerX2, centerY2));
+                        }*/
