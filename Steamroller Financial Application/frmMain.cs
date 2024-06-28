@@ -20,22 +20,6 @@
  *  Create Setup form for New Users
  */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 using System;
 using System.ComponentModel;
 using System.Globalization;
@@ -59,9 +43,10 @@ namespace Steamroller_Financial_Application
         GlobalDataAndFunctions globals = new GlobalDataAndFunctions();
         public static string executableLocation = Assembly.GetExecutingAssembly().Location;
         public static string path = System.IO.Path.GetDirectoryName(executableLocation);
-        public static string dbName = "FinancialData.db";
-        public static string conn = $"Data Source={System.IO.Path.Combine(path, dbName)};Version=3;";
-        // public SQLiteCRUD db = new SQLiteCRUD(); //db = new SQLiteCRUD();
+        
+        public static string dbName = System.IO.Path.Combine(path, "AppData", "Resources", "Database", "SteamRollerFinancialAssistant.db");
+        public static string conn = $"Data Source={System.IO.Path.Combine(path, "AppData", "Resources", "Database", dbName)};Version=3;";
+
         public SQLiteCRUD db = new SQLiteCRUD(conn);
 
         private ComboBox comboBoxBudgetDataCategories;
@@ -125,7 +110,8 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
 
         private void btnTestControl_Click(object sender, EventArgs e)
         {//Used to test specific controls
-            GenerateRandomTestData();
+         // GenerateRandomTestData();
+            db.CreateDatabaseAndTables();
         }
 
 

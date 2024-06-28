@@ -29,6 +29,16 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Microsoft.VisualBasic.ApplicationServices;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Security.Cryptography.Xml;
+using System.Xml;
+using static System.Windows.Forms.AxHost;
+using System.Net;
+using System.Reflection.Emit;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace SQLiteClassLib
 {
@@ -47,24 +57,6 @@ namespace SQLiteClassLib
 
     public class SQLiteCRUD
     {
-        public enum TableNames
-        {
-                    AccountTypes = 1,
-                    Accounts = 2,
-                    Bills = 3,
-                    BudgetData = 4,
-                    BudgetItems = 5,
-                    Budgets = 6,
-                    Categories = 7,
-                    PaymentMethods = 8,
-                    Transactions = 9,
-                    UserDefinedApplicationSettings = 10,
-                    User_Access = 11,
-                    Users = 12        
-        
-        }
-
-
 
         private SQLiteConnection sqlite_conn;
         List<SQLiteParameter> parameters = new List<SQLiteParameter>();
@@ -75,10 +67,17 @@ namespace SQLiteClassLib
         /// {Eample connectionString = "Data Source=C:\\sqlite\\db\\mydatabase.db; Version=3;"}
         /// </summary>
         /// <param name="connectionString"></param>
-        public SQLiteCRUD(string connectionString)// Create a new database connection:
+        public SQLiteCRUD(string connectionString) // Create a new database connection:
         {
             sqlite_conn = new SQLiteConnection(connectionString);
-            //sqlite_conn.Open();
+
+
+            string databasePath = new SQLiteConnectionStringBuilder(connectionString).DataSource;
+
+            if (!File.Exists(databasePath))
+            {
+                CreateDatabaseAndTables();
+            }
         }
 
         /// <summary>
@@ -103,6 +102,25 @@ namespace SQLiteClassLib
             }
         }
 
+
+        public void TestConnection()
+        {
+            string message = "Connection to the database was successful.";
+
+            OpenConnection();
+            if (Console.OpenStandardInput(1) != Stream.Null)//Console Application
+            {
+                Console.WriteLine(message);
+            }
+            else// Windows appliaction
+            {
+                // If it's not a console application, it's likely a Windows application
+                // You can handle the message appropriately here, such as showing a message box
+                MessageBox.Show(message);
+            }
+        }
+
+
         /// <summary>
         ///  The Write method. Executes a non-query SQLite command (Insert, Update, Drop) by processing the query string.
         /// </summary>
@@ -125,7 +143,7 @@ namespace SQLiteClassLib
             CloseConnection();
         }
 
-   /// <summary>
+        /// <summary>
         /// The Read method. Executes a SQLite querry command that returns data using the provided query string.
         /// </summary>
         /// <param name="query">Uses a preBuilt SQL Querry string to perform operations</param>
@@ -142,7 +160,7 @@ namespace SQLiteClassLib
                     cmd.Parameters.Add(parameter);
                 }
                 reader = cmd.ExecuteReader();
-            }          
+            }
 
             return reader;
         }
@@ -338,7 +356,7 @@ namespace SQLiteClassLib
                     }
                 }
             }
-            
+
 
             return result;
         }
@@ -501,11 +519,11 @@ namespace SQLiteClassLib
         /// <param name="fldName"></param>
         /// <param name="value"></param>
         /// <returns>Boolean value indicating if data is present.</returns>
-        public bool FieldContains(string tableName, string fldName, string value)
+        public bool Contains(string tableName, string fldName, string value)
         {
             bool result = false;
 
-            Dictionary<string,string>condition = new Dictionary<string,string>();
+            Dictionary<string, string> condition = new Dictionary<string, string>();
 
             condition.Add(fldName, value);
 
@@ -617,66 +635,9 @@ namespace SQLiteClassLib
 
             return count;
         }
-          
-
-
 
 
         /// <summary>
-        /// Given the Enum TableName returns the string value of the tablesName
-        /// </summary>
-        /// <param name="tbl"></param>
-        /// <returns></returns>
-        public string Tables(TableNames tbl)
-        {
-            string tblName = string.Empty;
-
-            switch (tbl)
-            {
-                case TableNames.AccountTypes:
-                    tblName = "AccountTypes";
-                    break;
-                case TableNames.Accounts:
-                    tblName = "Accounts";
-                    break;
-                case TableNames.Bills:
-                    tblName = "Bills";
-                    break;
-                case TableNames.BudgetData:
-                    tblName = "BudgetData";
-                    break;
-                case TableNames.BudgetItems:
-                    tblName = "BudgetItems";
-                    break;
-                case TableNames.Budgets:
-                    tblName = "Budgets";
-                    break;
-                case TableNames.Categories:
-                    tblName = "Categories";
-                    break;
-                case TableNames.PaymentMethods:
-                    tblName = "PaymentMethods";
-                    break;
-                case TableNames.Transactions:
-                    tblName = "Transactions";
-                    break;
-                case TableNames.UserDefinedApplicationSettings:
-                    tblName = "UserDefinedApplicationSettings";
-                    break;
-                case TableNames.User_Access:
-                    tblName = "User_Access";
-                    break;
-                case TableNames.Users:
-                    tblName = "Users";
-                    break;
-            }
-            return tblName;
-
-            }
-
-
-
-  /// <summary>
         /// The ClearColumns method. Clears the _COLUMNS list, should be called before creating a new table.
         /// </summary>
         public void ClearColumns()
@@ -834,7 +795,7 @@ namespace SQLiteClassLib
             }
         }
 
-     
+
         /// <summary>
         /// 
         /// </summary>
@@ -871,303 +832,215 @@ namespace SQLiteClassLib
         }
 
 
-     
+
 
         public void ClearAndVacuumTable(string tableName)
-        {           
-                string query = $"DELETE FROM {tableName};";
-               Write(query);            
+        {
+            string query = $"DELETE FROM {tableName};";
+            Write(query);
         }
-         public void Vacuum()
+        public void Vacuum()
         {
             // Vacuum the table
             Write("VACUUM;");
         }
 
+        public void CreateDatabaseAndTables()
+        {
+
+
+            string assemblyPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string databaseDirectory = System.IO.Path.Combine(assemblyPath, "AppData", "Resources", "Database");
+            System.IO.Directory.CreateDirectory(databaseDirectory); // This ensures that the directory exists
+
+            string databaseName = System.IO.Path.Combine(databaseDirectory, "SteamRollerFinancialAssistant.db");
+
+            SQLiteConnection.CreateFile(databaseName);
+
+            using (SQLiteConnection connection = new SQLiteConnection($"Data Source={databaseName};Version=3;"))
+            {
+                connection.Open();
+
+                string sql = @"
+        PRAGMA case_sensitive_like = OFF;
+
+        CREATE TABLE Users (
+            UserID INTEGER PRIMARY KEY,
+            UserName TEXT COLLATE NOCASE NOT NULL UNIQUE,
+            PasswordHash TEXT COLLATE NOCASE NOT NULL,
+            IsActive BOOLEAN NOT NULL DEFAULT 1
+        );
+
+        CREATE TABLE Budgets (
+            BudgetID INTEGER PRIMARY KEY,
+            UserID INTEGER,
+            BudgetName TEXT COLLATE NOCASE NOT NULL,
+            IsActive BOOLEAN NOT NULL DEFAULT 1,
+            FOREIGN KEY(UserID) REFERENCES Users(UserID)
+        );
+
+        CREATE TABLE Categories (
+            CategoryID INTEGER PRIMARY KEY,
+            CategoryName TEXT COLLATE NOCASE NOT NULL
+        );
+
+        CREATE TABLE Allocations (
+            AllocationID INTEGER PRIMARY KEY,
+            BudgetID INTEGER,
+            CategoryID INTEGER,
+            Amount REAL NOT NULL,
+            FOREIGN KEY(BudgetID) REFERENCES Budgets(BudgetID),
+            FOREIGN KEY(CategoryID) REFERENCES Categories(CategoryID)
+        );
+
+       CREATE TABLE Bills (
+    BillID INTEGER PRIMARY KEY,
+    UserID INTEGER,
+    CategoryID INTEGER,
+    SubGroupID INTEGER,
+    CompanyName TEXT COLLATE NOCASE NOT NULL,
+    PaymentMethod TEXT COLLATE NOCASE,
+    AccountNumber TEXT COLLATE NOCASE,
+    Address TEXT COLLATE NOCASE,
+    State TEXT COLLATE NOCASE,
+    ZipCode TEXT COLLATE NOCASE,
+    PhoneNumber TEXT COLLATE NOCASE,
+    Website TEXT COLLATE NOCASE,
+    Reoccurring BOOLEAN NOT NULL,
+    DayOfMonthDue INTEGER,
+    IsPrimaryVendor BOOLEAN NOT NULL DEFAULT 0,
+    FOREIGN KEY(UserID) REFERENCES Users(UserID),
+    FOREIGN KEY(CategoryID) REFERENCES Categories(CategoryID),
+    FOREIGN KEY(SubGroupID) REFERENCES CategorySubGroups(SubGroupID)
+);
+
+
+        CREATE TABLE AccountTypes (
+            AccountTypeID INTEGER PRIMARY KEY,
+            AccountTypeName TEXT COLLATE NOCASE NOT NULL UNIQUE
+        );
+
+        INSERT INTO AccountTypes (AccountTypeName) VALUES 
+        ('Primary Checking'), 
+        ('Checking'), 
+        ('Primary Saving'), 
+        ('Savings'), 
+        ('Primary Credit Card'), 
+        ('Credit Card');
+
+        CREATE TABLE UserAccounts (
+            UserAccountID INTEGER PRIMARY KEY,
+            UserID INTEGER,
+            AccountTypeID INTEGER,
+            BankName TEXT COLLATE NOCASE,
+            NickName TEXT COLLATE NOCASE,
+            Balance REAL,
+            AccountNumber TEXT COLLATE NOCASE,
+            LogoFilePath TEXT COLLATE NOCASE,
+            IsActive BOOLEAN NOT NULL DEFAULT 1,
+            FOREIGN KEY(UserID) REFERENCES Users(UserID),
+            FOREIGN KEY(AccountTypeID) REFERENCES AccountTypes(AccountTypeID)
+        );
+
+        CREATE TABLE CategorySubGroups (
+            SubGroupID INTEGER PRIMARY KEY,
+            CategoryID INTEGER,
+            SubCategoryName TEXT COLLATE NOCASE,
+            IsActive BOOLEAN NOT NULL DEFAULT 1,
+            FOREIGN KEY(CategoryID) REFERENCES Categories(CategoryID),
+            UNIQUE(CategoryID, SubCategoryName)
+        );
+
+CREATE TABLE CreditCards (
+    CreditCardID INTEGER PRIMARY KEY,
+    UserAccountID INTEGER,
+    BillID INTEGER,
+    APR REAL,
+    Balance REAL,
+    LogoFilePath TEXT COLLATE NOCASE,
+    IsActive BOOLEAN NOT NULL DEFAULT 1,
+    FOREIGN KEY(UserAccountID) REFERENCES UserAccounts(UserAccountID),
+    FOREIGN KEY(BillID) REFERENCES Bills(BillID)
+);
+
+CREATE TABLE Loans (
+    LoanID INTEGER PRIMARY KEY,
+    UserAccountID INTEGER,
+    BillID INTEGER,
+    APR REAL,
+    Balance REAL,
+    TermMonths INTEGER,
+    LogoFilePath TEXT COLLATE NOCASE,
+    IsActive BOOLEAN NOT NULL DEFAULT 1,
+    FOREIGN KEY(UserAccountID) REFERENCES UserAccounts(UserAccountID),
+    FOREIGN KEY(BillID) REFERENCES Bills(BillID)
+);
+
+CREATE TABLE HouseholdBills (
+    HouseholdBillID INTEGER PRIMARY KEY,
+    UserAccountID INTEGER,
+    BillID INTEGER,
+    AmountDue REAL,
+    DueDate TEXT,
+    LogoFilePath TEXT COLLATE NOCASE,
+    IsActive BOOLEAN NOT NULL DEFAULT 1,
+    FOREIGN KEY(UserAccountID) REFERENCES UserAccounts(UserAccountID),
+    FOREIGN KEY(BillID) REFERENCES Bills(BillID)
+);
+
+       
+
+        CREATE TABLE TransactionTypes (
+            TransactionTypeID INTEGER PRIMARY KEY,
+            TransactionTypeName TEXT COLLATE NOCASE NOT NULL UNIQUE
+        );
+
+        INSERT INTO TransactionTypes (TransactionTypeName) VALUES 
+        ('Income'), 
+        ('Expense');
+
+        CREATE TABLE Transactions (
+            TransactionID INTEGER PRIMARY KEY,
+            BudgetID INTEGER,
+            TransactionTypeID INTEGER,
+            CategoryID INTEGER,
+            SubGroupID INTEGER,
+            Amount REAL,
+            VendorName TEXT COLLATE NOCASE,
+            PaymentMethodID INTEGER,
+            TransactionDate TEXT,
+            FOREIGN KEY(BudgetID) REFERENCES Budgets(BudgetID),
+            FOREIGN KEY(TransactionTypeID) REFERENCES TransactionTypes(TransactionTypeID),
+            FOREIGN KEY(CategoryID) REFERENCES Categories(CategoryID),
+            FOREIGN KEY(SubGroupID) REFERENCES CategorySubGroups(SubGroupID),
+            FOREIGN KEY(PaymentMethodID) REFERENCES PaymentMethods(PaymentMethodID)
+        );
+
+        CREATE TABLE Reports (
+            ReportID INTEGER PRIMARY KEY,
+            BudgetID INTEGER,
+            ReportName TEXT COLLATE NOCASE,
+            ReportFilter TEXT COLLATE NOCASE,
+            IsActive BOOLEAN NOT NULL DEFAULT 1,
+            FOREIGN KEY(BudgetID) REFERENCES Budgets(BudgetID),
+            UNIQUE(BudgetID, ReportName)
+        );
+
+        ";
+
+                using (SQLiteCommand command = new SQLiteCommand(sql, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
+
+
+
+
+
+
 }
 
-/*
- 
-   /// <summary>
-        /// The Insert_Into method. Inserts a new row into the specified table using the provided column-value pairs.
-        /// </summary>
-        /// <param name="tableName"> Name of the table to insert data.</param>
-        /// <param name="columnValues">List of Key Value Pairs Where Key:[Column Name] Value:[Value to insert]</param>
-        public void Insert_Into(string tableName, Dictionary<string,string>columnValues)
-        {
-            StringBuilder query = new StringBuilder();
-
-            query.Append($"INSERT INTO {tableName} (");
-
-            if (columnValues != null)
-            {
-
-                for (int i = 0; i < columnValues.Count; i++)
-                {
-                    query.Append($"[{columnValues[i].Key}]");
-                    if (i < columnValues.Count - 1) { query.Append(", "); }
-
-                    parameters.Add(new SQLiteParameter("@" + columnValues[i].Key, columnValues[i].Value));
-                }
-                query.Append(") VALUES(");
-
-                for (int i = 0; i < columnValues.Count; i++)
-                {
-                    query.Append($"@{columnValues[i].Value}");
-                    if (i < columnValues.Count - 1) { query.Append(", "); }
-
-
-                }
-                query.Append(");");
-
-
-            }
-
-            Write(query.ToString());
-        }
-
-
-
-
-        /// <summary>
-        ///  The Update method. Updates the specified table with the provided column-value pairs where the conditions are met.
-        /// </summary>
-        /// <param name="tableName">Name of the table to insert data.</param>
-        /// <param name="columnValues">List of Key Value Pairs Where Key:[Column Name] Value:[Value to insert]</param>
-        /// <param name="conditions">List of Key Value Pairs Where Key:[Column Name] Value:[Value to insert]</param>
-        public void Update(string tableName, Dictionary<string,string>columnValues, Dictionary<string,string>conditions)
-        {
-            StringBuilder query = new StringBuilder();
-
-            query.Append($"UPDATE {tableName} SET ");
-
-            if (columnValues != null)
-            {
-                for (int i = 0; i < columnValues.Count; i++)
-                {
-                    query.Append($"[{columnValues[i].Key}] = @{columnValues[i].Key}");
-                    if (i < columnValues.Count - 1) { query.Append(", "); }
-
-                    parameters.Add(new SQLiteParameter("@" + columnValues[i].Key, columnValues[i].Value));
-                }
-            }
-
-            if (conditions != null && conditions.Count > 0)
-            {
-                query.Append(" WHERE ");
-
-                for (int i = 0; i < conditions.Count; i++)
-                {
-                    query.Append($"[{conditions[i].Key}] = @{conditions[i].Key}");
-                    if (i < conditions.Count - 1) { query.Append(" AND "); }
-
-                    parameters.Add(new SQLiteParameter("@" + conditions[i].Key, conditions[i].Value));
-                }
-            }
-
-            query.Append(";");
-
-            Write(query.ToString());
-        }
-
-  /// <summary>
-        ///  The Select method. It selects specified columns from the specified table where the conditions are met and orders the result as specified.
-        /// </summary>
-        /// <param name="columns">List of strings containing Column Names</param>
-        /// <param name="fromTable"> Name of the table to retrive data from.</param>
-        /// <param name="conditions">List of Key Value Pairs Where Key:[Column Name] Value:[Value]</param>
-        /// <param name="orderBy">List of Key Value Pairs Where Key:[Column Name] Value:[Order By Type (ASC | DESC)]</param>
-        /// <returns>SQLiteDataReader Object to be used by calling method to extract data.</returns>
-        public SQLiteDataReader Select(List<string> columns, string fromTable, Dictionary<string,string>conditions = null, Dictionary<string,string>orderBy = null)
-        {
-            SQLiteDataReader reader;
-
-            StringBuilder query = new StringBuilder();
-
-            parameters.Clear();
-
-            query.Append("SELECT ");
-
-            for (int i = 0; i < columns.Count; i++)
-            {
-                query.Append(columns[i]);
-                if (i < columns.Count - 1) { query.Append(","); }
-            }
-
-            query.Append($" FROM {fromTable} ");
-
-            if (conditions != null)
-            {
-                query.Append("WHERE ");
-
-                for (int i = 0; i < conditions.Count; i++)
-                {
-                    query.Append(conditions[i].Key + " = @" + conditions[i].Key);
-                    if (i < conditions.Count - 1) { query.Append(" AND "); }
-
-                    parameters.Add(new SQLiteParameter("@" + conditions[i].Key, conditions[i].Value));
-                }
-            }
-
-            if (orderBy != null)
-            {
-                query.Append("ORDER BY ");
-                for (int i = 0; i < orderBy.Count; i++)
-                {
-                    query.Append($"{orderBy[i]} {orderBy[i].Value}");
-                    if (i < conditions.Count - 1) { query.Append(", "); }
-                }
-            }
-            query.Append(";");
-
-            reader = Read(query.ToString());
-
-            return reader;
-
-        }
-
-
-        /// <summary>
-        /// The GetDataTable method. It gets a DataSet of specified columns from the specified table where the conditions are met and orders the result as specified.
-        /// </summary>
-        /// <param name="columns">List of strings containing Column Names</param>
-        /// <param name="fromTable">Name of the table to retrive data from.</param>
-        /// <param name="conditions">List of Key Value Pairs Where Key:[Column Name] Value:[Value to insert]</param>
-        /// <param name="orderBy">List of Key Value Pairs Where Key:[Column Name] Value:[Order By Type (ASC | DESC)]</param>
-        /// <returns>DataSet Object with data from query if any found.</returns>
-        public DataTable GetDataTable(List<string> columns, string fromTable, Dictionary<string,string>conditions = null, Dictionary<string,string>orderBy = null)
-        {
-            DataTable dataTable = new DataTable();
-
-            StringBuilder query = new StringBuilder();
-
-            parameters.Clear();
-
-            query.Append("SELECT ");
-
-            for (int i = 0; i < columns.Count; i++)
-            {
-                query.Append(columns[i]);
-                if (i < columns.Count - 1) { query.Append(","); }
-            }
-
-            query.Append($" FROM {fromTable} ");
-
-            if (conditions != null)
-            {
-                query.Append("WHERE ");
-
-                for (int i = 0; i < conditions.Count; i++)
-                {
-                    query.Append(conditions[i].Key + " = @" + conditions[i].Key);
-                    if (i < conditions.Count - 1) { query.Append(" AND "); }
-
-                    parameters.Add(new SQLiteParameter("@" + conditions[i].Key, conditions[i].Value));
-                }
-            }
-
-            if (orderBy != null)
-            {
-                query.Append("ORDER BY ");
-                for (int i = 0; i < orderBy.Count; i++)
-                {
-                    query.Append($"{orderBy[i]} {orderBy[i].Value}");
-                    if (i < conditions.Count - 1) { query.Append(", "); }
-                }
-            }
-            query.Append(";");
-
-            SQLiteDataReader reader = Read(query.ToString());
-
-            dataTable.Load(reader);
-
-            return dataTable;
-        }
-
-        /// <summary>
-        /// The Count method. It counts the number of rows in the specified table where the conditions are met.
-        /// </summary>
-        /// <param name="fromTable"></param>
-        /// <param name="conditions"></param>
-        /// <returns>Integer value of count of rows. Zero indicates no data found.</returns>
-        public int Count(string fromTable, Dictionary<string,string>conditions = null)
-        {
-            // sqliteString = $"SELECT COUNT(*) FROM {tblNames} WHERE {fldName1} = @value1";
-
-            int count = 0;
-
-            StringBuilder query = new StringBuilder();
-
-            parameters.Clear();
-
-            query.Append($"SELECT COUNT(*) FROM {fromTable}");
-
-            if (conditions != null)
-            {
-                query.Append(" WHERE ");
-
-                for (int i = 0; i < conditions.Count; i++)
-                {
-                    query.Append(conditions[i].Key + " = @" + conditions[i].Key);
-                    if (i < conditions.Count - 1) { query.Append(" AND "); }
-
-                    parameters.Add(new SQLiteParameter("@" + conditions[i].Key, conditions[i].Value));
-                }
-            }
-
-            query.Append(";");
-
-            using (SQLiteDataReader reader = Read(query.ToString()))
-            {
-                if (reader.Read())
-                {
-                    count = Convert.ToInt32(reader[0]);
-                }
-            }
-
-            return count;
-        }
-
-      
-        /// <summary>
-        /// InnerJoin Method: Creates a DataTable by joining on a common field between two tables.
-        /// </summary>
-        /// <param name="tblCommonField"> Commonly known as the From Table</param>
-        /// <param name="tblCommonField_2">Joining Tabl </param>
-        /// <param name="tableAndColumn">List of KVP of the Table.Column Names to put in DataTable. Where Key= Table Name & Value = Field Name. </param>
-        /// <returns>DataTable of Combined Table Columns from both tables</returns>
-        public DataTable InnerJoin(Dictionary<string, string> tblCommonField, Dictionary<string, string> tblCommonField_2, Dictionary<string,string>tableAndColumn)
-        {
-            StringBuilder sql = new StringBuilder();
-
-            sql.Append($"SELECT ");
-
-            if (tableAndColumn != null)//Append Table Names and Columns to sql statment
-            {
-                for (int i = 0; i < tableAndColumn.Count; i++)
-                {
-                    sql.Append(tableAndColumn[i].Key + "." + tableAndColumn[i].Value);
-                    if (i < tableAndColumn.Count - 1) { sql.Append(", "); }
-                }
-            }
-
-            sql.Append($" FROM {tblCommonField.Key} INNER JOIN {tblCommonField_2.Key} ON {tblCommonField.Key + "." + tblCommonField.Value} = {tblCommonField_2.Key + "." + tblCommonField_2.Value}");
-
-            SQLiteDataReader reader = Read(sql.ToString());
-
-            // Load the data into the DataTable
-            DataTable dataTable = new DataTable();
-            dataTable.Load(reader);
-
-            return dataTable;
-        }
-
-
-
-
-
-
-
-
-  */

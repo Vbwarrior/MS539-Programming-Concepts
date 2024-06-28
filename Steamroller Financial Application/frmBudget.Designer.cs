@@ -193,11 +193,10 @@ namespace Steamroller_Financial_Application
             pnlBudgetCategory_Alocator.Controls.Add(button1);
             pnlBudgetCategory_Alocator.Controls.Add(lblRedBar);
             pnlBudgetCategory_Alocator.Controls.Add(lblOrangeBar);
-            pnlBudgetCategory_Alocator.Dock = DockStyle.Fill;
-            pnlBudgetCategory_Alocator.Location = new Point(0, 55);
+            pnlBudgetCategory_Alocator.Location = new Point(757, 217);
             pnlBudgetCategory_Alocator.MinimumSize = new Size(783, 368);
             pnlBudgetCategory_Alocator.Name = "pnlBudgetCategory_Alocator";
-            pnlBudgetCategory_Alocator.Size = new Size(785, 375);
+            pnlBudgetCategory_Alocator.Size = new Size(783, 368);
             pnlBudgetCategory_Alocator.TabIndex = 10;
             pnlBudgetCategory_Alocator.Visible = false;
             // 
@@ -274,7 +273,7 @@ namespace Steamroller_Financial_Application
             lblCategoryName.ForeColor = Color.FromArgb(244, 237, 204);
             lblCategoryName.Location = new Point(0, 0);
             lblCategoryName.Name = "lblCategoryName";
-            lblCategoryName.Size = new Size(785, 43);
+            lblCategoryName.Size = new Size(783, 43);
             lblCategoryName.TabIndex = 11;
             lblCategoryName.Text = "Category Name";
             lblCategoryName.TextAlign = ContentAlignment.MiddleCenter;

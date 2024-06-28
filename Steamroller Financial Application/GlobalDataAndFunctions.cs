@@ -17,15 +17,17 @@ namespace Steamroller_Financial_Application
 
         // SQLite Specific Variables
         //public static SQLiteCRUD db = new SQLiteCRUD();
-        public static string executableLocation = Assembly.GetExecutingAssembly().Location;
-        public static string path = System.IO.Path.GetDirectoryName(executableLocation);
-        public static string dbName = "FinancialData.db";
-        public static string conn = $"Data Source={System.IO.Path.Combine(path, dbName)};Version=3;";
-        public static SQLiteConnection connection = new SQLiteConnection(conn);
+        //public static string executableLocation = Assembly.GetExecutingAssembly().Location;
+        //public static string path = System.IO.Path.GetDirectoryName(executableLocation);
+        //public static string dbName = "FinancialData.db";
+        //public static string conn = $"Data Source={System.IO.Path.Combine(path, dbName)};Version=3;";
+        //public static SQLiteConnection connection = new SQLiteConnection(conn);
         public Color CalendarDayMouseEnterOriginalColor;
         public  string BudgetID = "0";//Default fo testing
         public  string UserName = string.Empty;
          private static Random _random = new Random();
+
+
         /// <summary>
         /// Load all globals varibles into dictionary and parse values to correct type for usage
         /// </summary>

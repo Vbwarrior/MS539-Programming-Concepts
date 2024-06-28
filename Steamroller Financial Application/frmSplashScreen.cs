@@ -156,7 +156,7 @@ namespace Steamroller_Financial_Application
 
             lblViolation.Visible = false;//Clear any previous error attempts
 
-            hasName = data.FieldContains("Users", "UserName", userName);// Check if Users Exists Already
+            hasName = data.Contains("Users", "UserName", userName);// Check if Users Exists Already
 
             
             if (hasName)
@@ -175,7 +175,7 @@ namespace Steamroller_Financial_Application
                     }
                     else//Create New Budget
                     {
-                        using (var inputBox = new InputBox("Enter Budget Name"))
+                        using (var inputBox = new InputBox("Enter Budget Name", InputBox.Style.Medium))
                         {
                             var result = inputBox.ShowDialog();
                             if (result == DialogResult.OK)
@@ -200,7 +200,7 @@ namespace Steamroller_Financial_Application
 
                        
                       
-                        using (SQLiteDataReader LastID = data.SelectReader(columns, data.Tables(SQLiteCRUD.TableNames.Budgets), conditions))
+                        using (SQLiteDataReader LastID = data.SelectReader(columns, "Budgets", conditions))
                         {
                             if (LastID.Read()) // Check if there are any results
                             {

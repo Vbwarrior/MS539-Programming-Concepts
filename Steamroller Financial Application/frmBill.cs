@@ -415,7 +415,7 @@ namespace Steamroller_Financial_Application
            columnData.Add("BudgetCategory ", cmbBudgetCategory.SelectedValue != null ? cmbBudgetCategory.SelectedValue.ToString() : "NULL");
            columnData.Add("CompanyLogo ", "Not Set");
 
-            data.Insert_Into(data.Tables(SQLiteCRUD.TableNames.Bills), columnData);
+            data.Insert_Into("Bills", columnData);
 
 
 

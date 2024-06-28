@@ -44,19 +44,19 @@
             pnlHeader.Location = new Point(0, 0);
             pnlHeader.Margin = new Padding(5, 6, 5, 6);
             pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new Size(554, 100);
+            pnlHeader.Size = new Size(747, 100);
             pnlHeader.TabIndex = 0;
             // 
             // lblMessage
             // 
             lblMessage.BackColor = Color.Transparent;
             lblMessage.Dock = DockStyle.Fill;
-            lblMessage.Font = new Font("Ink Free", 26.2499962F, FontStyle.Bold);
+            lblMessage.Font = new Font("Ink Free", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblMessage.ForeColor = SystemColors.ActiveCaption;
             lblMessage.Location = new Point(0, 0);
             lblMessage.Margin = new Padding(5, 0, 5, 0);
             lblMessage.Name = "lblMessage";
-            lblMessage.Size = new Size(554, 100);
+            lblMessage.Size = new Size(747, 100);
             lblMessage.TabIndex = 0;
             lblMessage.Text = "input box";
             lblMessage.TextAlign = ContentAlignment.MiddleCenter;
@@ -65,12 +65,13 @@
             // 
             txtUserInput.BackColor = Color.FromArgb(64, 64, 64);
             txtUserInput.BorderStyle = BorderStyle.None;
+            txtUserInput.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtUserInput.ForeColor = SystemColors.InactiveCaption;
-            txtUserInput.Location = new Point(78, 160);
+            txtUserInput.Location = new Point(159, 191);
             txtUserInput.Margin = new Padding(5, 6, 5, 6);
             txtUserInput.Name = "txtUserInput";
             txtUserInput.PlaceholderText = "Budget_1";
-            txtUserInput.Size = new Size(398, 28);
+            txtUserInput.Size = new Size(428, 36);
             txtUserInput.TabIndex = 1;
             txtUserInput.TextAlign = HorizontalAlignment.Center;
             // 
@@ -83,9 +84,9 @@
             btnAccept.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnAccept.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnAccept.FlatStyle = FlatStyle.Flat;
-            btnAccept.Location = new Point(214, 220);
+            btnAccept.Location = new Point(315, 295);
             btnAccept.Name = "btnAccept";
-            btnAccept.Size = new Size(127, 52);
+            btnAccept.Size = new Size(116, 116);
             btnAccept.TabIndex = 2;
             btnAccept.UseVisualStyleBackColor = false;
             btnAccept.Click += btnAccept_Click;
@@ -96,7 +97,7 @@
             AutoScaleMode = AutoScaleMode.None;
             BackgroundImage = Properties.Resources.BlueGrid;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(554, 324);
+            ClientSize = new Size(747, 464);
             ControlBox = false;
             Controls.Add(btnAccept);
             Controls.Add(txtUserInput);
@@ -107,6 +108,7 @@
             Margin = new Padding(5, 6, 5, 6);
             Name = "InputBox";
             StartPosition = FormStartPosition.CenterParent;
+          
             pnlHeader.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
