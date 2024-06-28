@@ -35,32 +35,34 @@
 
 
 
-//using Steam_Roller_Financial_Application;
+
 using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
-//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-//using Button = System.Windows.Forms.Button;
-//using ComboBox = System.Windows.Forms.ComboBox;
-//using TextBox = System.Windows.Forms.TextBox;
 using System.Data.SQLite;
 using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using Microsoft.VisualBasic.Logging;
 using static System.Collections.Specialized.BitVector32;
 using Microsoft.EntityFrameworkCore;
+using SQLiteClassLib;
+using System.Reflection;
+
 
 namespace Steamroller_Financial_Application
 {
 
     public partial class frmMain : Form
     {
-      
+
         GlobalDataAndFunctions globals = new GlobalDataAndFunctions();
-
-        public SQL_Database db = new SQL_Database(); //db = new SQL_Database();
-
+        public static string executableLocation = Assembly.GetExecutingAssembly().Location;
+        public static string path = System.IO.Path.GetDirectoryName(executableLocation);
+        public static string dbName = "FinancialData.db";
+        public static string conn = $"Data Source={System.IO.Path.Combine(path, dbName)};Version=3;";
+        // public SQLiteCRUD db = new SQLiteCRUD(); //db = new SQLiteCRUD();
+        public SQLiteCRUD db = new SQLiteCRUD(conn);
 
         private ComboBox comboBoxBudgetDataCategories;
 
@@ -72,7 +74,7 @@ namespace Steamroller_Financial_Application
         private List<Label> xLabels = new List<Label>();
         private List<TreeView> xTreeViews = new List<TreeView>();
         public Dictionary<string, string> dictVariables = new Dictionary<string, string>();
-  
+
 
 
         public frmMain()
@@ -100,8 +102,8 @@ namespace Steamroller_Financial_Application
 
 #if !DEBUG
 frmSplashScreen sp = new frmSplashScreen(db, globals);
-                    reportForm.MdiParent = this;                 
-            sp.Show();
+                    //reportForm.MdiParent = this;                 
+            sp.ShowDialog();
 #endif
 
 
@@ -109,22 +111,16 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
 
         public void CustomExceptionHandler()
         {
-
-
-            pnlerrorPanel.Visible = true;
-            pnlerrorPanel.Size = new Size(803, 572);
-            pnlerrorPanel.BringToFront();
-            errorPanelLabel.Text = "Oops this feature is still under cinstruction";
-
-            Center_Object(pnlerrorPanel, EventArgs.Empty);
-
+            frmException exceptionForm = new frmException("404 - Can't go no more. \nYou have reached the end, \nclose this message and go back again.");
+            exceptionForm.ShowDialog();
         }
         private void btnDisplaySplashScreen_Click(object sender, EventArgs e)
         {
-#if !DEBUG
-            frmSplashScreen sp = new frmSplashScreen();
-            sp.Show();
-#endif
+
+            frmSplashScreen sp = new frmSplashScreen(db, globals);
+            sp.TopMost = false;
+            sp.ShowDialog();
+
         }
 
         private void btnTestControl_Click(object sender, EventArgs e)
@@ -245,23 +241,6 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
             }
         }
 
-        public void InputBox(string header, Action<string> callback)
-        {
-            Center_Object(pnlInputBox, EventArgs.Empty);
-            InputBoxHeader.Text = header;
-            pnlInputBox.Show();
-
-            btnInputPanelOK.Click += (sender, e) =>
-            {
-                callback(txtInputBox_Reply.Text);
-                pnlInputBox.Visible = false;
-            };
-
-        }
-        private void btnInputPanelOK_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void tmrMainForm_Tick(object sender, EventArgs e)
         {
@@ -361,13 +340,9 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
 
             }
         }
-      
 
 
-        private void pnlerrorPanel_VisibleChanged(object sender, EventArgs e)
-        {
-            if (pnlerrorPanel.Visible == false) { pnlMainMenu.Visible = true; }
-        }
+
 
 
         #endregion
@@ -803,331 +778,331 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
 
         #region "Budget Panel"
 
-        private Panel Create_BudgetEditorPanel()
-        {
-            // db = new SQL_Database();//Setup new Data Class Object
+        //private Panel Create_BudgetEditorPanel()
+        //{
+        //    // db = new SQLiteCRUD();//Setup new Data Class Object
 
-            Panel xPanel = new Panel();// Main Panel to contain other controls
+        //    Panel xPanel = new Panel();// Main Panel to contain other controls
 
 
-            Label xLabel = new Label(); //Generic Lable place holder for various labels
+        //    Label xLabel = new Label(); //Generic Lable place holder for various labels
 
-            Button xButton = new Button();
+        //    Button xButton = new Button();
 
-            ComboBox xCombobox = new ComboBox();
+        //    ComboBox xCombobox = new ComboBox();
 
-            CheckedListBox xListbox = new CheckedListBox();
+        //    CheckedListBox xListbox = new CheckedListBox();
 
-            RichTextBox xRichTextBox = new RichTextBox();
+        //    RichTextBox xRichTextBox = new RichTextBox();
 
-            TextBox xTextBox = new TextBox();
+        //    TextBox xTextBox = new TextBox();
 
-            TreeView xTreeView = new TreeView();
+        //    TreeView xTreeView = new TreeView();
 
-            // Create Panel
-            xPanel.Dock = DockStyle.None;
-            xPanel.BackColor = SystemColors.Control;
-            xPanel.BorderStyle = BorderStyle.FixedSingle;
-            xPanel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            xPanel.Location = new Point(517, 231);
-            xPanel.Name = "pnlBudgetEditor";
-            xPanel.Size = new Size(627, 453);
-            xPanel.Visible = true;
+        //    // Create Panel
+        //    xPanel.Dock = DockStyle.None;
+        //    xPanel.BackColor = SystemColors.Control;
+        //    xPanel.BorderStyle = BorderStyle.FixedSingle;
+        //    xPanel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        //    xPanel.Location = new Point(517, 231);
+        //    xPanel.Name = "pnlBudgetEditor";
+        //    xPanel.Size = new Size(627, 453);
+        //    xPanel.Visible = true;
 
-            //Generate Events for Base Panel
-            xPanel.Resize += xPanel_Resize;
-            xPanel.Click += xPanel_Click;
+        //    //Generate Events for Base Panel
+        //    xPanel.Resize += xPanel_Resize;
+        //    xPanel.Click += xPanel_Click;
 
-            this.Controls.Add(xPanel);//Add Base Panelk to Bottom Panel
+        //    this.Controls.Add(xPanel);//Add Base Panelk to Bottom Panel
 
 
-            //Add  Labels
+        //    //Add  Labels
 
-            // lblTextBox
-            xLabel = new Label();
-            xLabel.AutoSize = true;
-            xLabel.Location = new Point(44, 132);
-            xLabel.Name = "lblTextBox";
-            xLabel.Size = new Size(237, 21);
-            xLabel.TabIndex = 12;
-            xLabel.Text = "Add New Item to Selected Group";
+        //    // lblTextBox
+        //    xLabel = new Label();
+        //    xLabel.AutoSize = true;
+        //    xLabel.Location = new Point(44, 132);
+        //    xLabel.Name = "lblTextBox";
+        //    xLabel.Size = new Size(237, 21);
+        //    xLabel.TabIndex = 12;
+        //    xLabel.Text = "Add New Item to Selected Group";
 
-            xPanel.Controls.Add(xLabel);
+        //    xPanel.Controls.Add(xLabel);
 
-            // lblGroups
+        //    // lblGroups
 
-            xLabel = new Label();
-            xLabel.AutoSize = true;
-            xLabel.Location = new Point(282, 66);
-            xLabel.Name = "lblGroups";
-            xLabel.Size = new Size(61, 21);
-            xLabel.TabIndex = 9;
-            xLabel.Text = "Groups";
+        //    xLabel = new Label();
+        //    xLabel.AutoSize = true;
+        //    xLabel.Location = new Point(282, 66);
+        //    xLabel.Name = "lblGroups";
+        //    xLabel.Size = new Size(61, 21);
+        //    xLabel.TabIndex = 9;
+        //    xLabel.Text = "Groups";
 
-            xPanel.Controls.Add(xLabel);
+        //    xPanel.Controls.Add(xLabel);
 
-            // lblItems
-            xLabel = new Label();
-            xLabel.AutoSize = true;
-            xLabel.Location = new Point(378, 132);
-            xLabel.Name = "lblItems";
-            xLabel.Size = new Size(175, 21);
-            xLabel.TabIndex = 8;
-            xLabel.Text = "Items in Selected Group";
+        //    // lblItems
+        //    xLabel = new Label();
+        //    xLabel.AutoSize = true;
+        //    xLabel.Location = new Point(378, 132);
+        //    xLabel.Name = "lblItems";
+        //    xLabel.Size = new Size(175, 21);
+        //    xLabel.TabIndex = 8;
+        //    xLabel.Text = "Items in Selected Group";
 
-            xPanel.Controls.Add(xLabel);
+        //    xPanel.Controls.Add(xLabel);
 
 
-            //lblHeader
-            xLabel = new Label();
-            xLabel.BackColor = SystemColors.MenuHighlight;
-            xLabel.Dock = DockStyle.Top;
-            xLabel.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            xLabel.ForeColor = Color.Black;
-            xLabel.Location = new Point(0, 0);
-            xLabel.Name = "label2";
-            xLabel.Size = new Size(625, 33);
-            xLabel.TabIndex = 0;
-            xLabel.Text = "Budget Editor";
-            xLabel.TextAlign = ContentAlignment.MiddleCenter;
+        //    //lblHeader
+        //    xLabel = new Label();
+        //    xLabel.BackColor = SystemColors.MenuHighlight;
+        //    xLabel.Dock = DockStyle.Top;
+        //    xLabel.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        //    xLabel.ForeColor = Color.Black;
+        //    xLabel.Location = new Point(0, 0);
+        //    xLabel.Name = "label2";
+        //    xLabel.Size = new Size(625, 33);
+        //    xLabel.TabIndex = 0;
+        //    xLabel.Text = "Budget Editor";
+        //    xLabel.TextAlign = ContentAlignment.MiddleCenter;
 
-            xPanel.Controls.Add(xLabel);
+        //    xPanel.Controls.Add(xLabel);
 
-            //Add Textbox
-            // txtAddNewItem           
-            xTextBox.Location = new Point(34, 156);
-            xTextBox.Name = "txtAddNewItem";
-            xTextBox.Size = new Size(257, 29);
-            xTextBox.TabIndex = 5;
+        //    //Add Textbox
+        //    // txtAddNewItem           
+        //    xTextBox.Location = new Point(34, 156);
+        //    xTextBox.Name = "txtAddNewItem";
+        //    xTextBox.Size = new Size(257, 29);
+        //    xTextBox.TabIndex = 5;
 
-            xPanel.Controls.Add(xTextBox);
+        //    xPanel.Controls.Add(xTextBox);
 
-            //Add rtbInstructions
+        //    //Add rtbInstructions
 
-            xRichTextBox.BackColor = SystemColors.Control;
-            xRichTextBox.BorderStyle = BorderStyle.None;
-            xRichTextBox.Location = new Point(40, 195);
-            xRichTextBox.Name = "rtbInstructions";
-            xRichTextBox.Size = new Size(255, 201);
-            xRichTextBox.TabIndex = 13;
-            xRichTextBox.Text = "Add additional items to selected group. Items in groups cannot be removed.\nUncheck any items which you do not want selectable for your budget. These can be reverted back at any time.";
+        //    xRichTextBox.BackColor = SystemColors.Control;
+        //    xRichTextBox.BorderStyle = BorderStyle.None;
+        //    xRichTextBox.Location = new Point(40, 195);
+        //    xRichTextBox.Name = "rtbInstructions";
+        //    xRichTextBox.Size = new Size(255, 201);
+        //    xRichTextBox.TabIndex = 13;
+        //    xRichTextBox.Text = "Add additional items to selected group. Items in groups cannot be removed.\nUncheck any items which you do not want selectable for your budget. These can be reverted back at any time.";
 
-            xPanel.Controls.Add(xRichTextBox);
+        //    xPanel.Controls.Add(xRichTextBox);
 
-            //Add ComboBox
-            //cmbGroups
-            xCombobox.FormattingEnabled = true;
-            xCombobox.Location = new Point(208, 90);
-            xCombobox.Name = "cmbGroups";
-            xCombobox.Size = new Size(208, 29);
-            xCombobox.TabIndex = 2;
+        //    //Add ComboBox
+        //    //cmbGroups
+        //    xCombobox.FormattingEnabled = true;
+        //    xCombobox.Location = new Point(208, 90);
+        //    xCombobox.Name = "cmbGroups";
+        //    xCombobox.Size = new Size(208, 29);
+        //    xCombobox.TabIndex = 2;
 
-            xPanel.Controls.Add(xCombobox);
-            comboBoxBudgetDataCategories = xCombobox;
-            //Add Data to ComboBox
+        //    xPanel.Controls.Add(xCombobox);
+        //    comboBoxBudgetDataCategories = xCombobox;
+        //    //Add Data to ComboBox
 
 
 
-            using (SQLiteDataReader reader = db.FetchData(db.sqlCommands(sqlCode: "Budget_1")))
-            {
-                while (reader.Read())
-                {
-                    xCombobox.Items.Add(reader["Group"].ToString());
-                }
-            }
+        //    using (SQLiteDataReader reader = db.FetchData(db.SqlStringBuilder(sqlCode: "Budget_1")))
+        //    {
+        //        while (reader.Read())
+        //        {
+        //            xCombobox.Items.Add(reader["Group"].ToString());
+        //        }
+        //    }
 
-            xCombobox.SelectedIndexChanged += XCombobox_SelectedIndexChanged;
+        //    xCombobox.SelectedIndexChanged += XCombobox_SelectedIndexChanged;
 
 
 
 
-            // treeView_BudgetData
-            // 
-            xTreeView.CheckBoxes = true;
-            xTreeView.Location = new Point(339, 156);
-            xTreeView.Name = "treeView_BudgetData";
-            xTreeView.Size = new Size(252, 220);
-            xTreeView.TabIndex = 12;
-            xTreeView.Enabled = true;
-            xTreeView.Visible = true;
-            xPanel.Controls.Add(xTreeView);
-            // treeViewBudgetData = xTreeView;
-            //Add Data to xTreeView
+        //    // treeView_BudgetData
+        //    // 
+        //    xTreeView.CheckBoxes = true;
+        //    xTreeView.Location = new Point(339, 156);
+        //    xTreeView.Name = "treeView_BudgetData";
+        //    xTreeView.Size = new Size(252, 220);
+        //    xTreeView.TabIndex = 12;
+        //    xTreeView.Enabled = true;
+        //    xTreeView.Visible = true;
+        //    xPanel.Controls.Add(xTreeView);
+        //    // treeViewBudgetData = xTreeView;
+        //    //Add Data to xTreeView
 
 
 
 
 
-            //Add Buttons
-            // btnCloseBudgetEditior
+        //    //Add Buttons
+        //    // btnCloseBudgetEditior
 
-            xButton = new Button();
-            xButton.BackColor = SystemColors.MenuHighlight;
-            xButton.BackgroundImage = Properties.Resources.Cancel1;
-            xButton.BackgroundImageLayout = ImageLayout.Zoom;
-            xButton.FlatAppearance.BorderSize = 0;
-            xButton.FlatStyle = FlatStyle.Flat;
-            xButton.Location = new Point(600, 3);
-            xButton.Name = "btnCloseBudgetEditior";
-            xButton.Size = new Size(22, 20);
-            xButton.Tag = "Budget Editior";
-            xButton.UseVisualStyleBackColor = false;
+        //    xButton = new Button();
+        //    xButton.BackColor = SystemColors.MenuHighlight;
+        //    xButton.BackgroundImage = Properties.Resources.Cancel1;
+        //    xButton.BackgroundImageLayout = ImageLayout.Zoom;
+        //    xButton.FlatAppearance.BorderSize = 0;
+        //    xButton.FlatStyle = FlatStyle.Flat;
+        //    xButton.Location = new Point(600, 3);
+        //    xButton.Name = "btnCloseBudgetEditior";
+        //    xButton.Size = new Size(22, 20);
+        //    xButton.Tag = "Budget Editior";
+        //    xButton.UseVisualStyleBackColor = false;
 
-            xPanel.Controls.Add(xButton);
-            xButton.BringToFront();
+        //    xPanel.Controls.Add(xButton);
+        //    xButton.BringToFront();
 
-            xButton.Click += Close_Object;
+        //    xButton.Click += Close_Object;
 
 
 
-            // btnAddNew
-            xButton = new Button();
-            xButton.BackgroundImage = Properties.Resources.AssignRight;
-            xButton.BackgroundImageLayout = ImageLayout.Zoom;
-            xButton.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            xButton.Location = new Point(297, 156);
-            xButton.Name = "btnAddNew";
-            xButton.Size = new Size(36, 29);
-            xButton.TabIndex = 11;
-            xButton.UseVisualStyleBackColor = true;
+        //    // btnAddNew
+        //    xButton = new Button();
+        //    xButton.BackgroundImage = Properties.Resources.AssignRight;
+        //    xButton.BackgroundImageLayout = ImageLayout.Zoom;
+        //    xButton.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        //    xButton.Location = new Point(297, 156);
+        //    xButton.Name = "btnAddNew";
+        //    xButton.Size = new Size(36, 29);
+        //    xButton.TabIndex = 11;
+        //    xButton.UseVisualStyleBackColor = true;
 
 
-            xPanel.Controls.Add(xButton);
+        //    xPanel.Controls.Add(xButton);
 
-            xButton.Click += btnAddNewCategoryValue_Click;
+        //    xButton.Click += btnAddNewCategoryValue_Click;
 
 
-            // btnUpdate
-            xButton = new Button();
-            xButton.Location = new Point(339, 382);
-            xButton.Name = "btnUpdate";
-            xButton.Size = new Size(252, 33);
-            xButton.TabIndex = 6;
-            xButton.Text = "Update";
-            xButton.UseVisualStyleBackColor = true;
+        //    // btnUpdate
+        //    xButton = new Button();
+        //    xButton.Location = new Point(339, 382);
+        //    xButton.Name = "btnUpdate";
+        //    xButton.Size = new Size(252, 33);
+        //    xButton.TabIndex = 6;
+        //    xButton.Text = "Update";
+        //    xButton.UseVisualStyleBackColor = true;
 
-            xPanel.Controls.Add(xButton);
+        //    xPanel.Controls.Add(xButton);
 
-            xButton.Click += btnUpdate_Click;
+        //    xButton.Click += btnUpdate_Click;
 
-            // btnNewGroup
-            xButton = new Button();
-            xButton.Location = new Point(420, 90);
-            xButton.Name = "btnAddNewGroup";
-            xButton.Size = new Size(30, 30);
-            xButton.BackgroundImage = Properties.Resources.Add2;
-            xButton.BackgroundImageLayout = ImageLayout.Zoom;
-            xButton.BringToFront();
+        //    // btnNewGroup
+        //    xButton = new Button();
+        //    xButton.Location = new Point(420, 90);
+        //    xButton.Name = "btnAddNewGroup";
+        //    xButton.Size = new Size(30, 30);
+        //    xButton.BackgroundImage = Properties.Resources.Add2;
+        //    xButton.BackgroundImageLayout = ImageLayout.Zoom;
+        //    xButton.BringToFront();
 
-            xPanel.Controls.Add(xButton);
+        //    xPanel.Controls.Add(xButton);
 
-            xButton.Click += btnAddNewCategory_Click;
+        //    xButton.Click += btnAddNewCategory_Click;
 
 
 
-            AssignControls(xPanel);
+        //    AssignControls(xPanel);
 
-            return xPanel;
-        }
+        //    return xPanel;
+        //}
 
 
-        private void btnAddNewCategoryValue_Click(object? sender, EventArgs e)
-        {
-            ComboBox cmb = xComboBoxes.Find(x => x.Name == "cmbGroups");
-            TextBox xValue = xTextBoxs.Find(x => x.Name == "txtAddNewItem");
+        //private void btnAddNewCategoryValue_Click(object? sender, EventArgs e)
+        //{
+        //    ComboBox cmb = xComboBoxes.Find(x => x.Name == "cmbGroups");
+        //    TextBox xValue = xTextBoxs.Find(x => x.Name == "txtAddNewItem");
 
-            if (cmb == null)
-            {
-                errorProvider.SetError(cmb, "Missing Value");
-            }
-            else if (xValue == null)
-            {
-                errorProvider.SetError(xValue, "Missing Value");
-            }
-            else
-            {
-                db.ExecuteCommand(db.sqlCommands("Budget_4", Value1: cmb.Text, Value2: xValue.Text));
-            }
+        //    if (cmb == null)
+        //    {
+        //        errorProvider.SetError(cmb, "Missing Value");
+        //    }
+        //    else if (xValue == null)
+        //    {
+        //        errorProvider.SetError(xValue, "Missing Value");
+        //    }
+        //    else
+        //    {
+        //        db.ExecuteCommand(db.SqlStringBuilder("Budget_4", Value1: cmb.Text, Value2: xValue.Text));
+        //    }
 
 
-        }
+        //}
 
-        private void btnAddNewCategory_Click(object? sender, EventArgs e)
-        {
+        //private void btnAddNewCategory_Click(object? sender, EventArgs e)
+        //{
 
-            ComboBox cmb = xComboBoxes.Find(x => x.Name == "cmbGroups");
+        //    ComboBox cmb = xComboBoxes.Find(x => x.Name == "cmbGroups");
 
-            string test = cmb.Text;
+        //    string test = cmb.Text;
 
-            InputBox("What is the 1st value of this new category?", (xValue) =>
-            {
-                // Now you can use xValue here
-                db.ExecuteCommand(db.sqlCommands("Budget_4", Value1: cmb.Text, Value2: xValue));
-            });
+        //    InputBox("What is the 1st value of this new category?", (xValue) =>
+        //    {
+        //        // Now you can use xValue here
+        //        db.ExecuteCommand(db.SqlStringBuilder("Budget_4", Value1: cmb.Text, Value2: xValue));
+        //    });
 
 
-            TreeView tv = xTreeViews.Find(x => x.Name == "treeView_BudgetData");
-            tv.Nodes.Clear();
-            PopulateBudgetTree(ref tv, cmb.Text);
+        //    TreeView tv = xTreeViews.Find(x => x.Name == "treeView_BudgetData");
+        //    tv.Nodes.Clear();
+        //    PopulateBudgetTree(ref tv, cmb.Text);
 
 
-        }
+        //}
 
-        private void btnUpdate_Click(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        //private void btnUpdate_Click(object? sender, EventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
 
-        private void XCombobox_SelectedIndexChanged(object? sender, EventArgs e)
-        {
-            try
-            {
-                ComboBox cb = xComboBoxes.Find(x => x.Name == "cmbGroups");
-                TreeView tv = xTreeViews.Find(x => x.Name == "treeView_BudgetData");
-                PopulateBudgetTree(ref tv, cb.SelectedItem.ToString());
-            }
-            catch (System.Exception)
-            {
+        //private void XCombobox_SelectedIndexChanged(object? sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        ComboBox cb = xComboBoxes.Find(x => x.Name == "cmbGroups");
+        //        TreeView tv = xTreeViews.Find(x => x.Name == "treeView_BudgetData");
+        //        PopulateBudgetTree(ref tv, cb.SelectedItem.ToString());
+        //    }
+        //    catch (System.Exception)
+        //    {
 
-            }
+        //    }
 
-        }
-        private void PopulateBudgetTree(ref TreeView cntrlName, string Category)
-        {
-            TreeView BudgetTree = xTreeViews.Find(x => x.Name == "treeView_BudgetData");
-            TreeNode selectedCategory = new TreeNode(Category);//Creates Parent Node for View
+        //}
+        //private void PopulateBudgetTree(ref TreeView cntrlName, string Category)
+        //{
+        //    TreeView BudgetTree = xTreeViews.Find(x => x.Name == "treeView_BudgetData");
+        //    TreeNode selectedCategory = new TreeNode(Category);//Creates Parent Node for View
 
 
-            using (SQLiteDataReader reader = db.FetchData(db.sqlCommands(sqlCode: "Budget_3", Value1: Category)))
-            {
-                while (reader.Read())
-                {
-                    if (reader.GetOrdinal("SubGroup") >= 0)
-                    {
-                        try
-                        {
-                            TreeNode value = new TreeNode(reader["SubGroup"].ToString());
-                            selectedCategory.Nodes.Add(value);
-                        }
-                        catch (System.Exception)
-                        {
+        //    using (SQLiteDataReader reader = db.FetchData(db.SqlStringBuilder(sqlCode: "Budget_3", Value1: Category)))
+        //    {
+        //        while (reader.Read())
+        //        {
+        //            if (reader.GetOrdinal("SubGroup") >= 0)
+        //            {
+        //                try
+        //                {
+        //                    TreeNode value = new TreeNode(reader["SubGroup"].ToString());
+        //                    selectedCategory.Nodes.Add(value);
+        //                }
+        //                catch (System.Exception)
+        //                {
 
-                        }
-                    }
+        //                }
+        //            }
 
 
-                }
-            }
+        //        }
+        //    }
 
-            BudgetTree.Nodes.Add(selectedCategory);
-            BudgetTree.ExpandAll();
+        //    BudgetTree.Nodes.Add(selectedCategory);
+        //    BudgetTree.ExpandAll();
 
 
 
 
 
-        }
+        //}
 
 
 
@@ -1143,7 +1118,7 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
         #region "Main Menu"
         private void mnuEditBudgetCategories_Click(object sender, EventArgs e)
         {
-            Center_Object(Create_BudgetEditorPanel(), EventArgs.Empty, 0, -100);
+            MainMenuButtons_Click(this.mnuEditBudgetCategories, EventArgs.Empty);
 
         }
 
@@ -1152,14 +1127,7 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
             this.Close();
         }
 
-        private void mnuNewPayee_Click(object sender, EventArgs e)
-        {
-            pnlBottom.Height = 1;
-            pnlNewPayee.Visible = true;
-            pnlImageSelector.Location = new Point(181, 234);
-            pnlImageSelector.Visible = false;
-            Center_Object(pnlNewPayee, EventArgs.Empty, 0, 0);
-        }
+
         private void mnuViewChart_Click(object sender, EventArgs e)
         {
             // CreateChartPanel();
@@ -1167,11 +1135,8 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
 
         private void mnuNewAccount_Click(object sender, EventArgs e)
         {
-            pnlNewAccountSetup.Size = new Size(716, 413);
-            Center_Object(pnlNewAccountSetup, EventArgs.Empty, 0, -250);
-            pnlMainMenu.Visible = false;
-            pnlNewAccountSetup.Visible = true;
-            picPnlNewAccountSetup_Logo.AllowDrop = true;
+            frmAccount accountForm = new frmAccount(db, globals);
+            accountForm.ShowDialog();
         }
 
 
@@ -1288,104 +1253,39 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
 
         #region "pnlImageSelector"
 
-        private void ImageSelectorControls_Click(object sender, EventArgs e)
-        {
-            int displayNumber = 0;
-            Button xButton = new Button();
-
-            xButton = sender as Button;
-
-            if (xButton.Name == "btnImageSelectorScrollLeft")
-            {
-                int.TryParse(btnUseSelectedImage.Tag.ToString(), out displayNumber);
-                displayNumber--;
-                if (displayNumber == -1)
-                {
-                    picImageSelectorSelectedImage.Image = Properties.Resources.CreditCardLogos;
-                }
-                else if (displayNumber < -1)
-                {
-                    displayNumber = 51;
-                    CreditCardImageSelection(displayNumber);
-                }
-                else
-                {
-                    CreditCardImageSelection(displayNumber);
-                }
-            }
-            else if (xButton.Name == "btnImageSelectorScrollRight")
-            {
-                int.TryParse(btnUseSelectedImage.Tag.ToString(), out displayNumber);
-                displayNumber++;
-                if (displayNumber > 51)
-                {
-                    displayNumber = -1;
-                    picImageSelectorSelectedImage.Image = Properties.Resources.CreditCardLogos;
-                }
-                else
-                {
-                    CreditCardImageSelection(displayNumber);
-                }
-
-            }
-            else
-            {
-                picNewPayeeCardSelectedImage.Image = picImageSelectorSelectedImage.Image;
-                //"btnUseSelectedImage"
-                //ToDo Send value to Database create Utility Table or Settings
-
-                pnlImageSelector.Visible = false;
-            }
-
-            btnUseSelectedImage.Tag = displayNumber;
-
-
-        }
-
-        private void picNewPayeeCardSelectedImage_Click(object sender, EventArgs e)
-        {
-            pnlImageSelector.Visible = true;
-            lblImageSelectorHeader.Text = "Select Credit Card Image";
-            picImageSelectorSelectedImage.Image = Properties.Resources.CreditCardLogos;
-            pnlImageSelector.BringToFront();
-            if (btnUseSelectedImage.Tag.ToString() != "-1")
-            {
-                int.TryParse(btnUseSelectedImage.Tag.ToString(), out int displayNumber);
-                CreditCardImageSelection(displayNumber);
-
-            }
-        }
-
-        private void CreditCardImageSelection(int displayNumber)
-        {
-
-            // Define the row and column values for each logo Grid = 4rows & 13Col
-            int Row = displayNumber / 13;
-            int Col = displayNumber % 13;
 
 
 
-            Size sectionSize = new Size(501, 348); //Size of each logo on Vector Image
-            Image image = Properties.Resources.CreditCardLogos;//Logos Purchased from Vector Stock
-            const int RowSpacing = 484;//Spacing Between Images 136 plus Image Height 348
-            const int ColSpacing = 718;//Spacing Between Images 217 plus Width of Image 501
+        //private void CreditCardImageSelection(int displayNumber)
+        //{
 
-            Point sectionStartPoint = new Point(0, 0);
+        //    // Define the row and column values for each logo Grid = 4rows & 13Col
+        //    int Row = displayNumber / 13;
+        //    int Col = displayNumber % 13;
 
-            sectionStartPoint = new Point(ColSpacing * Col, RowSpacing * Row); // Replace with the actual values
 
-            Bitmap section = new Bitmap(sectionSize.Width, sectionSize.Height);//Creates a place holder with correct size for image
 
-            using (Graphics g = Graphics.FromImage(section))
-            {
-                g.DrawImage(image, new Rectangle(Point.Empty, sectionSize), new Rectangle(sectionStartPoint, sectionSize), GraphicsUnit.Pixel);
+        //    Size sectionSize = new Size(501, 348); //Size of each logo on Vector Image
+        //    Image image = Properties.Resources.CreditCardLogos;//Logos Purchased from Vector Stock
+        //    const int RowSpacing = 484;//Spacing Between Images 136 plus Image Height 348
+        //    const int ColSpacing = 718;//Spacing Between Images 217 plus Width of Image 501
 
-            }
+        //    Point sectionStartPoint = new Point(0, 0);
 
-            if (Row == 4) { picImageSelectorSelectedImage.Image = Properties.Resources.CreditCardLogos; btnUseSelectedImage.Tag = "-1"; }//Reset Control
-            else { picImageSelectorSelectedImage.Image = section; }
+        //    sectionStartPoint = new Point(ColSpacing * Col, RowSpacing * Row); // Replace with the actual values
 
-        }
+        //    Bitmap section = new Bitmap(sectionSize.Width, sectionSize.Height);//Creates a place holder with correct size for image
+
+        //    using (Graphics g = Graphics.FromImage(section))
+        //    {
+        //        g.DrawImage(image, new Rectangle(Point.Empty, sectionSize), new Rectangle(sectionStartPoint, sectionSize), GraphicsUnit.Pixel);
+
+        //    }
+
+        //    if (Row == 4) { picImageSelectorSelectedImage.Image = Properties.Resources.CreditCardLogos; btnUseSelectedImage.Tag = "-1"; }//Reset Control
+        //    else { picImageSelectorSelectedImage.Image = section; }
+
+        //}
 
         #endregion
 
@@ -1394,27 +1294,38 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
 
         private void MainMenuButtons_Click(object sender, EventArgs e)
         {
-            Button btn = sender as Button;
+            string Name = string.Empty;
+            if (sender is Button)
+            {
+                Button btn = sender as Button;
+                Name = btn.Name;
+            }
+            else
+            {
+                ToolStripMenuItem tbtn = sender as ToolStripMenuItem;
+                Name = tbtn.Name;
+            }
+
+
 
             pnlMainMenu.Visible = false;
             pnlBottom.Visible = false;
 
-            switch (btn.Name)
+            tmrMainForm.Enabled = false;
+
+            switch (Name)
             {
                 case "btnMainMenuPanel_RecordIncome":
-                    frmIncome incomeForm = new frmIncome();
-                    incomeForm.MdiParent = this;
-                    incomeForm.Show();
+                    frmIncome incomeForm = new frmIncome(db, globals);
+                    incomeForm.ShowDialog();
                     break;
                 case "btnMainMenuPanel_PayBills":
                     CustomExceptionHandler();
 
                     break;
                 case "btnMainMenuPanel_NewTransaction":
-                    frmNewTransaction transactionForm = new frmNewTransaction();
-                    transactionForm.MdiParent = this;
-                    transactionForm.Show();
-
+                    frmNewTransaction transactionForm = new frmNewTransaction(db, globals);
+                    transactionForm.ShowDialog();
                     break;
                 case "btnMainMenuPanel_DisPlayCalendar":
 
@@ -1423,27 +1334,21 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
                     break;
                 case "btnMainMenuPanel_DisplayReports":
                     frmReports reportForm = new frmReports(db, globals);
-                    reportForm.MdiParent = this;
-
-                    reportForm.Show();
-
-
+                    reportForm.ShowDialog();
                     break;
                 case "btnMainMenuPanel_Transfer":
-                    frmTransfer transferForm = new frmTransfer();
-                    transferForm.MdiParent = this;
-                    transferForm.Show();
-
+                    frmTransfer transferForm = new frmTransfer(db, globals);
+                    transferForm.ShowDialog();
                     break;
+                case "mnuNewBill":
                 case "btnMainMenuPanel_NewBill":
-                    pnlNewPayee.Size = new Size(695, 886);
-                    Center_Object(pnlNewPayee, EventArgs.Empty, 0, -50);
-                    pnlNewPayee.Visible = true;
+                    frmBill billForm = new frmBill(db, globals, "Setup New Bill");
+                    billForm.ShowDialog();
                     break;
+                case "mnuEditBudgetCategories":
                 case "btnMainMenuPanel_OpenBudget":
-                    frmBudget budgetForm = new frmBudget();
-                    budgetForm.MdiParent = this;
-                    budgetForm.Show();
+                    frmBudget budgetForm = new frmBudget(db, globals);
+                    budgetForm.ShowDialog();
 
                     break;
                 case "btnMainMenuPanel_AdjustBalances":
@@ -1455,8 +1360,8 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
 
                     break;
             }
-
-
+            pnlMainMenu.Visible = true;
+            tmrMainForm.Enabled = true;
 
 
         }
@@ -1511,205 +1416,9 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
 
         }
 
-        private void pnlNewPayee_VisibleChanged(object sender, EventArgs e)
-        {
-            if (pnlNewPayee.Visible == false) { pnlMainMenu.Visible = true; }
-        }
-        #endregion
-
-
-        #region "New Bill / Payee Panel"
-        private void AccountTypeDecisionLables_Click(object sender, EventArgs e)
-        {
-            if (!(sender is Label)) { return; }
-
-            Label selection = (Label)sender;
-
-
-
-
-            if (selection.Name == "lblpnlNewPayeeHouseHoldAccount" || selection.Name == "lblpnlNewPayeeLoanAccount" || selection.Name == "lblpnlNewPayeeCrditCardAccount")
-            {
-                lblpnlNewPayeeHouseHoldAccount.BackColor = Color.FromKnownColor(KnownColor.Control);
-                lblpnlNewPayeeHouseHoldAccount.ForeColor = Color.Black;
-                lblpnlNewPayeeLoanAccount.BackColor = Color.FromKnownColor(KnownColor.Control);
-                lblpnlNewPayeeLoanAccount.ForeColor = Color.Black;
-                lblpnlNewPayeeCrditCardAccount.BackColor = Color.FromKnownColor(KnownColor.Control);
-                lblpnlNewPayeeCrditCardAccount.ForeColor = Color.Black;
-
-
-
-
-                selection.BackColor = Color.RoyalBlue;
-                selection.ForeColor = Color.White;
-
-            }
-            pnlNewLiabilityHouseHold.Visible = false;
-            pnlNewLiabilityLoan.Visible = false;
-            pnlNewLiabilityCreditCard.Visible = false;
-            pnlNewLiabilityAccountInformation.Visible = true;
-            pnlNewLiabilityAccountInformation.Size = new Size(0, 25);
-            pnlNewLiabilityAccountInformation.Location = new Point(0, 753);
-
-
-
-            if (selection.Name == "lblpnlNewPayeeHouseHoldAccount")
-            {
-                pnlNewLiabilityHouseHold.Visible = true;
-                pnlNewLiabilityHouseHold.Location = new Point(0, 360);
-                pnlNewLiabilityHouseHold.Height = 400;
-                pnlNewLiabilityHouseHold.BringToFront();
-            }
-            else if (selection.Name == "lblpnlNewPayeeLoanAccount")
-            {
-                pnlNewLiabilityLoan.Visible = true;
-                pnlNewLiabilityLoan.Location = new Point(0, 360);
-                pnlNewLiabilityLoan.Height = 400;
-                pnlNewLiabilityLoan.BringToFront();
-            }
-            else if (selection.Name == "lblpnlNewPayeeCrditCardAccount")
-            {
-                pnlNewLiabilityCreditCard.Visible = true;
-                pnlNewLiabilityCreditCard.Location = new Point(0, 360);
-                pnlNewLiabilityCreditCard.Height = 400;
-                pnlNewLiabilityCreditCard.BringToFront();
-            }
-            else if (selection.Name == "lblpnlNewPayeeAccountInformation")
-            {
-                pnlNewLiabilityAccountInformation.Visible = true;
-                pnlNewLiabilityAccountInformation.Location = new Point(0, 360);
-                pnlNewLiabilityAccountInformation.Height = 425;
-                pnlNewLiabilityAccountInformation.BringToFront();
-            }
-
-
-        }
-        private void monthCalendarPnlNewPayee_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            btnPnlNewPayeeSetDate.Text = monthCalendarPnlNewPayee.SelectionRange.Start.Day.ToString();
-            btnPnlNewPayeeSetDate.Visible = true;
-            btnPnlNewPayeeSetDate.BringToFront();
-            monthCalendarPnlNewPayee.Visible = false;
-            lblPnlNewPayee_SelectedDay.Text = "Selected Due Day";
-        }
-
-        private void btnPnlNewPayeeSetDate_Click(object sender, EventArgs e)
-        {
-            btnPnlNewPayeeSetDate.Visible = false;
-            btnPnlNewPayeeSetDate.SendToBack();
-            monthCalendarPnlNewPayee.Visible = true;
-            monthCalendarPnlNewPayee.BringToFront();
-            lblPnlNewPayee_SelectedDay.Text = "Select Due By Date";
-        }
-
-        private void PreferedPaymentMethod_MouseEnter(object sender, EventArgs e)//Moves the TextHiglight Box to current control
-        {
-
-            PictureBox pic = new PictureBox();
-            string xTag = string.Empty;
-            pic = sender as PictureBox;
-
-            Point xControl = pic.Location;
-
-            xTag = pic.Tag.ToString();
-
-            lblPaymentMethodHighligter.Visible = false;
-            lblPaymentMethodHighligter2.Visible = false;
-            lblPaymentMethodHighligter3.Visible = false;
-
-            switch (xTag)
-            {
-                case "House Hold":
-                    lblPaymentMethodHighligter.Location = new Point(xControl.X - 5, xControl.Y - 5);
-                    lblPaymentMethodHighligter.Visible = true;
-                    break;
-                case "Credit Card":
-                    lblPaymentMethodHighligter2.Location = new Point(xControl.X - 5, xControl.Y - 5);
-                    lblPaymentMethodHighligter2.Visible = true;
-
-                    break;
-                case "Loan":
-                    lblPaymentMethodHighligter3.Location = new Point(xControl.X - 5, xControl.Y - 5);
-                    lblPaymentMethodHighligter3.Visible = true;
-                    break;
-            }
-
-
-
-
-
-
-        }
-        #endregion
-
-        #region "New Account"
-
-        private void btnPnlNewAccountSetup_Save_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void picPnlNewAccountSetup_AccountType_Selection_Click(object sender, EventArgs e)
-        {
-            PictureBox pic = new PictureBox();
-
-            pic = sender as PictureBox;
-
-            Point xControl = pic.Location;
-
-            lblPnlNewAccountSetup_AccountTypeHilighter.Location = new Point(pic.Location.X - 5, pic.Location.Y - 5);
-            lblPnlNewAccountSetup_AccountTypeHilighter.Visible = true;
-
-        }
-
-        private void picPnlNewAccountSetup_Logo_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effect = DragDropEffects.Copy;
-            }
-        }
-
-        private void picPnlNewAccountSetup_Logo_DragDrop(object sender, DragEventArgs e)
-        {
-            try
-            {
-                var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                if (files != null && files.Any())
-                {
-                    picPnlNewAccountSetup_Logo.Image = Image.FromFile(files[0]);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Sorry Someting went wrong while trying to capture the image" + ex.Message);
-            }
-        }
-
-
-        private void trackBarPnlNewAccountSetup_Scroll(object sender, EventArgs e)
-        {
-            if (trackBarPnlNewAccountSetup.Value > 0) { picPnlNewAccountSetup_Logo.SizeMode = PictureBoxSizeMode.StretchImage; }
-            else { picPnlNewAccountSetup_Logo.SizeMode = PictureBoxSizeMode.Zoom; }
-        }
-
-
-        private void pnlNewAccountSetup_VisibleChanged(object sender, EventArgs e)
-        {
-            if (pnlNewAccountSetup.Visible == true)
-            {
-                pnlMainMenu.Visible = false;
-            }
-            else
-            {
-                pnlMainMenu.Visible = true;
-            }
-        }
-
 
         #endregion
+
 
 
 
@@ -1952,7 +1661,7 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
                 int dateRange = (DateTime.Today - startDate).Days;
                 int randomDays = rand.Next(dateRange);
                 DateTime myDate = startDate.AddDays(randomDays);
-                string date  = myDate.ToString("yyyy-MM-dd");
+                string date = myDate.ToString("yyyy-MM-dd");
                 // ([Amount], [Date], [PaymentMenthod], [VendorName], [Category], [Item],[isPastDue] 
 
                 sqlStrings.Add($"{Amount}, {date}, \'{paymentMethod}\', \'{Vendor}\', \'{category}\', \'{item}\',1");
@@ -1960,6 +1669,9 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
             }
         }
 
-
-        }//end class
+        private void mnuNewBill_Click(object sender, EventArgs e)
+        {
+            MainMenuButtons_Click(this.mnuNewBill, EventArgs.Empty);
+        }
+    }//end class
 }//end NameSpace

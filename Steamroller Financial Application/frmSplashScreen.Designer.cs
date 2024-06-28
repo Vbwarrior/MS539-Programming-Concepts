@@ -36,10 +36,10 @@
             LoginTimer = new System.Windows.Forms.Timer(components);
             CloseTimer = new System.Windows.Forms.Timer(components);
             txtPassword = new TextBox();
-            label1 = new Label();
-            label2 = new Label();
             txtUserName = new TextBox();
             pnlLogin = new Panel();
+            btnCancel = new Button();
+            lblViolation = new Label();
             btnNewAccount = new Button();
             btnLogin = new Button();
             ((System.ComponentModel.ISupportInitialize)picEyeball).BeginInit();
@@ -89,66 +89,80 @@
             // 
             txtPassword.BackColor = Color.Black;
             txtPassword.ForeColor = Color.Gray;
-            txtPassword.Location = new Point(147, 75);
+            txtPassword.Location = new Point(31, 80);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
+            txtPassword.PlaceholderText = "Password";
             txtPassword.Size = new Size(317, 39);
-            txtPassword.TabIndex = 3;
+            txtPassword.TabIndex = 1;
             txtPassword.TextAlign = HorizontalAlignment.Center;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.ForeColor = Color.Yellow;
-            label1.Location = new Point(3, 24);
-            label1.Name = "label1";
-            label1.Size = new Size(141, 32);
-            label1.TabIndex = 4;
-            label1.Text = "User Name:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.ForeColor = Color.Yellow;
-            label2.Location = new Point(23, 82);
-            label2.Name = "label2";
-            label2.Size = new Size(121, 32);
-            label2.TabIndex = 6;
-            label2.Text = "Password:";
             // 
             // txtUserName
             // 
             txtUserName.BackColor = Color.Black;
             txtUserName.ForeColor = Color.Gray;
-            txtUserName.Location = new Point(147, 17);
+            txtUserName.Location = new Point(31, 31);
             txtUserName.Name = "txtUserName";
+            txtUserName.PlaceholderText = "User Name";
             txtUserName.Size = new Size(317, 39);
-            txtUserName.TabIndex = 5;
+            txtUserName.TabIndex = 0;
             txtUserName.TextAlign = HorizontalAlignment.Center;
             // 
             // pnlLogin
             // 
+            pnlLogin.Controls.Add(btnCancel);
+            pnlLogin.Controls.Add(lblViolation);
             pnlLogin.Controls.Add(btnNewAccount);
             pnlLogin.Controls.Add(btnLogin);
             pnlLogin.Controls.Add(txtUserName);
-            pnlLogin.Controls.Add(label1);
-            pnlLogin.Controls.Add(label2);
             pnlLogin.Controls.Add(txtPassword);
-            pnlLogin.Location = new Point(603, 374);
+            pnlLogin.Location = new Point(680, 363);
             pnlLogin.Name = "pnlLogin";
-            pnlLogin.Size = new Size(518, 210);
+            pnlLogin.Size = new Size(364, 221);
             pnlLogin.TabIndex = 7;
             pnlLogin.Visible = false;
+            // 
+            // btnCancel
+            // 
+            btnCancel.FlatAppearance.BorderSize = 0;
+            btnCancel.FlatStyle = FlatStyle.Flat;
+            btnCancel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCancel.ForeColor = Color.Black;
+            btnCancel.Location = new Point(345, 2);
+            btnCancel.MaximumSize = new Size(15, 20);
+            btnCancel.MinimumSize = new Size(15, 20);
+            btnCancel.Name = "btnCancel";
+            btnCancel.RightToLeft = RightToLeft.Yes;
+            btnCancel.Size = new Size(15, 20);
+            btnCancel.TabIndex = 10;
+            btnCancel.Text = "X";
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
+            btnCancel.MouseEnter += btnCancel_MouseEnter;
+            btnCancel.MouseLeave += btnCancel_MouseLeave;
+            // 
+            // lblViolation
+            // 
+            lblViolation.Dock = DockStyle.Top;
+            lblViolation.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblViolation.ForeColor = Color.FromArgb(192, 0, 0);
+            lblViolation.Location = new Point(0, 0);
+            lblViolation.Name = "lblViolation";
+            lblViolation.Size = new Size(364, 17);
+            lblViolation.TabIndex = 9;
+            lblViolation.Text = "Invalid Username or Password (3) attempts remaining!";
+            lblViolation.TextAlign = ContentAlignment.MiddleCenter;
+            lblViolation.Visible = false;
             // 
             // btnNewAccount
             // 
             btnNewAccount.FlatStyle = FlatStyle.Flat;
-            btnNewAccount.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnNewAccount.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnNewAccount.ForeColor = Color.Gray;
-            btnNewAccount.Location = new Point(5, 158);
+            btnNewAccount.Location = new Point(298, 170);
             btnNewAccount.Name = "btnNewAccount";
-            btnNewAccount.Size = new Size(86, 44);
-            btnNewAccount.TabIndex = 8;
+            btnNewAccount.Size = new Size(63, 43);
+            btnNewAccount.TabIndex = 3;
             btnNewAccount.Text = "Create\r\nAccount";
             btnNewAccount.UseVisualStyleBackColor = true;
             btnNewAccount.Click += btnNewAccount_Click;
@@ -157,20 +171,22 @@
             // 
             btnLogin.FlatStyle = FlatStyle.Flat;
             btnLogin.ForeColor = SystemColors.ActiveCaption;
-            btnLogin.Location = new Point(268, 142);
+            btnLogin.Location = new Point(145, 131);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(74, 44);
-            btnLogin.TabIndex = 7;
+            btnLogin.TabIndex = 2;
             btnLogin.Text = "Ok";
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += btnLogin_Click;
             // 
             // frmSplashScreen
             // 
+            AcceptButton = btnLogin;
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.Black;
             BackgroundImage = Properties.Resources.vectorstock_31211011;
             BackgroundImageLayout = ImageLayout.Stretch;
+            CancelButton = btnCancel;
             ClientSize = new Size(1724, 954);
             Controls.Add(pnlLogin);
             Controls.Add(picDollarSign);
@@ -180,9 +196,9 @@
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(6);
             Name = "frmSplashScreen";
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "frmSplashScreen";
-            Click += frmSplashScreen_Click;
+            TopMost = true;
             ((System.ComponentModel.ISupportInitialize)picEyeball).EndInit();
             ((System.ComponentModel.ISupportInitialize)picDollarSign).EndInit();
             pnlLogin.ResumeLayout(false);
@@ -197,11 +213,11 @@
         private System.Windows.Forms.Timer LoginTimer;
         private System.Windows.Forms.Timer CloseTimer;
         private TextBox txtPassword;
-        private Label label1;
-        private Label label2;
         private TextBox txtUserName;
         private Panel pnlLogin;
         private Button btnLogin;
         private Button btnNewAccount;
+        private Label lblViolation;
+        private Button btnCancel;
     }
 }

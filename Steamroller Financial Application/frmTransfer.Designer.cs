@@ -30,9 +30,9 @@
         {
             components = new System.ComponentModel.Container();
             panel1 = new Panel();
-            button1 = new Button();
-            toolTip1 = new ToolTip(components);
+            btnCancel = new Button();
             label1 = new Label();
+            toolTip1 = new ToolTip(components);
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
             pictureBox3 = new PictureBox();
@@ -61,7 +61,7 @@
             // 
             panel1.BackgroundImage = Properties.Resources.Grid;
             panel1.BackgroundImageLayout = ImageLayout.Stretch;
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(btnCancel);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
@@ -69,19 +69,20 @@
             panel1.Size = new Size(796, 55);
             panel1.TabIndex = 0;
             // 
-            // button1
+            // btnCancel
             // 
-            button1.BackColor = Color.Transparent;
-            button1.BackgroundImage = Properties.Resources.Cancel1;
-            button1.BackgroundImageLayout = ImageLayout.Zoom;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(768, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(25, 25);
-            button1.TabIndex = 1;
-            toolTip1.SetToolTip(button1, "Cancel");
-            button1.UseVisualStyleBackColor = false;
+            btnCancel.BackColor = Color.Transparent;
+            btnCancel.BackgroundImage = Properties.Resources.Cancel1;
+            btnCancel.BackgroundImageLayout = ImageLayout.Zoom;
+            btnCancel.FlatAppearance.BorderSize = 0;
+            btnCancel.FlatStyle = FlatStyle.Flat;
+            btnCancel.Location = new Point(768, 3);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(25, 25);
+            btnCancel.TabIndex = 1;
+            toolTip1.SetToolTip(btnCancel, "Cancel");
+            btnCancel.UseVisualStyleBackColor = false;
+            btnCancel.Click += btnCancel_Click;
             // 
             // label1
             // 
@@ -252,8 +253,10 @@
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(panel1);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmTransfer";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "frmTransfer";
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -272,7 +275,7 @@
         #endregion
 
         private Panel panel1;
-        private Button button1;
+        private Button btnCancel;
         private ToolTip toolTip1;
         private Label label1;
         private PictureBox pictureBox1;

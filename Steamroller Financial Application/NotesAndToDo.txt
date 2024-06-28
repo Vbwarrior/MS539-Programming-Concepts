@@ -1,5 +1,25 @@
-﻿/*
- *  
+﻿
+
+
+
+
+
+Future Upgrades:
+    Transactions- if a Auto Loaan has been added to Bills then add this to Transportation Category so when user selects it it AutoPopulates the textboxes with Names and amounts- if CC or other that has Min use that unless defined in plan. if there are multiples then require NickNames so this feature will work.
+    
+    Add category to All Bills so the above feature can work (Loans, CC, Set Utilitie Bills)
+    Add check box to make primary Vendor for Category Item, so txtbox will auto populate
+    If not a Defined Bill Search DB as user types to suggest possible vendor names.
+
+
+
+
+
+
+
+
+/*
+ *   
  *  
  *  Create Panel for new charges
  *  Create Panel for Paying Bills- create a input box that searches with each keystroke using the AutoComplete functions of the text box
@@ -52,3 +72,64 @@
                             // Draw the second line of text
                             g.DrawString(text2, font, Brushes.LimeGreen, new PointF(centerX2, centerY2));
                         }*/
+
+
+Database:
+
+ Get Numeric Count back from reader:
+
+    using (SQLiteDataReader DuplicateReader = data.FetchData(data.SqlStringBuilder(sqlCode: "Check4DuplicateUsers", Value1: userName)))
+    {
+        if (DuplicateReader.Read()) // Read the first row
+        {
+            int count = Convert.ToInt32(DuplicateReader[0]); // Get the value of the first column
+            if (count > 0) // Check if the count is greater than 0
+        {
+
+         }
+
+    }
+
+    Insert:
+     db.ExecuteCommand(db.SqlStringBuilder("Budget_4", Value1: cmb.Text, Value2: xValue.Text));
+
+     Read:
+       using (SQLiteDataReader accessReader = data.FetchData(data.SqlStringBuilder(sqlCode: "Login", Value1: userName, Value2: password)))
+            {
+                if (accessReader.HasRows)
+                {
+                    using (SQLiteDataReader getUsersBudgets = data.FetchData(data.SqlStringBuilder(sqlCode: "Load_Budgets", Value1: userName)))
+                    {
+                        while (getUsersBudgets.Read())
+                        {
+                            Budgets.Add(getUsersBudgets.GetInt32(0).ToString());
+                        }
+                    }
+
+                }
+
+                else
+                {
+                    lblViolation.Visible = true;
+                    FailedLoginAttempts++;
+
+                    if(FailedLoginAttempts > 3) { Application.Exit(); }
+
+                    return;
+                }
+            }
+
+
+
+
+              using (SQLiteDataReader getUsersBudgets = data.FetchData(data.SqlStringBuilder(sqlCode: "Load_Budgets", Value1: userName)))
+                    {
+                        while (getUsersBudgets.Read())
+                        {
+                            Budgets.Add(getUsersBudgets.GetInt32(0).ToString());
+                        }
+                    }
+
+        public List<string> columns = new List<string>();
+        public List<KeyValuePair<string, string>> conditions = new List<KeyValuePair<string, string>>();
+        public KeyValuePair<string, string> kvp = new KeyValuePair<string, string>();

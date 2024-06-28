@@ -53,45 +53,53 @@
             btnCheck = new Button();
             btnCreditCard = new Button();
             btnDebitCard = new Button();
-            label1 = new Label();
-            btnReturn = new Button();
-            pnlHeader = new Panel();
-            label2 = new Label();
             btnTaxes = new Button();
+            label1 = new Label();
+            btnCancel = new Button();
+            pnlHeader = new Panel();
+            lblHeader = new Label();
             lblPaymentMethodHalo = new Label();
             txtPayTo = new TextBox();
             label4 = new Label();
             lblCategoryHalo = new Label();
-            button22 = new Button();
-            label3 = new Label();
-            label5 = new Label();
+            lblTopBar = new Label();
+            lblBottomBar = new Label();
+            lblItemsHalo = new Label();
+            picError_Amount = new PictureBox();
+            picError_PayTo = new PictureBox();
             pnlHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picError_Amount).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picError_PayTo).BeginInit();
             SuspendLayout();
             // 
             // txtAmount
             // 
+            txtAmount.Anchor = AnchorStyles.Bottom;
             txtAmount.BorderStyle = BorderStyle.None;
             txtAmount.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtAmount.Location = new Point(341, 345);
             txtAmount.Name = "txtAmount";
+            txtAmount.PlaceholderText = "0.00";
             txtAmount.Size = new Size(154, 32);
-            txtAmount.TabIndex = 41;
-            txtAmount.Text = "0.00";
+            txtAmount.TabIndex = 16;
             txtAmount.TextAlign = HorizontalAlignment.Center;
+            txtAmount.Leave += txtAmount_Leave;
             // 
             // btnAccept
             // 
+            btnAccept.Anchor = AnchorStyles.Bottom;
             btnAccept.BackColor = Color.Transparent;
             btnAccept.BackgroundImage = Properties.Resources.Thumbs_Up_Left;
             btnAccept.BackgroundImageLayout = ImageLayout.Stretch;
             btnAccept.FlatAppearance.BorderSize = 0;
             btnAccept.FlatStyle = FlatStyle.Flat;
-            btnAccept.Location = new Point(566, 392);
+            btnAccept.Location = new Point(364, 533);
             btnAccept.Name = "btnAccept";
-            btnAccept.Size = new Size(46, 46);
-            btnAccept.TabIndex = 43;
+            btnAccept.Size = new Size(85, 77);
+            btnAccept.TabIndex = 23;
             toolTip1.SetToolTip(btnAccept, "Accept");
             btnAccept.UseVisualStyleBackColor = false;
+            btnAccept.Click += btnAccept_Click;
             // 
             // btnHousing
             // 
@@ -101,10 +109,11 @@
             btnHousing.Location = new Point(88, 75);
             btnHousing.Name = "btnHousing";
             btnHousing.Size = new Size(75, 75);
-            btnHousing.TabIndex = 26;
+            btnHousing.TabIndex = 0;
             btnHousing.Tag = "Housing";
             toolTip1.SetToolTip(btnHousing, "Housing &  Maintenance");
             btnHousing.UseVisualStyleBackColor = true;
+            btnHousing.Click += category_Click;
             // 
             // btnTransportation
             // 
@@ -114,10 +123,11 @@
             btnTransportation.Location = new Point(169, 75);
             btnTransportation.Name = "btnTransportation";
             btnTransportation.Size = new Size(75, 75);
-            btnTransportation.TabIndex = 24;
+            btnTransportation.TabIndex = 1;
             btnTransportation.Tag = "Transportation";
             toolTip1.SetToolTip(btnTransportation, "Transportation &  Maintenance");
             btnTransportation.UseVisualStyleBackColor = true;
+            btnTransportation.Click += category_Click;
             // 
             // btnTravel
             // 
@@ -127,10 +137,11 @@
             btnTravel.Location = new Point(412, 156);
             btnTravel.Name = "btnTravel";
             btnTravel.Size = new Size(75, 75);
-            btnTravel.TabIndex = 27;
-            btnTravel.Tag = "Travel";
+            btnTravel.TabIndex = 12;
+            btnTravel.Tag = "Travel & Leisure";
             toolTip1.SetToolTip(btnTravel, "Travel & Leisure");
             btnTravel.UseVisualStyleBackColor = true;
+            btnTravel.Click += category_Click;
             // 
             // btnEntertainment
             // 
@@ -140,10 +151,11 @@
             btnEntertainment.Location = new Point(331, 156);
             btnEntertainment.Name = "btnEntertainment";
             btnEntertainment.Size = new Size(75, 75);
-            btnEntertainment.TabIndex = 28;
+            btnEntertainment.TabIndex = 11;
             btnEntertainment.Tag = "Entertainment";
             toolTip1.SetToolTip(btnEntertainment, "Entertainment");
             btnEntertainment.UseVisualStyleBackColor = true;
+            btnEntertainment.Click += category_Click;
             // 
             // btnPersonalCare
             // 
@@ -153,10 +165,11 @@
             btnPersonalCare.Location = new Point(250, 156);
             btnPersonalCare.Name = "btnPersonalCare";
             btnPersonalCare.Size = new Size(75, 75);
-            btnPersonalCare.TabIndex = 29;
+            btnPersonalCare.TabIndex = 10;
             btnPersonalCare.Tag = "Personal Care";
             toolTip1.SetToolTip(btnPersonalCare, "Personal Care & Grooming");
             btnPersonalCare.UseVisualStyleBackColor = true;
+            btnPersonalCare.Click += category_Click;
             // 
             // btnSavings
             // 
@@ -166,10 +179,11 @@
             btnSavings.Location = new Point(169, 156);
             btnSavings.Name = "btnSavings";
             btnSavings.Size = new Size(75, 75);
-            btnSavings.TabIndex = 30;
-            btnSavings.Tag = "Savings";
+            btnSavings.TabIndex = 9;
+            btnSavings.Tag = "Savings & Investments";
             toolTip1.SetToolTip(btnSavings, "Savings & Investments");
             btnSavings.UseVisualStyleBackColor = true;
+            btnSavings.Click += category_Click;
             // 
             // btnEducation
             // 
@@ -179,10 +193,11 @@
             btnEducation.Location = new Point(88, 156);
             btnEducation.Name = "btnEducation";
             btnEducation.Size = new Size(75, 75);
-            btnEducation.TabIndex = 31;
-            btnEducation.Tag = "Education";
+            btnEducation.TabIndex = 8;
+            btnEducation.Tag = "Education & Child Care";
             toolTip1.SetToolTip(btnEducation, "Education & After School Care");
             btnEducation.UseVisualStyleBackColor = true;
+            btnEducation.Click += category_Click;
             // 
             // btnInsurance
             // 
@@ -192,10 +207,11 @@
             btnInsurance.Location = new Point(574, 75);
             btnInsurance.Name = "btnInsurance";
             btnInsurance.Size = new Size(75, 75);
-            btnInsurance.TabIndex = 33;
+            btnInsurance.TabIndex = 6;
             btnInsurance.Tag = "Insurance";
             toolTip1.SetToolTip(btnInsurance, "Insurance");
             btnInsurance.UseVisualStyleBackColor = true;
+            btnInsurance.Click += category_Click;
             // 
             // btnHealthCare
             // 
@@ -205,10 +221,11 @@
             btnHealthCare.Location = new Point(493, 75);
             btnHealthCare.Name = "btnHealthCare";
             btnHealthCare.Size = new Size(75, 75);
-            btnHealthCare.TabIndex = 34;
-            btnHealthCare.Tag = "Medical ";
+            btnHealthCare.TabIndex = 5;
+            btnHealthCare.Tag = "Medical Care";
             toolTip1.SetToolTip(btnHealthCare, "Health Care");
             btnHealthCare.UseVisualStyleBackColor = true;
+            btnHealthCare.Click += category_Click;
             // 
             // btnUtilities
             // 
@@ -217,10 +234,11 @@
             btnUtilities.Location = new Point(412, 75);
             btnUtilities.Name = "btnUtilities";
             btnUtilities.Size = new Size(75, 75);
-            btnUtilities.TabIndex = 35;
+            btnUtilities.TabIndex = 4;
             btnUtilities.Tag = "Utilities";
             toolTip1.SetToolTip(btnUtilities, "Houehold Utilities");
             btnUtilities.UseVisualStyleBackColor = true;
+            btnUtilities.Click += category_Click;
             // 
             // btnClothing
             // 
@@ -230,10 +248,11 @@
             btnClothing.Location = new Point(331, 75);
             btnClothing.Name = "btnClothing";
             btnClothing.Size = new Size(75, 75);
-            btnClothing.TabIndex = 36;
+            btnClothing.TabIndex = 3;
             btnClothing.Tag = "Clothing";
             toolTip1.SetToolTip(btnClothing, "Clothing & Accessories");
             btnClothing.UseVisualStyleBackColor = true;
+            btnClothing.Click += category_Click;
             // 
             // btnGroceries
             // 
@@ -243,10 +262,11 @@
             btnGroceries.Location = new Point(250, 75);
             btnGroceries.Name = "btnGroceries";
             btnGroceries.Size = new Size(75, 75);
-            btnGroceries.TabIndex = 37;
-            btnGroceries.Tag = "Groceries";
+            btnGroceries.TabIndex = 2;
+            btnGroceries.Tag = "Food";
             toolTip1.SetToolTip(btnGroceries, "Groceries & Household Supplies");
             btnGroceries.UseVisualStyleBackColor = true;
+            btnGroceries.Click += category_Click;
             // 
             // btnPets
             // 
@@ -256,10 +276,11 @@
             btnPets.Location = new Point(493, 156);
             btnPets.Name = "btnPets";
             btnPets.Size = new Size(75, 75);
-            btnPets.TabIndex = 38;
+            btnPets.TabIndex = 13;
             btnPets.Tag = "Pets";
             toolTip1.SetToolTip(btnPets, "Pet Care & Accessories");
             btnPets.UseVisualStyleBackColor = true;
+            btnPets.Click += category_Click;
             // 
             // btnGifts
             // 
@@ -269,21 +290,30 @@
             btnGifts.Location = new Point(574, 156);
             btnGifts.Name = "btnGifts";
             btnGifts.Size = new Size(75, 75);
-            btnGifts.TabIndex = 39;
-            btnGifts.Tag = "Gifts";
+            btnGifts.TabIndex = 14;
+            btnGifts.Tag = "Gifts & Contributions";
             toolTip1.SetToolTip(btnGifts, "Gifts & Contributions");
             btnGifts.UseVisualStyleBackColor = true;
+            btnGifts.Click += category_Click;
             // 
             // btnCash
             // 
+            btnCash.Anchor = AnchorStyles.Bottom;
+            btnCash.BackColor = Color.Transparent;
             btnCash.BackgroundImage = Properties.Resources.vectorstock_51448106;
             btnCash.BackgroundImageLayout = ImageLayout.Zoom;
+            btnCash.FlatAppearance.BorderSize = 0;
+            btnCash.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnCash.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnCash.FlatStyle = FlatStyle.Flat;
             btnCash.Location = new Point(212, 457);
             btnCash.Name = "btnCash";
             btnCash.Size = new Size(76, 51);
-            btnCash.TabIndex = 48;
+            btnCash.TabIndex = 18;
+            btnCash.Tag = "Cash";
             toolTip1.SetToolTip(btnCash, "Cash");
-            btnCash.UseVisualStyleBackColor = true;
+            btnCash.UseVisualStyleBackColor = false;
+            btnCash.Click += paymentMethod_Click;
             // 
             // btnPayBills
             // 
@@ -294,57 +324,105 @@
             btnPayBills.Margin = new Padding(1);
             btnPayBills.Name = "btnPayBills";
             btnPayBills.Size = new Size(75, 75);
-            btnPayBills.TabIndex = 52;
-            btnPayBills.Tag = "Education";
+            btnPayBills.TabIndex = 15;
+            btnPayBills.Tag = "Bills";
             toolTip1.SetToolTip(btnPayBills, "Pay Bills");
             btnPayBills.UseVisualStyleBackColor = true;
+            btnPayBills.Click += category_Click;
             // 
             // btnOnlineBanking
             // 
+            btnOnlineBanking.Anchor = AnchorStyles.Bottom;
+            btnOnlineBanking.BackColor = Color.Transparent;
             btnOnlineBanking.BackgroundImage = Properties.Resources.vectorstock_1143062_transparent;
             btnOnlineBanking.BackgroundImageLayout = ImageLayout.Zoom;
+            btnOnlineBanking.FlatAppearance.BorderSize = 0;
+            btnOnlineBanking.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnOnlineBanking.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnOnlineBanking.FlatStyle = FlatStyle.Flat;
             btnOnlineBanking.Location = new Point(548, 457);
             btnOnlineBanking.Name = "btnOnlineBanking";
             btnOnlineBanking.Size = new Size(76, 51);
-            btnOnlineBanking.TabIndex = 56;
+            btnOnlineBanking.TabIndex = 22;
+            btnOnlineBanking.Tag = "Online Banking";
             toolTip1.SetToolTip(btnOnlineBanking, "Online Banking");
-            btnOnlineBanking.UseVisualStyleBackColor = true;
+            btnOnlineBanking.UseVisualStyleBackColor = false;
+            btnOnlineBanking.Click += paymentMethod_Click;
             // 
             // btnCheck
             // 
+            btnCheck.Anchor = AnchorStyles.Bottom;
+            btnCheck.BackColor = Color.Transparent;
             btnCheck.BackgroundImage = Properties.Resources.BlankCheckGreen;
             btnCheck.BackgroundImageLayout = ImageLayout.Zoom;
+            btnCheck.FlatAppearance.BorderSize = 0;
+            btnCheck.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnCheck.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnCheck.FlatStyle = FlatStyle.Flat;
             btnCheck.Location = new Point(296, 457);
             btnCheck.Name = "btnCheck";
             btnCheck.Size = new Size(76, 51);
-            btnCheck.TabIndex = 61;
+            btnCheck.TabIndex = 19;
+            btnCheck.Tag = "Check";
             toolTip1.SetToolTip(btnCheck, "Cash");
-            btnCheck.UseVisualStyleBackColor = true;
+            btnCheck.UseVisualStyleBackColor = false;
+            btnCheck.Click += paymentMethod_Click;
             // 
             // btnCreditCard
             // 
+            btnCreditCard.Anchor = AnchorStyles.Bottom;
+            btnCreditCard.BackColor = Color.Transparent;
             btnCreditCard.BackgroundImage = Properties.Resources.CreditCard;
             btnCreditCard.BackgroundImageLayout = ImageLayout.Zoom;
+            btnCreditCard.FlatAppearance.BorderSize = 0;
+            btnCreditCard.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnCreditCard.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnCreditCard.FlatStyle = FlatStyle.Flat;
             btnCreditCard.Location = new Point(380, 457);
             btnCreditCard.Name = "btnCreditCard";
             btnCreditCard.Size = new Size(76, 51);
-            btnCreditCard.TabIndex = 62;
+            btnCreditCard.TabIndex = 20;
+            btnCreditCard.Tag = "Charge";
             toolTip1.SetToolTip(btnCreditCard, "Cash");
-            btnCreditCard.UseVisualStyleBackColor = true;
+            btnCreditCard.UseVisualStyleBackColor = false;
+            btnCreditCard.Click += paymentMethod_Click;
             // 
             // btnDebitCard
             // 
+            btnDebitCard.Anchor = AnchorStyles.Bottom;
+            btnDebitCard.BackColor = Color.Transparent;
             btnDebitCard.BackgroundImage = Properties.Resources.Debit_Card;
             btnDebitCard.BackgroundImageLayout = ImageLayout.Zoom;
+            btnDebitCard.FlatAppearance.BorderSize = 0;
+            btnDebitCard.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnDebitCard.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnDebitCard.FlatStyle = FlatStyle.Flat;
             btnDebitCard.Location = new Point(464, 457);
             btnDebitCard.Name = "btnDebitCard";
             btnDebitCard.Size = new Size(76, 51);
-            btnDebitCard.TabIndex = 63;
+            btnDebitCard.TabIndex = 21;
+            btnDebitCard.Tag = "Debit Card";
             toolTip1.SetToolTip(btnDebitCard, "Cash");
-            btnDebitCard.UseVisualStyleBackColor = true;
+            btnDebitCard.UseVisualStyleBackColor = false;
+            btnDebitCard.Click += paymentMethod_Click;
+            // 
+            // btnTaxes
+            // 
+            btnTaxes.BackgroundImage = Properties.Resources.Taxes1;
+            btnTaxes.BackgroundImageLayout = ImageLayout.Zoom;
+            btnTaxes.FlatAppearance.BorderSize = 0;
+            btnTaxes.Location = new Point(655, 75);
+            btnTaxes.Name = "btnTaxes";
+            btnTaxes.Size = new Size(75, 75);
+            btnTaxes.TabIndex = 7;
+            btnTaxes.Tag = "Taxes & Fees";
+            toolTip1.SetToolTip(btnTaxes, "Taxes & Fees");
+            btnTaxes.UseVisualStyleBackColor = true;
+            btnTaxes.Click += category_Click;
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Bottom;
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -355,78 +433,74 @@
             label1.TabIndex = 42;
             label1.Text = "Amount";
             // 
-            // btnReturn
+            // btnCancel
             // 
-            btnReturn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnReturn.BackColor = Color.Transparent;
-            btnReturn.BackgroundImage = Properties.Resources.Cancel1;
-            btnReturn.BackgroundImageLayout = ImageLayout.Zoom;
-            btnReturn.FlatAppearance.BorderSize = 0;
-            btnReturn.FlatStyle = FlatStyle.Flat;
-            btnReturn.Location = new Point(784, 3);
-            btnReturn.Name = "btnReturn";
-            btnReturn.Size = new Size(25, 25);
-            btnReturn.TabIndex = 44;
-            btnReturn.UseVisualStyleBackColor = false;
+            btnCancel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCancel.BackColor = Color.Transparent;
+            btnCancel.BackgroundImage = Properties.Resources.Cancel1;
+            btnCancel.BackgroundImageLayout = ImageLayout.Zoom;
+            btnCancel.FlatAppearance.BorderSize = 0;
+            btnCancel.FlatStyle = FlatStyle.Flat;
+            btnCancel.Location = new Point(784, 3);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(25, 25);
+            btnCancel.TabIndex = 0;
+            btnCancel.UseVisualStyleBackColor = false;
+            btnCancel.Click += btnCancel_Click;
             // 
             // pnlHeader
             // 
             pnlHeader.BackgroundImage = Properties.Resources.Grid1;
             pnlHeader.BackgroundImageLayout = ImageLayout.Stretch;
-            pnlHeader.Controls.Add(btnReturn);
-            pnlHeader.Controls.Add(label2);
+            pnlHeader.Controls.Add(btnCancel);
+            pnlHeader.Controls.Add(lblHeader);
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Location = new Point(0, 0);
             pnlHeader.Name = "pnlHeader";
             pnlHeader.Size = new Size(812, 55);
             pnlHeader.TabIndex = 47;
             // 
-            // label2
+            // lblHeader
             // 
-            label2.BackColor = Color.Transparent;
-            label2.Dock = DockStyle.Fill;
-            label2.Font = new Font("Ink Free", 26.2499962F, FontStyle.Bold);
-            label2.ForeColor = SystemColors.ActiveCaption;
-            label2.Location = new Point(0, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(812, 55);
-            label2.TabIndex = 45;
-            label2.Text = "New Transaction";
-            label2.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // btnTaxes
-            // 
-            btnTaxes.BackgroundImage = Properties.Resources.Taxes1;
-            btnTaxes.BackgroundImageLayout = ImageLayout.Zoom;
-            btnTaxes.FlatAppearance.BorderSize = 0;
-            btnTaxes.Location = new Point(655, 75);
-            btnTaxes.Name = "btnTaxes";
-            btnTaxes.Size = new Size(75, 75);
-            btnTaxes.TabIndex = 32;
-            btnTaxes.Tag = "Taxes";
-            toolTip1.SetToolTip(btnTaxes, "Taxes & Fees");
-            btnTaxes.UseVisualStyleBackColor = true;
+            lblHeader.BackColor = Color.Transparent;
+            lblHeader.Dock = DockStyle.Fill;
+            lblHeader.Font = new Font("Ink Free", 26.2499962F, FontStyle.Bold);
+            lblHeader.ForeColor = SystemColors.ActiveCaption;
+            lblHeader.Location = new Point(0, 0);
+            lblHeader.Name = "lblHeader";
+            lblHeader.Size = new Size(812, 55);
+            lblHeader.TabIndex = 45;
+            lblHeader.Text = "New Transaction";
+            lblHeader.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblPaymentMethodHalo
             // 
-            lblPaymentMethodHalo.BackColor = SystemColors.Highlight;
+            lblPaymentMethodHalo.Anchor = AnchorStyles.Bottom;
+            lblPaymentMethodHalo.BackColor = Color.LightGreen;
             lblPaymentMethodHalo.Location = new Point(207, 452);
+            lblPaymentMethodHalo.MaximumSize = new Size(422, 61);
+            lblPaymentMethodHalo.MinimumSize = new Size(86, 61);
             lblPaymentMethodHalo.Name = "lblPaymentMethodHalo";
             lblPaymentMethodHalo.Size = new Size(86, 61);
             lblPaymentMethodHalo.TabIndex = 57;
+            lblPaymentMethodHalo.Visible = false;
             // 
             // txtPayTo
             // 
+            txtPayTo.Anchor = AnchorStyles.Bottom;
             txtPayTo.BorderStyle = BorderStyle.None;
             txtPayTo.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtPayTo.Location = new Point(276, 396);
             txtPayTo.Name = "txtPayTo";
+            txtPayTo.PlaceholderText = "Who are you paying?";
             txtPayTo.Size = new Size(284, 32);
-            txtPayTo.TabIndex = 58;
+            txtPayTo.TabIndex = 17;
             txtPayTo.TextAlign = HorizontalAlignment.Center;
+            txtPayTo.Leave += txtPayTo_Leave;
             // 
             // label4
             // 
+            label4.Anchor = AnchorStyles.Bottom;
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -439,46 +513,66 @@
             // 
             // lblCategoryHalo
             // 
-            lblCategoryHalo.BackColor = Color.Magenta;
+            lblCategoryHalo.BackColor = Color.LightGreen;
             lblCategoryHalo.Location = new Point(83, 70);
+            lblCategoryHalo.MaximumSize = new Size(653, 166);
+            lblCategoryHalo.MinimumSize = new Size(85, 85);
             lblCategoryHalo.Name = "lblCategoryHalo";
-            lblCategoryHalo.Size = new Size(85, 85);
+            lblCategoryHalo.Size = new Size(653, 166);
             lblCategoryHalo.TabIndex = 60;
+            lblCategoryHalo.Visible = false;
             // 
-            // button22
+            // lblTopBar
             // 
-            button22.AutoSize = true;
-            button22.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            button22.BackColor = Color.Transparent;
-            button22.BackgroundImage = Properties.Resources.Black_Metal;
-            button22.BackgroundImageLayout = ImageLayout.Stretch;
-            button22.FlatAppearance.BorderSize = 0;
-            button22.FlatStyle = FlatStyle.Flat;
-            button22.Font = new Font("Consolas", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button22.ForeColor = Color.Magenta;
-            button22.Location = new Point(356, 256);
-            button22.Name = "button22";
-            button22.Size = new Size(100, 32);
-            button22.TabIndex = 64;
-            button22.Text = "Button22";
-            button22.TextImageRelation = TextImageRelation.TextBeforeImage;
-            button22.UseVisualStyleBackColor = false;
+            lblTopBar.BackColor = Color.SlateGray;
+            lblTopBar.Location = new Point(96, 245);
+            lblTopBar.Name = "lblTopBar";
+            lblTopBar.Size = new Size(621, 2);
+            lblTopBar.TabIndex = 65;
             // 
-            // label3
+            // lblBottomBar
             // 
-            label3.BackColor = Color.SlateGray;
-            label3.Location = new Point(96, 245);
-            label3.Name = "label3";
-            label3.Size = new Size(621, 2);
-            label3.TabIndex = 65;
+            lblBottomBar.Anchor = AnchorStyles.Bottom;
+            lblBottomBar.BackColor = Color.SlateGray;
+            lblBottomBar.Location = new Point(96, 307);
+            lblBottomBar.Name = "lblBottomBar";
+            lblBottomBar.Size = new Size(621, 2);
+            lblBottomBar.TabIndex = 66;
             // 
-            // label5
+            // lblItemsHalo
             // 
-            label5.BackColor = Color.SlateGray;
-            label5.Location = new Point(96, 307);
-            label5.Name = "label5";
-            label5.Size = new Size(621, 2);
-            label5.TabIndex = 66;
+            lblItemsHalo.BackColor = Color.LightGreen;
+            lblItemsHalo.Location = new Point(96, 247);
+            lblItemsHalo.Name = "lblItemsHalo";
+            lblItemsHalo.Size = new Size(44, 38);
+            lblItemsHalo.TabIndex = 67;
+            lblItemsHalo.Visible = false;
+            // 
+            // picError_Amount
+            // 
+            picError_Amount.Anchor = AnchorStyles.Bottom;
+            picError_Amount.BackColor = Color.Transparent;
+            picError_Amount.BackgroundImage = Properties.Resources.Warning;
+            picError_Amount.BackgroundImageLayout = ImageLayout.Zoom;
+            picError_Amount.Location = new Point(500, 330);
+            picError_Amount.Name = "picError_Amount";
+            picError_Amount.Size = new Size(34, 32);
+            picError_Amount.TabIndex = 68;
+            picError_Amount.TabStop = false;
+            picError_Amount.Visible = false;
+            // 
+            // picError_PayTo
+            // 
+            picError_PayTo.Anchor = AnchorStyles.Bottom;
+            picError_PayTo.BackColor = Color.Transparent;
+            picError_PayTo.BackgroundImage = Properties.Resources.Warning;
+            picError_PayTo.BackgroundImageLayout = ImageLayout.Zoom;
+            picError_PayTo.Location = new Point(566, 382);
+            picError_PayTo.Name = "picError_PayTo";
+            picError_PayTo.Size = new Size(34, 32);
+            picError_PayTo.TabIndex = 69;
+            picError_PayTo.TabStop = false;
+            picError_PayTo.Visible = false;
             // 
             // frmNewTransaction
             // 
@@ -487,10 +581,11 @@
             BackColor = Color.Black;
             BackgroundImage = Properties.Resources.Black_Metal;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(812, 526);
-            Controls.Add(label5);
-            Controls.Add(label3);
-            Controls.Add(button22);
+            ClientSize = new Size(812, 630);
+            Controls.Add(picError_PayTo);
+            Controls.Add(picError_Amount);
+            Controls.Add(lblBottomBar);
+            Controls.Add(lblTopBar);
             Controls.Add(btnDebitCard);
             Controls.Add(btnCreditCard);
             Controls.Add(btnCheck);
@@ -520,11 +615,17 @@
             Controls.Add(btnGroceries);
             Controls.Add(lblPaymentMethodHalo);
             Controls.Add(lblCategoryHalo);
+            Controls.Add(lblItemsHalo);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
+            MinimumSize = new Size(812, 526);
             Name = "frmNewTransaction";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "NewTransaction";
             Load += NewTransaction_Load;
             pnlHeader.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)picError_Amount).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picError_PayTo).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -534,9 +635,9 @@
         private ToolTip toolTip1;
         private Label label1;
         private Button btnAccept;
-        private Button btnReturn;
+        private Button btnCancel;
         private Panel pnlHeader;
-        private Label label2;
+        private Label lblHeader;
         private Button btnHousing;
         private Button btnTransportation;
         private Button btnTravel;
@@ -562,8 +663,10 @@
         private TextBox txtPayTo;
         private Label label4;
         private Label lblCategoryHalo;
-        private Button button22;
-        private Label label3;
-        private Label label5;
+        private Label lblTopBar;
+        private Label lblBottomBar;
+        private Label lblItemsHalo;
+        private PictureBox picError_Amount;
+        private PictureBox picError_PayTo;
     }
 }

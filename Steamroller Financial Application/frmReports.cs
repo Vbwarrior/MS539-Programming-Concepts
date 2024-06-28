@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Primitives;
+using SQLiteClassLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,8 @@ namespace Steamroller_Financial_Application
 {
     public partial class frmReports : Form
     {
-        private SQL_Database data;//Refrence to Database Instance from Main Form
+        //private SQLiteCRUD data;//Refrence to Database Instance from Main Form
+        private SQLiteCRUD data;
         private GlobalDataAndFunctions globals;
         private string sqlQuery = string.Empty;
         private List<string> categories = new List<string>();
@@ -30,7 +32,7 @@ namespace Steamroller_Financial_Application
         private string xTag;
 
 
-        public frmReports(SQL_Database db, GlobalDataAndFunctions globalData)
+        public frmReports(SQLiteCRUD db, GlobalDataAndFunctions globalData)
         {
             InitializeComponent();
 
@@ -50,28 +52,28 @@ namespace Steamroller_Financial_Application
         #region "Completed Code"
         private void btnSearchDatabase_Click(object sender, EventArgs e)
         {
-            BuildSelectStatment();//Load Filter Data in SQLQuery
-            using (SQLiteDataReader reader = data.FetchData(sqlQuery))//Execurte Query
-            {
+            //BuildSelectStatment();//Load Filter Data in SQLQuery
+            //using (SQLiteDataReader reader = data.FetchData(sqlQuery))//Execurte Query
+            //{
 
-                dgDataDisplay.Rows.Clear();
-                dgDataDisplay.Columns.Clear();
+            //    dgDataDisplay.Rows.Clear();
+            //    dgDataDisplay.Columns.Clear();
 
-                for (int i = 0; i < reader.FieldCount; i++)
-                {
-                    dgDataDisplay.Columns.Add(reader.GetName(i), reader.GetName(i));
-                }
+            //    for (int i = 0; i < reader.FieldCount; i++)
+            //    {
+            //        dgDataDisplay.Columns.Add(reader.GetName(i), reader.GetName(i));
+            //    }
 
-                while (reader.Read())
-                {
-                    DataGridViewRow row = new DataGridViewRow();
-                    for (int i = 0; i < reader.FieldCount; i++)
-                    {
-                        row.Cells.Add(new DataGridViewTextBoxCell { Value = reader.GetValue(i) });
-                    }
-                    dgDataDisplay.Rows.Add(row);
-                }
-            }
+            //    while (reader.Read())
+            //    {
+            //        DataGridViewRow row = new DataGridViewRow();
+            //        for (int i = 0; i < reader.FieldCount; i++)
+            //        {
+            //            row.Cells.Add(new DataGridViewTextBoxCell { Value = reader.GetValue(i) });
+            //        }
+            //        dgDataDisplay.Rows.Add(row);
+            //    }
+            //}
 
         }
 
@@ -593,23 +595,25 @@ namespace Steamroller_Financial_Application
         #endregion
         private void btnSaveQueryName_Click(object sender, EventArgs e)//Gather all required Data and Upload to DB
         {
-            if (txtName.Text.Length > 0 && txtName.Text.Length < 22)
-            {
-                if (rgbValue.Length > 0 && sqlQuery.Length > 0)
-                {
-                    string customReport = CreateCustomReportString();
-                    string fileName = $"RGB:={rgbValue}||NAME:={txtName.Text}||{customReport}"; //Uplodd String value
+            //if (txtName.Text.Length > 0 && txtName.Text.Length < 22)
+            //{
+            //    if (rgbValue.Length > 0 && sqlQuery.Length > 0)
+            //    {
+            //        string customReport = CreateCustomReportString();
+            //        string filterData = $"RGB:={rgbValue}||NAME:={txtName.Text}||{customReport}"; //Uplodd String value
 
-                    data.ExecuteCommand(data.sqlCommands(sqlCode: "NewSearch", Value1: fileName));
-                }
-            }
-            else
-            {
-                if (txtName.Text.Length < 1) { MessageBox.Show("Name cannont be empty."); }
-                if (txtName.Text.Length > 22) { MessageBox.Show("Name cannont be longer than 22 characters."); }
+            //        //(isActive, Parent, Type, Property, Value) VALUES(@Value2, @Value3, @Value4, @Value5, @Value6);";//Send comma seperated values as string using Value2
+            //        string value2 = $"1,frmReports,Report, Filter,{filterData}";
+            //        data.ExecuteCommand(data.SqlStringBuilder(tblName: "UserDefinedApplicationSettings",mode:1, Value2: value2));
+            //    }
+            //}
+            //else
+            //{
+            //    if (txtName.Text.Length < 1) { MessageBox.Show("Name cannont be empty."); }
+            //    if (txtName.Text.Length > 22) { MessageBox.Show("Name cannont be longer than 22 characters."); }
 
 
-            }
+            //}
         }
 
         private void CustomReport_Click(object? sender, EventArgs e)
@@ -690,60 +694,60 @@ namespace Steamroller_Financial_Application
 
         public void LoadCustomReport()// Rip string value into its part and assign its value
         {
-            // Color||Name||Filter  
-            //KVPs  Key:=Value
-            //Arrays  value,value
-            //   Dictionary Filters = Dictionary<ControlName, Value>
-            // Dictionary  CustomReports = Dictionary<ReportName, Filters>
+            //// Color||Name||Filter  
+            ////KVPs  Key:=Value
+            ////Arrays  value,value
+            ////   Dictionary Filters = Dictionary<ControlName, Value>
+            //// Dictionary  CustomReports = Dictionary<ReportName, Filters>
 
-            Dictionary<string, string> Filters = new Dictionary<string, string>();//Used to Hold SQL Filter Strings
-            List<string> customReports = new List<string>();
-            string[] strCustomFilter;
-            int cntrlCount = 0;
-            //Check if there are any Custom Searches in DB
-            using (SQLiteDataReader reader = data.FetchData(data.sqlCommands("GetCusomReports")))
-            {
-                while (reader.Read())
-                {
-                    customReports.Add(reader["Value"].ToString());
-                }
-            }
+            //Dictionary<string, string> Filters = new Dictionary<string, string>();//Used to Hold SQL Filter Strings
+            //List<string> customReports = new List<string>();
+            //string[] strCustomFilter;
+            //int cntrlCount = 0;
+            ////Check if there are any Custom Searches in DB
+            //using (SQLiteDataReader reader = data.FetchData(data.SqlStringBuilder("GetCusomReports")))
+            //{
+            //    while (reader.Read())
+            //    {
+            //        customReports.Add(reader["Value"].ToString());
+            //    }
+            //}
 
-            if (!(customReports.Count > 0))
-            {
-                return;//no reports found
-            }
-            else  //Brake strings in list into parts to store in Dictionary values into dictionary values
-            {
-                foreach (string item in customReports)
-                {
-                    string cntrlColor = string.Empty;
-                    string cntrlText = string.Empty;
-                    string filters = string.Empty;
-                    string[] cntrls;
-                    string[] KVP;
+            //if (!(customReports.Count > 0))
+            //{
+            //    return;//no reports found
+            //}
+            //else  //Brake strings in list into parts to store in Dictionary values into dictionary values
+            //{
+            //    foreach (string item in customReports)
+            //    {
+            //        string cntrlColor = string.Empty;
+            //        string cntrlText = string.Empty;
+            //        string filters = string.Empty;
+            //        string[] cntrls;
+            //        string[] KVP;
 
-                    strCustomFilter = item.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);// Split into Major Componets (Color, Name, Filter)
+            //        strCustomFilter = item.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);// Split into Major Componets (Color, Name, Filter)
 
-                    //Assign
-                    cntrlColor = strCustomFilter[0];
-                    cntrlText = strCustomFilter[1];
-                    filters = strCustomFilter[2];
+            //        //Assign
+            //        cntrlColor = strCustomFilter[0];
+            //        cntrlText = strCustomFilter[1];
+            //        filters = strCustomFilter[2];
 
-                    Filters.Add("Color", cntrlColor);
-                    Filters.Add("Text", cntrlText);
+            //        Filters.Add("Color", cntrlColor);
+            //        Filters.Add("Text", cntrlText);
 
-                    cntrls = filters.Split(new string[] { "::" }, StringSplitOptions.RemoveEmptyEntries);//Seperate Control Filters into KVP Name:=Value 
+            //        cntrls = filters.Split(new string[] { "::" }, StringSplitOptions.RemoveEmptyEntries);//Seperate Control Filters into KVP Name:=Value 
 
-                    foreach (string cntrl in cntrls)
-                    {
-                        KVP = cntrl.Split(new string[] { "::" }, StringSplitOptions.RemoveEmptyEntries);
-                        Filters.Add(KVP[0], KVP[1]);
-                    }
-                    CustomReports.Add($"CustomReport_{cntrlCount}", Filters);
-                    cntrlCount++;
-                }
-            }
+            //        foreach (string cntrl in cntrls)
+            //        {
+            //            KVP = cntrl.Split(new string[] { "::" }, StringSplitOptions.RemoveEmptyEntries);
+            //            Filters.Add(KVP[0], KVP[1]);
+            //        }
+            //        CustomReports.Add($"CustomReport_{cntrlCount}", Filters);
+            //        cntrlCount++;
+            //    }
+            //}
 
         }
 

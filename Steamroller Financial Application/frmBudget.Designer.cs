@@ -39,6 +39,7 @@ namespace Steamroller_Financial_Application
             label6 = new Label();
             label3 = new Label();
             pnlBudgetCategory_Alocator = new Panel();
+            lblSelectedColor = new Label();
             btnAccept = new Button();
             btnReturn = new Button();
             btnAddItemsToCategory = new Button();
@@ -69,6 +70,7 @@ namespace Steamroller_Financial_Application
             btnTransportion = new Button();
             btnPets = new Button();
             btnGifts = new Button();
+            colorDialog = new ColorDialog();
             pnlHeader.SuspendLayout();
             pnlBudgetCategory_Alocator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picControlKnob).BeginInit();
@@ -87,7 +89,7 @@ namespace Steamroller_Financial_Application
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Location = new Point(0, 0);
             pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new Size(811, 55);
+            pnlHeader.Size = new Size(785, 55);
             pnlHeader.TabIndex = 0;
             // 
             // btnCloseAlocatorPanel
@@ -98,7 +100,7 @@ namespace Steamroller_Financial_Application
             btnCloseAlocatorPanel.BackgroundImageLayout = ImageLayout.Zoom;
             btnCloseAlocatorPanel.FlatAppearance.BorderSize = 0;
             btnCloseAlocatorPanel.FlatStyle = FlatStyle.Flat;
-            btnCloseAlocatorPanel.Location = new Point(783, 3);
+            btnCloseAlocatorPanel.Location = new Point(757, 3);
             btnCloseAlocatorPanel.Name = "btnCloseAlocatorPanel";
             btnCloseAlocatorPanel.Size = new Size(25, 25);
             btnCloseAlocatorPanel.TabIndex = 14;
@@ -168,7 +170,7 @@ namespace Steamroller_Financial_Application
             label3.ForeColor = SystemColors.ActiveCaption;
             label3.Location = new Point(0, 0);
             label3.Name = "label3";
-            label3.Size = new Size(811, 55);
+            label3.Size = new Size(785, 55);
             label3.TabIndex = 0;
             label3.Text = "Budget";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -176,6 +178,7 @@ namespace Steamroller_Financial_Application
             // pnlBudgetCategory_Alocator
             // 
             pnlBudgetCategory_Alocator.BackColor = Color.Transparent;
+            pnlBudgetCategory_Alocator.Controls.Add(lblSelectedColor);
             pnlBudgetCategory_Alocator.Controls.Add(btnAccept);
             pnlBudgetCategory_Alocator.Controls.Add(btnReturn);
             pnlBudgetCategory_Alocator.Controls.Add(btnAddItemsToCategory);
@@ -190,12 +193,26 @@ namespace Steamroller_Financial_Application
             pnlBudgetCategory_Alocator.Controls.Add(button1);
             pnlBudgetCategory_Alocator.Controls.Add(lblRedBar);
             pnlBudgetCategory_Alocator.Controls.Add(lblOrangeBar);
-            pnlBudgetCategory_Alocator.Location = new Point(12, 61);
+            pnlBudgetCategory_Alocator.Dock = DockStyle.Fill;
+            pnlBudgetCategory_Alocator.Location = new Point(0, 55);
             pnlBudgetCategory_Alocator.MinimumSize = new Size(783, 368);
             pnlBudgetCategory_Alocator.Name = "pnlBudgetCategory_Alocator";
-            pnlBudgetCategory_Alocator.Size = new Size(783, 368);
+            pnlBudgetCategory_Alocator.Size = new Size(785, 375);
             pnlBudgetCategory_Alocator.TabIndex = 10;
             pnlBudgetCategory_Alocator.Visible = false;
+            // 
+            // lblSelectedColor
+            // 
+            lblSelectedColor.BackColor = SystemColors.Control;
+            lblSelectedColor.BorderStyle = BorderStyle.FixedSingle;
+            lblSelectedColor.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblSelectedColor.Location = new Point(25, 117);
+            lblSelectedColor.Name = "lblSelectedColor";
+            lblSelectedColor.Size = new Size(45, 46);
+            lblSelectedColor.TabIndex = 16;
+            lblSelectedColor.Text = "Select\r\nColor";
+            lblSelectedColor.TextAlign = ContentAlignment.MiddleCenter;
+            lblSelectedColor.Click += lblSelectedColor_Click;
             // 
             // btnAccept
             // 
@@ -257,7 +274,7 @@ namespace Steamroller_Financial_Application
             lblCategoryName.ForeColor = Color.FromArgb(244, 237, 204);
             lblCategoryName.Location = new Point(0, 0);
             lblCategoryName.Name = "lblCategoryName";
-            lblCategoryName.Size = new Size(783, 43);
+            lblCategoryName.Size = new Size(785, 43);
             lblCategoryName.TabIndex = 11;
             lblCategoryName.Text = "Category Name";
             lblCategoryName.TextAlign = ContentAlignment.MiddleCenter;
@@ -577,13 +594,17 @@ namespace Steamroller_Financial_Application
             btnGifts.UseVisualStyleBackColor = true;
             btnGifts.Click += Category_Click;
             // 
+            // colorDialog
+            // 
+            colorDialog.AnyColor = true;
+            // 
             // frmBudget
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             BackgroundImage = Properties.Resources.Black_Metal;
-            ClientSize = new Size(811, 460);
+            ClientSize = new Size(785, 430);
             Controls.Add(pnlBudgetCategory_Alocator);
             Controls.Add(btnGifts);
             Controls.Add(btnPets);
@@ -601,6 +622,7 @@ namespace Steamroller_Financial_Application
             Controls.Add(btnTravel);
             Controls.Add(btnHousing);
             Controls.Add(pnlHeader);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             MdiChildrenMinimizedAnchorBottom = false;
             Name = "frmBudget";
@@ -659,5 +681,7 @@ namespace Steamroller_Financial_Application
         private Button btnTransportion;
         private Button btnPets;
         private Button btnGifts;
+        private Label lblSelectedColor;
+        private ColorDialog colorDialog;
     }
 }

@@ -860,13 +860,12 @@ namespace Steamroller_Financial_Application
             Controls.Add(btnBills);
             Controls.Add(btnIncome);
             Controls.Add(btnTranactions);
-            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             MaximumSize = new Size(843, 575);
             Name = "frmReports";
             ShowIcon = false;
             ShowInTaskbar = false;
-            StartPosition = FormStartPosition.Manual;
+            StartPosition = FormStartPosition.CenterParent;
             TopMost = true;
             pnlHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgDataDisplay).EndInit();

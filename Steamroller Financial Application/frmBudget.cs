@@ -1,40 +1,70 @@
-﻿using System;
+﻿/*
+ 
+Add subgroups to category if not already present 
+get amounts and add to dictionary
+ 
+ */
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using SQLiteClassLib;
+
 
 namespace Steamroller_Financial_Application
 {
     public partial class frmBudget : Form
     {
+        private SQLiteCRUD data;//Refrence to Database Instance from Main Form
+        private GlobalDataAndFunctions globals;
         bool mouseIsDown = false;
         frmMain mainForm = new frmMain();
         int increment = 0;
         private Point lastLocation;
-        private Dictionary<string,int> dictBudget = new Dictionary<string,int>();
+        private Dictionary<string, int> dictBudget = new Dictionary<string, int>();
+        Dictionary<string, string> columnData = new Dictionary<string, string>();
 
-        public frmBudget()
+
+        public frmBudget(SQLiteCRUD db, GlobalDataAndFunctions globalData)
         {
             InitializeComponent();
             txtAmount.MouseWheel += TxtAmount_MouseWheel;
-            this.DoubleBuffered = true; // Enable double buffering
+
+            data = db;
+            globals = globalData;
+
         }
         private void frmBudget_Load(object sender, EventArgs e)
         {
-            this.Size = new System.Drawing.Size(783, 418);
-            this.Location = new Point(200, 120);
             LoadBudgetValues();
-
         }
 
         private void LoadBudgetValues()
         {
+            columnData.Add("Category", "");
+            columnData.Add("AllocatedAmount", "");
+            columnData.Add("Color", "");
+            columnData.Add("SubGroup", "");
+            columnData.Add("Category", "");
+
+
+
             //ToDo: Load Budget Values from DB and store them in dictBudget
+
+            dictBudget.Clear();
+          //  dictBudget =data.
+
+
+
         }
 
         private void Category_Click(object sender, EventArgs e)
@@ -113,8 +143,6 @@ namespace Steamroller_Financial_Application
             }
         }
 
-
-
         private void picControlKnob_MouseUp(object sender, MouseEventArgs e)
         {
             mouseIsDown = false;
@@ -145,11 +173,39 @@ namespace Steamroller_Financial_Application
                 txtAmount.Text = "0";
             }
         }
+     private void lblSelectedColor_Click(object sender, EventArgs e)
+        {
+          
+            ColorDialog colorDialog = new ColorDialog();           
+            DialogResult result = colorDialog.ShowDialog();            
+            if (result == DialogResult.OK)
+            {
+                // Set the label's background color to the selected color
+                lblSelectedColor.BackColor = colorDialog.Color;
 
+            }
+        }
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            //ToDo: Update Database
+         
             pnlBudgetCategory_Alocator.Visible = false;
+
+
+            Dictionary<string, string> columnData = new Dictionary<string, string>();
+
+            columnData.Add("Category", lblCategoryName.Text);
+            columnData.Add("AllocatedAmount", txtAmount.Text);
+            columnData.Add("Color", lblSelectedColor.BackColor.ToString());//[A=255, R=value, G=value, B=value]
+
+            data.Insert_Into(data.Tables(SQLiteCRUD.TableNames.BudgetData), columnData);
+
         }
+
+        private void LoadData()
+        {
+
+
+        }
+   
     }
 }

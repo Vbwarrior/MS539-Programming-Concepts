@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.Logging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,20 +8,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SQLite;
+using Microsoft.Data.Sqlite;
+using System.Security.Cryptography;
+using SQLiteClassLib;
 
 namespace Steamroller_Financial_Application
 {
     public partial class frmSplashScreen : Form
     {
-        private SQL_Database data;//Refrence to Database Instance from Main Form
+        // private SQLiteCRUD data;//Refrence to Database Instance from Main Form
+        private SQLiteCRUD data;
         private GlobalDataAndFunctions globals;
         bool flag = false;
+        int FailedLoginAttempts = 0;
+        string inputBoxReturnValue;
+        public List<string> columns = new List<string>();
+        public Dictionary<string, string> conditions = new Dictionary<string, string>();
+     
 
-        public frmSplashScreen(SQL_Database db, GlobalDataAndFunctions globalData)
+
+        public frmSplashScreen(SQLiteCRUD db, GlobalDataAndFunctions globalData)
         {
             InitializeComponent();
             data = db;
             globals = globalData;
+
+#if DEBUG
+            this.TopMost = false;
+#endif
 
         }
 
@@ -122,22 +138,138 @@ namespace Steamroller_Financial_Application
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-//#if DEBUG
-//            this.Close();
-//#endif
-string userName = txtUserName.Text;
+            if (string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Text)) { return; }
+            //#if DEBUG
+            //            this.Close();
+            //#endif
+            string userName = txtUserName.Text;
             string password = txtPassword.Text;
+            List<string> Budgets = new List<string>();
+            long BudgetID = 0;
+            bool hasName = false;
+            string BudgetName = string.Empty;
+            int xCount = 0;
+            Dictionary<string, string> columnsAndValues = new Dictionary<string, string>();
+
+            conditions.Clear();
+            columns.Clear();
+
+            lblViolation.Visible = false;//Clear any previous error attempts
+
+            hasName = data.FieldContains("Users", "UserName", userName);// Check if Users Exists Already
+
+            
+            if (hasName)
+            {
+
+                columns.Add("BudgetID");
+                conditions.Add("UserName",userName);
+
+                
+                using (SQLiteDataReader getUsersBudgets = data.SelectReader(columns, "User_Access", conditions)) 
+                {
+                    if (getUsersBudgets.HasRows)
+                    {
+                        BudgetID = getUsersBudgets.GetInt32(0);
+
+                    }
+                    else//Create New Budget
+                    {
+                        using (var inputBox = new InputBox("Enter Budget Name"))
+                        {
+                            var result = inputBox.ShowDialog();
+                            if (result == DialogResult.OK)
+                            {
+                                BudgetName = inputBox.ReturnValue;
+
+                            }
+                        }
 
 
+                        //Add New Budget into Budgets
+                        columnsAndValues.Add("isActive", "1");
+                        columnsAndValues.Add("BudgetName", BudgetName);
+                        data.Insert_Into("Budgets", columnsAndValues);
+
+                      
+                        columns.Clear();
+                        columns.Add("ID");
+                        conditions.Clear();
+                        conditions.Add("BudgetName",BudgetName);
 
 
+                       
+                      
+                        using (SQLiteDataReader LastID = data.SelectReader(columns, data.Tables(SQLiteCRUD.TableNames.Budgets), conditions))
+                        {
+                            if (LastID.Read()) // Check if there are any results
+                            {
+                                long lastRowId = LastID.GetInt64(0); // Convert BudgetID into Long
+                                BudgetID = lastRowId;
+                            }
+                        }
+                     
+                        //Add User Data and Budget ID into User Access
+                        columnsAndValues.Clear();
+                        columnsAndValues.Add("UserName", userName);
+                        columnsAndValues.Add("BudgetID", BudgetID.ToString());
+                        data.Insert_Into("User_Access", columnsAndValues);
 
+                    }
+
+
+                }
+
+            }
+
+            else
+            {
+                lblViolation.Visible = true;
+                ++FailedLoginAttempts;
+                //Invalid Username or Password (3) attempts remaining!
+                lblViolation.Text = $"Invalid Username or Password ({3 - FailedLoginAttempts}) attempts remaining!";
+
+
+                if (FailedLoginAttempts > 2) { Application.Exit(); }
+
+                return;
+            }
+            //   }
+
+            globals.BudgetID = BudgetID.ToString();
+            globals.UserName = userName;
+
+            this.Close();
 
         }
 
         private void btnNewAccount_Click(object sender, EventArgs e)
         {
-            //toDo Setup new User
+            frmNewUser frmNewUsercs = new frmNewUser(data, globals);
+
+            frmNewUsercs.ShowDialog();
+
         }
+
+        private void btnCancel_MouseEnter(object sender, EventArgs e)
+        {
+            btnCancel.ForeColor = Color.Cyan;
+        }
+
+        private void btnCancel_MouseLeave(object sender, EventArgs e)
+        {
+            btnCancel.ForeColor = Color.Black;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Application.Exit();//User Canceled Operation
+        }
+
+
+
+
+
+
     }
 }

@@ -133,6 +133,16 @@ namespace Steamroller_Financial_Application.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BlueGrid {
+            get {
+                object obj = ResourceManager.GetObject("BlueGrid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Budget {
             get {
                 object obj = ResourceManager.GetObject("Budget", resourceCulture);
@@ -643,6 +653,16 @@ namespace Steamroller_Financial_Application.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Thumbs_Down_Left {
+            get {
+                object obj = ResourceManager.GetObject("Thumbs Down Left", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Thumbs_Up_Left {
             get {
                 object obj = ResourceManager.GetObject("Thumbs Up Left", resourceCulture);
@@ -766,6 +786,16 @@ namespace Steamroller_Financial_Application.Properties {
         internal static System.Drawing.Bitmap Vehicle {
             get {
                 object obj = ResourceManager.GetObject("Vehicle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Warning {
+            get {
+                object obj = ResourceManager.GetObject("Warning", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

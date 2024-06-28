@@ -33,14 +33,14 @@
             picChecking = new PictureBox();
             panel1 = new Panel();
             label3 = new Label();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            txtAmount = new TextBox();
+            txtPaidTo = new TextBox();
+            txtNameOfEmployer = new TextBox();
             label2 = new Label();
             label1 = new Label();
             pnlHeader = new Panel();
-            button1 = new Button();
-            label4 = new Label();
+            btnCancel = new Button();
+            lblHeader = new Label();
             toolTip1 = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)picSavings).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picChecking).BeginInit();
@@ -77,9 +77,9 @@
             panel1.BackgroundImage = Properties.Resources.DepositBlue;
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
             panel1.Controls.Add(label3);
-            panel1.Controls.Add(textBox3);
-            panel1.Controls.Add(textBox2);
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(txtAmount);
+            panel1.Controls.Add(txtPaidTo);
+            panel1.Controls.Add(txtNameOfEmployer);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Location = new Point(26, 63);
@@ -98,39 +98,39 @@
             label3.TabIndex = 5;
             label3.Text = "DEPOSIT";
             // 
-            // textBox3
+            // txtAmount
             // 
-            textBox3.BackColor = Color.FromArgb(226, 244, 253);
-            textBox3.BorderStyle = BorderStyle.None;
-            textBox3.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox3.Location = new Point(577, 163);
-            textBox3.Name = "textBox3";
-            textBox3.PlaceholderText = "0.00";
-            textBox3.Size = new Size(116, 39);
-            textBox3.TabIndex = 4;
-            textBox3.TextAlign = HorizontalAlignment.Right;
+            txtAmount.BackColor = Color.FromArgb(226, 244, 253);
+            txtAmount.BorderStyle = BorderStyle.None;
+            txtAmount.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtAmount.Location = new Point(577, 163);
+            txtAmount.Name = "txtAmount";
+            txtAmount.PlaceholderText = "0.00";
+            txtAmount.Size = new Size(116, 39);
+            txtAmount.TabIndex = 4;
+            txtAmount.TextAlign = HorizontalAlignment.Right;
             // 
-            // textBox2
+            // txtPaidTo
             // 
-            textBox2.BackColor = Color.FromArgb(226, 244, 253);
-            textBox2.BorderStyle = BorderStyle.None;
-            textBox2.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox2.Location = new Point(47, 177);
-            textBox2.Name = "textBox2";
-            textBox2.PlaceholderText = "Your Name";
-            textBox2.Size = new Size(450, 43);
-            textBox2.TabIndex = 3;
+            txtPaidTo.BackColor = Color.FromArgb(226, 244, 253);
+            txtPaidTo.BorderStyle = BorderStyle.None;
+            txtPaidTo.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPaidTo.Location = new Point(47, 177);
+            txtPaidTo.Name = "txtPaidTo";
+            txtPaidTo.PlaceholderText = "Your Name";
+            txtPaidTo.Size = new Size(450, 43);
+            txtPaidTo.TabIndex = 3;
             // 
-            // textBox1
+            // txtNameOfEmployer
             // 
-            textBox1.BackColor = Color.FromArgb(226, 244, 253);
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(47, 94);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Employers Name";
-            textBox1.Size = new Size(250, 32);
-            textBox1.TabIndex = 2;
+            txtNameOfEmployer.BackColor = Color.FromArgb(226, 244, 253);
+            txtNameOfEmployer.BorderStyle = BorderStyle.None;
+            txtNameOfEmployer.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNameOfEmployer.Location = new Point(47, 94);
+            txtNameOfEmployer.Name = "txtNameOfEmployer";
+            txtNameOfEmployer.PlaceholderText = "Employers Name";
+            txtNameOfEmployer.Size = new Size(250, 32);
+            txtNameOfEmployer.TabIndex = 2;
             // 
             // label2
             // 
@@ -157,41 +157,42 @@
             // 
             pnlHeader.BackgroundImage = Properties.Resources.Grid;
             pnlHeader.BackgroundImageLayout = ImageLayout.Stretch;
-            pnlHeader.Controls.Add(button1);
-            pnlHeader.Controls.Add(label4);
+            pnlHeader.Controls.Add(btnCancel);
+            pnlHeader.Controls.Add(lblHeader);
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Location = new Point(0, 0);
             pnlHeader.Name = "pnlHeader";
             pnlHeader.Size = new Size(812, 55);
             pnlHeader.TabIndex = 3;
             // 
-            // button1
+            // btnCancel
             // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.BackColor = Color.Transparent;
-            button1.BackgroundImage = Properties.Resources.Cancel1;
-            button1.BackgroundImageLayout = ImageLayout.Zoom;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(784, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(25, 25);
-            button1.TabIndex = 4;
-            toolTip1.SetToolTip(button1, "Close");
-            button1.UseVisualStyleBackColor = false;
+            btnCancel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCancel.BackColor = Color.Transparent;
+            btnCancel.BackgroundImage = Properties.Resources.Cancel1;
+            btnCancel.BackgroundImageLayout = ImageLayout.Zoom;
+            btnCancel.FlatAppearance.BorderSize = 0;
+            btnCancel.FlatStyle = FlatStyle.Flat;
+            btnCancel.Location = new Point(784, 3);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(25, 25);
+            btnCancel.TabIndex = 4;
+            toolTip1.SetToolTip(btnCancel, "Close");
+            btnCancel.UseVisualStyleBackColor = false;
+            btnCancel.Click += btnCancel_Click;
             // 
-            // label4
+            // lblHeader
             // 
-            label4.BackColor = Color.Transparent;
-            label4.Dock = DockStyle.Fill;
-            label4.Font = new Font("Ink Free", 26.2499962F, FontStyle.Bold);
-            label4.ForeColor = SystemColors.ActiveCaption;
-            label4.Location = new Point(0, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(812, 55);
-            label4.TabIndex = 0;
-            label4.Text = "Record Income";
-            label4.TextAlign = ContentAlignment.MiddleCenter;
+            lblHeader.BackColor = Color.Transparent;
+            lblHeader.Dock = DockStyle.Fill;
+            lblHeader.Font = new Font("Ink Free", 26.2499962F, FontStyle.Bold);
+            lblHeader.ForeColor = SystemColors.ActiveCaption;
+            lblHeader.Location = new Point(0, 0);
+            lblHeader.Name = "lblHeader";
+            lblHeader.Size = new Size(812, 55);
+            lblHeader.TabIndex = 0;
+            lblHeader.Text = "Record Income";
+            lblHeader.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // frmIncome
             // 
@@ -203,8 +204,10 @@
             Controls.Add(panel1);
             Controls.Add(picChecking);
             Controls.Add(picSavings);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Name = "frmIncome";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Income";
             ((System.ComponentModel.ISupportInitialize)picSavings).EndInit();
             ((System.ComponentModel.ISupportInitialize)picChecking).EndInit();
@@ -221,13 +224,13 @@
         private Panel panel1;
         private Label label2;
         private Label label1;
-        private TextBox textBox1;
-        private TextBox textBox3;
-        private TextBox textBox2;
+        private TextBox txtNameOfEmployer;
+        private TextBox txtAmount;
+        private TextBox txtPaidTo;
         private Label label3;
         private Panel pnlHeader;
-        private Label label4;
-        private Button button1;
+        private Label lblHeader;
+        private Button btnCancel;
         private ToolTip toolTip1;
     }
 }
