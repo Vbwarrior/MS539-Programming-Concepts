@@ -52,6 +52,7 @@
             picAccountType_Checking = new PictureBox();
             lblHilighter = new Label();
             label1 = new Label();
+            ckbIsPrimary = new CheckBox();
             pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarLogoResize).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
@@ -124,7 +125,7 @@
             label56.BackColor = Color.Transparent;
             label56.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label56.ForeColor = Color.FromArgb(244, 237, 204);
-            label56.Location = new Point(709, 329);
+            label56.Location = new Point(709, 352);
             label56.Name = "label56";
             label56.Size = new Size(36, 13);
             label56.TabIndex = 66;
@@ -136,7 +137,7 @@
             label52.BackColor = Color.Transparent;
             label52.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label52.ForeColor = Color.FromArgb(244, 237, 204);
-            label52.Location = new Point(709, 264);
+            label52.Location = new Point(709, 287);
             label52.Name = "label52";
             label52.Size = new Size(43, 13);
             label52.TabIndex = 65;
@@ -146,7 +147,7 @@
             // 
             trackBarLogoResize.BackColor = Color.FromArgb(64, 64, 64);
             trackBarLogoResize.LargeChange = 1;
-            trackBarLogoResize.Location = new Point(707, 280);
+            trackBarLogoResize.Location = new Point(707, 303);
             trackBarLogoResize.Maximum = 1;
             trackBarLogoResize.Name = "trackBarLogoResize";
             trackBarLogoResize.Orientation = Orientation.Vertical;
@@ -162,7 +163,7 @@
             btnSave.BackColor = Color.FromArgb(95, 93, 156);
             btnSave.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSave.ForeColor = Color.FromArgb(244, 237, 204);
-            btnSave.Location = new Point(142, 312);
+            btnSave.Location = new Point(133, 322);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(210, 70);
             btnSave.TabIndex = 63;
@@ -237,7 +238,7 @@
             label47.BackColor = Color.Transparent;
             label47.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label47.ForeColor = Color.FromArgb(244, 237, 204);
-            label47.Location = new Point(521, 381);
+            label47.Location = new Point(521, 404);
             label47.Name = "label47";
             label47.Size = new Size(120, 13);
             label47.TabIndex = 54;
@@ -246,7 +247,7 @@
             // picLogo
             // 
             picLogo.BackColor = Color.FromArgb(64, 64, 64);
-            picLogo.Location = new Point(457, 229);
+            picLogo.Location = new Point(457, 252);
             picLogo.Name = "picLogo";
             picLogo.Size = new Size(249, 140);
             picLogo.SizeMode = PictureBoxSizeMode.Zoom;
@@ -362,12 +363,26 @@
             label1.TabIndex = 70;
             label1.Text = "Select Account Type";
             // 
+            // ckbIsPrimary
+            // 
+            ckbIsPrimary.AutoSize = true;
+            ckbIsPrimary.BackColor = Color.Transparent;
+            ckbIsPrimary.Font = new Font("Segoe UI", 12F);
+            ckbIsPrimary.ForeColor = Color.FromArgb(244, 237, 204);
+            ckbIsPrimary.Location = new Point(571, 217);
+            ckbIsPrimary.Name = "ckbIsPrimary";
+            ckbIsPrimary.Size = new Size(126, 25);
+            ckbIsPrimary.TabIndex = 71;
+            ckbIsPrimary.Text = "Make Primary";
+            ckbIsPrimary.UseVisualStyleBackColor = false;
+            // 
             // frmAccount
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackgroundImage = Properties.Resources.Black_Metal;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(ckbIsPrimary);
             Controls.Add(label1);
             Controls.Add(picAccountType_Savings);
             Controls.Add(picAccountType_Checking);
@@ -429,5 +444,6 @@
         private PictureBox picAccountType_Checking;
         private Label lblHilighter;
         private Label label1;
+        private CheckBox ckbIsPrimary;
     }
 }

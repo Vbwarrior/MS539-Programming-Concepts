@@ -19,6 +19,7 @@ namespace Steamroller_Financial_Application
         private GlobalDataAndFunctions globals;
         Dictionary<string, string> columnNames = new Dictionary<string, string>();
         private int acctType;
+        private string accountType;
         private string Logo;
 
         public frmAccount(SQLiteCRUD db, GlobalDataAndFunctions globalData)
@@ -51,9 +52,9 @@ namespace Steamroller_Financial_Application
                     if (!string.IsNullOrEmpty(txtNickName.Text))
                     {
                         string exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                        string targetPath = Path.Combine(exePath, "Steamroller Financial Assistant", "User Defined Resources", "Images", "Accounts");
+                        string targetPath = Path.Combine(exePath, "AppData", "Resources", "Images", "Accounts");
 
-                        string accountType = acctType == 1 ? "Checking_" : "Saving_";
+
 
                         Directory.CreateDirectory(targetPath);
 
@@ -93,7 +94,7 @@ namespace Steamroller_Financial_Application
         {
             lblHilighter.Visible = true;
             lblHilighter.Location = new Point(picAccountType_Savings.Location.X - 5, picAccountType_Savings.Location.Y - 5);
-            acctType = 2;
+            SetAccountType(4);
         }
 
 
@@ -101,9 +102,15 @@ namespace Steamroller_Financial_Application
         {
             lblHilighter.Visible = true;
             lblHilighter.Location = new Point(picAccountType_Checking.Location.X - 5, picAccountType_Checking.Location.Y - 5);
-            acctType = 1;
+            SetAccountType(2);
         }
 
+
+        private void SetAccountType(int type)
+        {
+            if (ckbIsPrimary.Checked) { type -= 1; }//Set as primary
+            acctType = type;
+        }
 
         private void trackBarLogoResize_Scroll(object sender, EventArgs e)
         {
@@ -113,15 +120,35 @@ namespace Steamroller_Financial_Application
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            columnNames.Add("AccountsTypesID", acctType.ToString());
-            columnNames.Add("NIckName", txtNickName.Text);
-            columnNames.Add("Balance", txtStartingBalance.Text);
-            columnNames.Add("BankName", txtBankName.Text);
-            columnNames.Add("AcctNumber", txtLast6AccountNumber.Text);
-            columnNames.Add("Image", Logo);
-            columnNames.Add("BudgetID", globals.BudgetID);
+            //Validate Account type if primary is selected to infor user 
+            Dictionary<string, string> conditions = new Dictionary<string, string>();
+            bool flag = false;
+            string AcctType = string.Empty;
+            conditions.Add("AccountTypeID", acctType.ToString());//Check for Primary of selected  account type
 
-            data.Insert_Into("Accounts", columnNames);
+            if (ckbIsPrimary.Checked)
+            {
+                flag = data.Contains("UserAccounts", conditions);
+
+                AcctType = acctType == 1 ? "Checking" : "Savings";
+                if (flag) { MessageBox.Show($"There is a Primary {AcctType} Account already assigned, account setup as a standard {AcctType} Account. This can be changed by going to Edit -> Accounts on the Main Menu."); }
+                acctType += 1;// Change to standard
+            }
+
+
+
+            //User Acounts table
+            columnNames.Add("UserID", acctType.ToString());
+            columnNames.Add("AccountTypeID", acctType.ToString());
+            columnNames.Add("BankName", txtBankName.Text);
+            columnNames.Add("NickName", txtNickName.Text);
+            columnNames.Add("Balance", txtStartingBalance.Text);
+            columnNames.Add("AcctNumber", txtLast6AccountNumber.Text);
+            columnNames.Add("PhoneNumber", txtLast6AccountNumber.Text);
+            columnNames.Add("LogoFilePath", Logo);
+            columnNames.Add("IsActive", "1");
+
+            data.Insert_Into("UserAccounts", columnNames);
 
         }
     }

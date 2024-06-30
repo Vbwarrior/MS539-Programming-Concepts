@@ -123,7 +123,7 @@ namespace Steamroller_Financial_Application
                     return;
                 }
 
-                Check4Duplicate();
+                UploadData();
             }
             catch (Exception ex)
             {
@@ -136,7 +136,7 @@ namespace Steamroller_Financial_Application
 
 
 
-        private void Check4Duplicate()
+        private void UploadData()//Check if an Account exists
         {
 
             List<string> columns = new List<string>();
@@ -144,56 +144,49 @@ namespace Steamroller_Financial_Application
             Dictionary<string, string> columnsAndValues = new Dictionary<string, string>();
 
             string userName = txtUserName.Text;
-            string password = txtPassword1.Text;
-
-         
+            string password = globals.CreateSha256Hash(txtPassword1.Text);//Create Password Hash
             conditions.Add("UserName", userName);
-
-           
             int count = data.Count("Users", conditions);
-           
-                    if (count > 0)
-                    {
-                        eventsEnabled = false;//prevent event from executing while reseting control
-                        btnCreateAccount.Enabled = false;
-                        picWarning2.Visible = true;
-                        toolTip1.SetToolTip(picWarning2, "Duplicate Add attempt");
-                        btnCreateAccount.BackgroundImage = Properties.Resources.Thumbs_Down_Left;
 
-                        pnlMessage.Visible = true;
-                        pnlMessage.Dock = DockStyle.Fill;
-                        pnlMessage.BringToFront();
-                        lblWelcomeMessage.Text = $"Sorry the username {txtUserName.Text} already exists.\n Please create a new username or login.";
+            if (count > 0)//Duplicate Found
+            {
+                eventsEnabled = false;//prevent event from executing while reseting control
+                btnCreateAccount.Enabled = false;
+                picWarning2.Visible = true;
+                toolTip1.SetToolTip(picWarning2, "Duplicate Add attempt");
+                btnCreateAccount.BackgroundImage = Properties.Resources.Thumbs_Down_Left;
 
-                        txtUserName.Text = "";
-                        timer1.Enabled = true;//start 3 second clock
-                        Mode = 1;
-                        eventsEnabled = true; // allow event firing again
-                    }
-                    else//Add new user
-                    {
-                    columnsAndValues.Clear();
-                    columnsAndValues.Add("isActive","1");
-                    columnsAndValues.Add("UserName",userName);
-                    columnsAndValues.Add("Password",password);
+                pnlMessage.Visible = true;
+                pnlMessage.Dock = DockStyle.Fill;
+                pnlMessage.BringToFront();
+                lblWelcomeMessage.Text = $"Sorry the username {txtUserName.Text} already exists.\n Please create a new username or login.";
 
+                txtUserName.Text = "";
+                timer1.Enabled = true;//start 3 second clock
+                Mode = 1;
+                eventsEnabled = true; // allow event firing again
+            }
+            else//Add new user
+            {
+                columnsAndValues.Clear();
+                columnsAndValues.Add("UserName", userName);
+                columnsAndValues.Add("PasswordHash", password);
+                columnsAndValues.Add("isActive", "1");
 
-
-                    data.Insert_Into("Users", columnsAndValues);
-
-                       // data.ExecuteCommand(data.SqlStringBuilder(tblName: "Users", mode: 1, Value1: txtUserName.Text, Value2: txtPassword1.Text));
-
-                        pnlMessage.Visible = true;
-                        pnlMessage.Dock = DockStyle.Fill;
-                        pnlMessage.BringToFront();
-                        lblHeaderText.Text = $"Welcome {txtUserName.Text} ";
-                        lblWelcomeMessage.Text = "Your new account was created sucessfully.\nPlease login with your cedentials";
-                        timer1.Enabled = true;//start 3 second clock
-                        Mode = 0;
-                    }              
+                data.Insert_Into("Users", columnsAndValues);
+                globals.UserID = data.GetLastInsertID();//Store in Global variable required everywhere              
+                pnlMessage.Visible = true;
+                pnlMessage.Dock = DockStyle.Fill;
+                pnlMessage.BringToFront();
+                lblHeaderText.Text = $"Welcome {txtUserName.Text} ";
+                lblWelcomeMessage.Text = "Your new account was created sucessfully.\nPlease login with your cedentials";
+                timer1.Enabled = true;//start 3 second clock
+                Mode = 0;
+            }
 
         }
 
+       
 
         private void timer1_Tick(object sender, EventArgs e)
         {

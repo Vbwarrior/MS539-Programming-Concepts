@@ -89,7 +89,7 @@ namespace Steamroller_Financial_Application
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Location = new Point(0, 0);
             pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new Size(785, 55);
+            pnlHeader.Size = new Size(1691, 55);
             pnlHeader.TabIndex = 0;
             // 
             // btnCloseAlocatorPanel
@@ -100,7 +100,7 @@ namespace Steamroller_Financial_Application
             btnCloseAlocatorPanel.BackgroundImageLayout = ImageLayout.Zoom;
             btnCloseAlocatorPanel.FlatAppearance.BorderSize = 0;
             btnCloseAlocatorPanel.FlatStyle = FlatStyle.Flat;
-            btnCloseAlocatorPanel.Location = new Point(757, 3);
+            btnCloseAlocatorPanel.Location = new Point(1663, 3);
             btnCloseAlocatorPanel.Name = "btnCloseAlocatorPanel";
             btnCloseAlocatorPanel.Size = new Size(25, 25);
             btnCloseAlocatorPanel.TabIndex = 14;
@@ -170,7 +170,7 @@ namespace Steamroller_Financial_Application
             label3.ForeColor = SystemColors.ActiveCaption;
             label3.Location = new Point(0, 0);
             label3.Name = "label3";
-            label3.Size = new Size(785, 55);
+            label3.Size = new Size(1691, 55);
             label3.TabIndex = 0;
             label3.Text = "Budget";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -603,7 +603,7 @@ namespace Steamroller_Financial_Application
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             BackgroundImage = Properties.Resources.Black_Metal;
-            ClientSize = new Size(785, 430);
+            ClientSize = new Size(1691, 726);
             Controls.Add(pnlBudgetCategory_Alocator);
             Controls.Add(btnGifts);
             Controls.Add(btnPets);
@@ -624,6 +624,7 @@ namespace Steamroller_Financial_Application
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             MdiChildrenMinimizedAnchorBottom = false;
+            MinimumSize = new Size(785, 430);
             Name = "frmBudget";
             StartPosition = FormStartPosition.CenterParent;
             Tag = "Housing";

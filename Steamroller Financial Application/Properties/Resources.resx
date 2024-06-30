@@ -124,8 +124,8 @@
   <data name="Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Vehicle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Vehicle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Personal Care" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Personal Care.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Thumbs Down Left" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Thumbs Down Left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -142,17 +142,11 @@
   <data name="Calendar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Calendar1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TransferFunds2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TransferFunds2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Cancel1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Cancel1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SaveDatabase" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SaveDatabase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Slider3PosOff" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Slider3PosOff.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Warning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Left_Pointer_Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Left_Pointer_Black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,11 +166,14 @@
   <data name="DepositBlue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DepositBlue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Bank and Pig" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Bank and Pig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AssignRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AssignRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Education" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Education.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BlueGrid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BlueGrid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SliderControlKnob" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SliderControlKnob.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -190,8 +187,8 @@
   <data name="SliderGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SliderGreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BlankCheckGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BlankCheckGreen.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="vectorstock_17026562" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vectorstock_17026562.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SearchDatabase" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SearchDatabase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -202,8 +199,8 @@
   <data name="Grid1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Grid1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SliderRed2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SliderRed2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="vectorstock_31211011" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vectorstock_31211011.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Slider_Off3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Slider_Off3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,8 +214,11 @@
   <data name="Right_Pointer_Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Right_Pointer_Black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Personal Care" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Personal Care.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SliderMiddleLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SliderMiddleLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Travel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Travel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SliderBabyBlue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SliderBabyBlue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -271,6 +271,9 @@
   <data name="Right_Pointer_Black1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Right_Pointer_Black1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="HealthCare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HealthCare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Transactions" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Transactions.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -280,32 +283,29 @@
   <data name="Insurance" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Insurance.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Travel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Travel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Black Metal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Black Metal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SliderMiddleLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SliderMiddleLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Slider3PosOff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Slider3PosOff.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Cancel1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Cancel1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Bank and Pig" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bank and Pig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="vectorstock_17026562" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vectorstock_17026562.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SliderRed2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SliderRed2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="vectorstock_31211011" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vectorstock_31211011.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Debit Card" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Debit Card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="vectorstock_51448106" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\vectorstock_51448106.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Debit Card" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Debit Card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Warning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="vectorstock_1143062_transparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\vectorstock_1143062_transparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -313,11 +313,11 @@
   <data name="Metal Band" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Metal Band.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Left_Pointer_Black1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Left_Pointer_Black1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Add2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Add2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AssignRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AssignRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SearchDatabase1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SearchDatabase1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -325,19 +325,28 @@
   <data name="AssignLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AssignLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BlankCheckGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BlankCheckGreen.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Bills" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Bills.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="HealthCare" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HealthCare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TransferFunds2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TransferFunds2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CreditCard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CreditCard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Left_Pointer_Black1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Left_Pointer_Black1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Vehicle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Vehicle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BlueGrid" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BlueGrid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Car Loan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Car Loan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Home Loan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Home Loan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Personal Loan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Personal Loan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

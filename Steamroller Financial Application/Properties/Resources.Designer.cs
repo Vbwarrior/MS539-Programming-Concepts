@@ -183,6 +183,16 @@ namespace Steamroller_Financial_Application.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Car_Loan {
+            get {
+                object obj = ResourceManager.GetObject("Car Loan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Clothes {
             get {
                 object obj = ResourceManager.GetObject("Clothes", resourceCulture);
@@ -333,6 +343,16 @@ namespace Steamroller_Financial_Application.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Home_Loan {
+            get {
+                object obj = ResourceManager.GetObject("Home Loan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap House {
             get {
                 object obj = ResourceManager.GetObject("House", resourceCulture);
@@ -396,6 +416,16 @@ namespace Steamroller_Financial_Application.Properties {
         internal static System.Drawing.Bitmap Personal_Care {
             get {
                 object obj = ResourceManager.GetObject("Personal Care", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Personal_Loan {
+            get {
+                object obj = ResourceManager.GetObject("Personal Loan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

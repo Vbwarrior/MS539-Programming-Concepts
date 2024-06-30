@@ -1,7 +1,14 @@
 ﻿/*
  
-Add subgroups to category if not already present 
-get amounts and add to dictionary
+1. Check if user already has a budget
+        Yes- 1. See if there is any alloctions already for this budget
+                2. Load NetSpending amount into Allocated Amount label
+                3. Load Dictionary with All allocations for this budget into BudgetData
+                4. Run a Linq query to calculate total amount already allocated in budget
+                5. When user selects category then alredy defined amount should be displayed.
+
+        No- 1. Open Input Box and Ask for Total funds available for budget
+                2. Assign this value to NetSpending on Budgets Table
  
  */
 
@@ -30,7 +37,11 @@ namespace Steamroller_Financial_Application
 
         private List<Dictionary<string, string>> budgetData = new List<Dictionary<string, string>>();
         private List<Button> createdButtons = new List<Button>();
+
         private Dictionary<string, string> columnData = new Dictionary<string, string>();
+        Dictionary<string, string> conditions = new Dictionary<string, string>();
+        Dictionary<string, string> allocations = new Dictionary<string, string>();
+        string BudgetID = string.Empty;
 
         private bool mouseIsDown = false;
         private bool eventsEnabled = false;
@@ -38,41 +49,75 @@ namespace Steamroller_Financial_Application
         private int AdditionalHeight;
         private Point lastLocation;
 
+        private int netSpending;
+        private int AssignAmount;
+
 
         public frmBudget(SQLiteCRUD db, GlobalDataAndFunctions globalData)
         {
             InitializeComponent();
             txtAmount.MouseWheel += TxtAmount_MouseWheel;
-
+            this.Size = new Size(785, 430);
             data = db;
             globals = globalData;
+            BudgetID = data.SelectString("BudgetID", "Budgets", globals.UserID.ToString());
 
         }
+
         private void frmBudget_Load(object sender, EventArgs e)
         {
+            if (BudgetID == "No Data Found")//Get Budget ID if Budget is present.
+            {
+                BudgetID = string.Empty;
+                lblAllocatedAmount.Text = "0";
+                lblAssignedAmount.Text = "0";
+            }
+            else//Load users data
+            {
+                UpdateAllocationsAndAssigned();
 
-            LoadBudgetValues();
+            }
+
+            // SetupDictionaries();
+        }
+
+        private void UpdateAllocationsAndAssigned()
+        {
+            var keyValuePair = new KeyValuePair<string, string>("BudgetID", BudgetID);
+            netSpending = int.Parse(data.SelectString("NetSpending", "Budgets", keyValuePair));
+            lblAllocatedAmount.Text = netSpending.ToString();
+            List<string> xList = data.SelectList("Amount", "Allocations", "BudgetID", BudgetID);
+            int x = 0;
+            for (int i = 0; i < xList.Count; i++)
+            {
+                x += int.Parse(xList[i]);
+            }
+            lblAssignedAmount.Text = x.ToString();
+
+        }
+
+        private void SetupDictionaries()
+        {
+            columnData.Add("BudgetID", BudgetID);
+            columnData.Add("CategoryID", "");
+            columnData.Add("Amount", "");
+            columnData.Add("KeyColor", "");
         }
 
         private void LoadBudgetValues()
         {
-            columnData.Add("Category", "");
-            columnData.Add("AllocatedAmount", "");
-            columnData.Add("Color", "");
-            columnData.Add("SubGroup", "");
-            columnData.Add("Category", "");
+            conditions.Add("UserID", globals.UserID.ToString());
 
-            if (data.Contains("BudgetData", "BudgetID", globals.BudgetID.ToString()))
+            if (data.Contains("Allocations", conditions))//Check if there is data to read
             {
-                Dictionary<string, string> conditions = new Dictionary<string, string>();
-                conditions.Add("BudgetID", globals.BudgetID.ToString());
-                budgetData.Clear();
-                budgetData = data.SelectTable("BudgetData", conditions);
-            }
-            else
-            {
+                List<string> xList = new List<string>();
+                xList.Add("CategoryID");
+                xList.Add("Amount");
+                xList.Add("KeyColor");
 
+                budgetData = data.SelectTable("Allocations", xList, "BudgetID", BudgetID);
             }
+
         }
 
         private void Category_Click(object sender, EventArgs e)
@@ -85,41 +130,34 @@ namespace Steamroller_Financial_Application
             lblRedBar.Width = int.Parse(lblAssignedAmount.Text) / increment;
             int xPos = lblOrangeBar.Right - lblRedBar.Width;
             int yPos = lblOrangeBar.Top;
+            string category = selection.Tag.ToString();
+            string categoryID;
+            string setAmount = string.Empty;
 
             lblRedBar.Location = new Point(xPos, yPos);
 
+            categoryID = data.SelectString("CategoryID", "Categories", category);
 
-
-
-
-
-
-
-
-
-
-            //toDo : Pull current amount from Database and assign to textbox, get all items in current Category and add Buttons with each
-
-            /*
-             * int CurrentAllocation = Database Get Current Amount by Category Name
-             * 
-             if(CurrentAllocation != 0)
+            if (data.Contains("Allocations", "CategoryID", categoryID))
             {
-            
-            txtAmount.Text = CurrentAllocation;
+                columnData.Clear();
+                columnData.Add("BudgetID", BudgetID);
+                columnData.Add("CategoryID", categoryID);
+
+                allocations = data.SelectRow("Allocations", columnData);
+                txtAmount.Text = allocations["Amount"];
             }
             else
             {
-             txtAmount.Text = 0;
-            }
-             */
+                txtAmount.Text = string.Empty;
 
+            }
+
+            getCategoryItems();
 
             pnlBudgetCategory_Alocator.Visible = true;
             pnlBudgetCategory_Alocator.BringToFront();
             pnlBudgetCategory_Alocator.Dock = DockStyle.Fill;
-
-
 
         }
 
@@ -131,7 +169,6 @@ namespace Steamroller_Financial_Application
         }
         private void btnCloseAlocatorPanel_Click(object sender, EventArgs e)
         {
-            //mainForm.pnlMainMenu.Visible = true;
             this.Close();
         }
 
@@ -207,15 +244,12 @@ namespace Steamroller_Financial_Application
 
             pnlBudgetCategory_Alocator.Visible = false;
 
-
-            Dictionary<string, string> columnData = new Dictionary<string, string>();
-
-            columnData.Add("Category", lblCategoryName.Text);
-            columnData.Add("AllocatedAmount", txtAmount.Text);
-            columnData.Add("Color", lblSelectedColor.BackColor.ToString());//[A=255, R=value, G=value, B=value]
-
-            data.Insert_Into("BudgetData", columnData);
-
+            columnData.Clear();
+            columnData.Add("BudgetID", BudgetID);
+            columnData.Add("CategoryID", data.SelectString("CategoryID", "Categories", lblCategoryName.Text));
+            columnData.Add("Amount", txtAmount.Text);
+            columnData.Add("KeyColor", globals.ColorToString(lblSelectedColor.BackColor));//  return $"{color.R},{color.G},{color.B}";
+            data.Insert_Into("Allocations", columnData);
         }
 
         private void getCategoryItems()

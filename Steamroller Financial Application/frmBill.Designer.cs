@@ -30,13 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBill));
             pnlHeader = new Panel();
+            btn_Save = new Button();
             btnCancel = new Button();
             btnReturn = new Button();
             lblHeader = new Label();
             lblPnlNewPayee_SelectedDay = new Label();
-            lblCreditCard = new Label();
-            lblLoan = new Label();
-            lblHouseHold = new Label();
             label30 = new Label();
             label26 = new Label();
             txtDisplayName = new TextBox();
@@ -53,8 +51,12 @@
             picImageSelectorSelectedImage = new PictureBox();
             btnSelectedDay = new Button();
             pnlHouseHold = new Panel();
-            btnHouseHold_Save = new Button();
+            label8 = new Label();
+            cmbCategoryItems = new ComboBox();
+            label7 = new Label();
             label32 = new Label();
+            picLogo = new PictureBox();
+            ckbPrimaryVendor = new CheckBox();
             label33 = new Label();
             cmbBudgetCategory = new ComboBox();
             groupBox1 = new GroupBox();
@@ -65,11 +67,11 @@
             picHouseHold_OnlineBanking = new PictureBox();
             lblPaymentMethodHighligter = new Label();
             pnlCreditCard = new Panel();
+            label6 = new Label();
+            txtCreditCardAPR = new TextBox();
             txtCreditCard_StartingBalance = new TextBox();
             label48 = new Label();
             label46 = new Label();
-            txtCreditCard_APR = new MaskedTextBox();
-            btnCreditCard_Save = new Button();
             groupBox2 = new GroupBox();
             label35 = new Label();
             picCreditCard_Check = new PictureBox();
@@ -79,6 +81,14 @@
             picCardSelectedImage = new PictureBox();
             label29 = new Label();
             pnlLoan = new Panel();
+            label5 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            dtEndDate = new DateTimePicker();
+            dtStartDate = new DateTimePicker();
+            btnLoanTypeScroll_Left = new Button();
+            btnLoanTypeScroll_Right = new Button();
             txtLoan_APR = new TextBox();
             label57 = new Label();
             picLoanType = new PictureBox();
@@ -93,10 +103,8 @@
             picLoan_DebitCard = new PictureBox();
             picLoan_OnlineBanking = new PictureBox();
             lblPaymentMethodHighligter3 = new Label();
-            btnLoan_Save = new Button();
             label4 = new Label();
             pnlAccountInformation = new Panel();
-            btnAccountSave = new Button();
             label45 = new Label();
             label28 = new Label();
             mtbAccount_ZipCode = new MaskedTextBox();
@@ -114,10 +122,15 @@
             txtAccount_Address = new TextBox();
             label22 = new Label();
             label23 = new Label();
+            ckbAutoPay = new CheckBox();
+            btnHouseHold = new Button();
+            btnLoan = new Button();
+            btnCreditCard = new Button();
             pnlHeader.SuspendLayout();
             pnlImageSelector.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picImageSelectorSelectedImage).BeginInit();
             pnlHouseHold.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picHouseHold_Cash).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picHouseHold_Check).BeginInit();
@@ -144,6 +157,7 @@
             // 
             pnlHeader.BackgroundImage = Properties.Resources.Grid1;
             pnlHeader.BackgroundImageLayout = ImageLayout.Stretch;
+            pnlHeader.Controls.Add(btn_Save);
             pnlHeader.Controls.Add(btnCancel);
             pnlHeader.Controls.Add(btnReturn);
             pnlHeader.Controls.Add(lblHeader);
@@ -153,6 +167,23 @@
             pnlHeader.Name = "pnlHeader";
             pnlHeader.Size = new Size(796, 55);
             pnlHeader.TabIndex = 48;
+            // 
+            // btn_Save
+            // 
+            btn_Save.BackColor = Color.Transparent;
+            btn_Save.BackgroundImage = Properties.Resources.Save;
+            btn_Save.BackgroundImageLayout = ImageLayout.Zoom;
+            btn_Save.FlatAppearance.BorderSize = 0;
+            btn_Save.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
+            btn_Save.FlatStyle = FlatStyle.Flat;
+            btn_Save.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            btn_Save.ForeColor = Color.Cyan;
+            btn_Save.Location = new Point(3, 7);
+            btn_Save.Name = "btn_Save";
+            btn_Save.Size = new Size(51, 45);
+            btn_Save.TabIndex = 38;
+            btn_Save.UseVisualStyleBackColor = false;
+            btn_Save.Click += btnSave_Click;
             // 
             // btnCancel
             // 
@@ -205,54 +236,12 @@
             lblPnlNewPayee_SelectedDay.BackColor = Color.Transparent;
             lblPnlNewPayee_SelectedDay.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblPnlNewPayee_SelectedDay.ForeColor = Color.FromArgb(244, 237, 204);
-            lblPnlNewPayee_SelectedDay.Location = new Point(347, 243);
+            lblPnlNewPayee_SelectedDay.Location = new Point(346, 241);
             lblPnlNewPayee_SelectedDay.Margin = new Padding(4, 0, 4, 0);
             lblPnlNewPayee_SelectedDay.Name = "lblPnlNewPayee_SelectedDay";
             lblPnlNewPayee_SelectedDay.Size = new Size(105, 15);
             lblPnlNewPayee_SelectedDay.TabIndex = 60;
             lblPnlNewPayee_SelectedDay.Text = "Select Due By Date";
-            // 
-            // lblCreditCard
-            // 
-            lblCreditCard.BackColor = SystemColors.Control;
-            lblCreditCard.BorderStyle = BorderStyle.FixedSingle;
-            lblCreditCard.ForeColor = Color.Black;
-            lblCreditCard.Location = new Point(493, 186);
-            lblCreditCard.Margin = new Padding(4, 0, 4, 0);
-            lblCreditCard.Name = "lblCreditCard";
-            lblCreditCard.Size = new Size(170, 37);
-            lblCreditCard.TabIndex = 57;
-            lblCreditCard.Text = "Credit Card";
-            lblCreditCard.TextAlign = ContentAlignment.MiddleCenter;
-            lblCreditCard.Click += AccountTypeDecisionLables_Click;
-            // 
-            // lblLoan
-            // 
-            lblLoan.BackColor = SystemColors.Control;
-            lblLoan.BorderStyle = BorderStyle.FixedSingle;
-            lblLoan.ForeColor = Color.Black;
-            lblLoan.Location = new Point(314, 186);
-            lblLoan.Margin = new Padding(4, 0, 4, 0);
-            lblLoan.Name = "lblLoan";
-            lblLoan.Size = new Size(170, 37);
-            lblLoan.TabIndex = 56;
-            lblLoan.Text = "Loan";
-            lblLoan.TextAlign = ContentAlignment.MiddleCenter;
-            lblLoan.Click += AccountTypeDecisionLables_Click;
-            // 
-            // lblHouseHold
-            // 
-            lblHouseHold.BackColor = SystemColors.Control;
-            lblHouseHold.BorderStyle = BorderStyle.FixedSingle;
-            lblHouseHold.ForeColor = Color.Black;
-            lblHouseHold.Location = new Point(135, 186);
-            lblHouseHold.Margin = new Padding(4, 0, 4, 0);
-            lblHouseHold.Name = "lblHouseHold";
-            lblHouseHold.Size = new Size(170, 37);
-            lblHouseHold.TabIndex = 55;
-            lblHouseHold.Text = "House Hold";
-            lblHouseHold.TextAlign = ContentAlignment.MiddleCenter;
-            lblHouseHold.Click += AccountTypeDecisionLables_Click;
             // 
             // label30
             // 
@@ -286,7 +275,7 @@
             txtDisplayName.Margin = new Padding(4);
             txtDisplayName.Name = "txtDisplayName";
             txtDisplayName.Size = new Size(262, 29);
-            txtDisplayName.TabIndex = 51;
+            txtDisplayName.TabIndex = 1;
             // 
             // label20
             // 
@@ -307,30 +296,28 @@
             txtCompanyName.Margin = new Padding(4);
             txtCompanyName.Name = "txtCompanyName";
             txtCompanyName.Size = new Size(262, 29);
-            txtCompanyName.TabIndex = 49;
+            txtCompanyName.TabIndex = 0;
             // 
             // ckbRecurring
             // 
             ckbRecurring.AutoSize = true;
             ckbRecurring.BackColor = Color.Transparent;
-            ckbRecurring.Checked = true;
-            ckbRecurring.CheckState = CheckState.Checked;
             ckbRecurring.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ckbRecurring.ForeColor = Color.FromArgb(244, 237, 204);
-            ckbRecurring.Location = new Point(358, 425);
+            ckbRecurring.Location = new Point(425, 425);
             ckbRecurring.Margin = new Padding(4);
             ckbRecurring.Name = "ckbRecurring";
             ckbRecurring.Size = new Size(83, 21);
-            ckbRecurring.TabIndex = 61;
+            ckbRecurring.TabIndex = 7;
             ckbRecurring.Text = "Recurring";
             ckbRecurring.UseVisualStyleBackColor = false;
             // 
             // calDatePicker
             // 
-            calDatePicker.Location = new Point(286, 262);
+            calDatePicker.Location = new Point(285, 262);
             calDatePicker.Margin = new Padding(12, 13, 12, 13);
             calDatePicker.Name = "calDatePicker";
-            calDatePicker.TabIndex = 59;
+            calDatePicker.TabIndex = 5;
             calDatePicker.DateSelected += calDatePicker_DateSelected;
             // 
             // pnlImageSelector
@@ -448,33 +435,53 @@
             // pnlHouseHold
             // 
             pnlHouseHold.BorderStyle = BorderStyle.FixedSingle;
-            pnlHouseHold.Controls.Add(btnHouseHold_Save);
+            pnlHouseHold.Controls.Add(label8);
+            pnlHouseHold.Controls.Add(cmbCategoryItems);
+            pnlHouseHold.Controls.Add(label7);
             pnlHouseHold.Controls.Add(label32);
+            pnlHouseHold.Controls.Add(picLogo);
+            pnlHouseHold.Controls.Add(ckbPrimaryVendor);
             pnlHouseHold.Controls.Add(label33);
             pnlHouseHold.Controls.Add(cmbBudgetCategory);
             pnlHouseHold.Controls.Add(groupBox1);
             pnlHouseHold.Dock = DockStyle.Bottom;
-            pnlHouseHold.Location = new Point(0, 79);
+            pnlHouseHold.Location = new Point(0, 784);
             pnlHouseHold.MaximumSize = new Size(796, 371);
             pnlHouseHold.Name = "pnlHouseHold";
-            pnlHouseHold.Size = new Size(796, 288);
+            pnlHouseHold.Size = new Size(796, 30);
             pnlHouseHold.TabIndex = 65;
             pnlHouseHold.Tag = "Permanant";
             pnlHouseHold.Visible = false;
+            pnlHouseHold.DragDrop += Logo_DragDrop;
+            pnlHouseHold.DragEnter += Logo_DragEnter;
             // 
-            // btnHouseHold_Save
+            // label8
             // 
-            btnHouseHold_Save.BackColor = Color.FromArgb(95, 93, 156);
-            btnHouseHold_Save.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
-            btnHouseHold_Save.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            btnHouseHold_Save.ForeColor = Color.Cyan;
-            btnHouseHold_Save.Location = new Point(314, 269);
-            btnHouseHold_Save.Name = "btnHouseHold_Save";
-            btnHouseHold_Save.Size = new Size(166, 37);
-            btnHouseHold_Save.TabIndex = 38;
-            btnHouseHold_Save.Text = "Save";
-            btnHouseHold_Save.UseVisualStyleBackColor = false;
-            btnHouseHold_Save.Click += btnSave_Click;
+            label8.AutoSize = true;
+            label8.Location = new Point(438, 34);
+            label8.Name = "label8";
+            label8.Size = new Size(108, 21);
+            label8.TabIndex = 46;
+            label8.Text = "Category Item";
+            // 
+            // cmbCategoryItems
+            // 
+            cmbCategoryItems.FormattingEnabled = true;
+            cmbCategoryItems.Location = new Point(406, 58);
+            cmbCategoryItems.Name = "cmbCategoryItems";
+            cmbCategoryItems.Size = new Size(172, 29);
+            cmbCategoryItems.TabIndex = 1;
+            cmbCategoryItems.SelectedIndexChanged += cmbCategoryItems_SelectedIndexChanged;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(378, 179);
+            label7.Name = "label7";
+            label7.Size = new Size(38, 13);
+            label7.TabIndex = 44;
+            label7.Text = "*Logo";
             // 
             // label32
             // 
@@ -488,10 +495,33 @@
             label32.Text = "House Hold";
             label32.Visible = false;
             // 
+            // picLogo
+            // 
+            picLogo.BorderStyle = BorderStyle.FixedSingle;
+            picLogo.Location = new Point(340, 102);
+            picLogo.Name = "picLogo";
+            picLogo.Size = new Size(114, 74);
+            picLogo.SizeMode = PictureBoxSizeMode.StretchImage;
+            picLogo.TabIndex = 43;
+            picLogo.TabStop = false;
+            picLogo.DragDrop += Logo_DragDrop;
+            picLogo.DragEnter += Logo_DragEnter;
+            // 
+            // ckbPrimaryVendor
+            // 
+            ckbPrimaryVendor.AutoSize = true;
+            ckbPrimaryVendor.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ckbPrimaryVendor.Location = new Point(584, 68);
+            ckbPrimaryVendor.Name = "ckbPrimaryVendor";
+            ckbPrimaryVendor.Size = new Size(118, 19);
+            ckbPrimaryVendor.TabIndex = 2;
+            ckbPrimaryVendor.Text = "Is Primary Vendor";
+            ckbPrimaryVendor.UseVisualStyleBackColor = true;
+            // 
             // label33
             // 
             label33.AutoSize = true;
-            label33.Location = new Point(334, 31);
+            label33.Location = new Point(240, 34);
             label33.Name = "label33";
             label33.Size = new Size(126, 21);
             label33.TabIndex = 2;
@@ -500,10 +530,11 @@
             // cmbBudgetCategory
             // 
             cmbBudgetCategory.FormattingEnabled = true;
-            cmbBudgetCategory.Location = new Point(311, 55);
+            cmbBudgetCategory.Location = new Point(217, 58);
             cmbBudgetCategory.Name = "cmbBudgetCategory";
             cmbBudgetCategory.Size = new Size(172, 29);
-            cmbBudgetCategory.TabIndex = 1;
+            cmbBudgetCategory.TabIndex = 0;
+            cmbBudgetCategory.SelectedIndexChanged += cmbBudgetCategory_SelectedIndexChanged;
             // 
             // groupBox1
             // 
@@ -513,10 +544,10 @@
             groupBox1.Controls.Add(picHouseHold_Charge);
             groupBox1.Controls.Add(picHouseHold_OnlineBanking);
             groupBox1.Controls.Add(lblPaymentMethodHighligter);
-            groupBox1.Location = new Point(119, 100);
+            groupBox1.Location = new Point(131, 205);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(557, 147);
-            groupBox1.TabIndex = 37;
+            groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             // 
             // picHouseHold_Cash
@@ -530,7 +561,6 @@
             picHouseHold_Cash.TabStop = false;
             picHouseHold_Cash.Tag = "House Hold:Cash";
             picHouseHold_Cash.Click += PreferedPaymentMethod_Click;
-            picHouseHold_Cash.MouseEnter += PreferedPaymentMethod_MouseEnter;
             // 
             // label34
             // 
@@ -538,7 +568,7 @@
             label34.Location = new Point(3, 25);
             label34.Name = "label34";
             label34.Size = new Size(551, 25);
-            label34.TabIndex = 36;
+            label34.TabIndex = 0;
             label34.Text = "Prefered Payment Method";
             label34.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -551,9 +581,8 @@
             picHouseHold_Check.SizeMode = PictureBoxSizeMode.StretchImage;
             picHouseHold_Check.TabIndex = 30;
             picHouseHold_Check.TabStop = false;
-            picHouseHold_Check.Tag = "House Hold:Checking";
+            picHouseHold_Check.Tag = "House Hold:Check";
             picHouseHold_Check.Click += PreferedPaymentMethod_Click;
-            picHouseHold_Check.MouseEnter += PreferedPaymentMethod_MouseEnter;
             // 
             // picHouseHold_Charge
             // 
@@ -566,7 +595,6 @@
             picHouseHold_Charge.TabStop = false;
             picHouseHold_Charge.Tag = "House Hold:Credit Card";
             picHouseHold_Charge.Click += PreferedPaymentMethod_Click;
-            picHouseHold_Charge.MouseEnter += PreferedPaymentMethod_MouseEnter;
             // 
             // picHouseHold_OnlineBanking
             // 
@@ -579,7 +607,6 @@
             picHouseHold_OnlineBanking.TabStop = false;
             picHouseHold_OnlineBanking.Tag = "House Hold:Online Banking";
             picHouseHold_OnlineBanking.Click += PreferedPaymentMethod_Click;
-            picHouseHold_OnlineBanking.MouseEnter += PreferedPaymentMethod_MouseEnter;
             // 
             // lblPaymentMethodHighligter
             // 
@@ -587,41 +614,63 @@
             lblPaymentMethodHighligter.Location = new Point(10, 55);
             lblPaymentMethodHighligter.Name = "lblPaymentMethodHighligter";
             lblPaymentMethodHighligter.Size = new Size(135, 78);
-            lblPaymentMethodHighligter.TabIndex = 34;
+            lblPaymentMethodHighligter.TabIndex = 1;
             lblPaymentMethodHighligter.Visible = false;
             // 
             // pnlCreditCard
             // 
             pnlCreditCard.BorderStyle = BorderStyle.FixedSingle;
+            pnlCreditCard.Controls.Add(label6);
+            pnlCreditCard.Controls.Add(txtCreditCardAPR);
             pnlCreditCard.Controls.Add(txtCreditCard_StartingBalance);
             pnlCreditCard.Controls.Add(label48);
             pnlCreditCard.Controls.Add(label46);
-            pnlCreditCard.Controls.Add(txtCreditCard_APR);
-            pnlCreditCard.Controls.Add(btnCreditCard_Save);
             pnlCreditCard.Controls.Add(groupBox2);
             pnlCreditCard.Controls.Add(picCardSelectedImage);
             pnlCreditCard.Controls.Add(label29);
             pnlCreditCard.Dock = DockStyle.Bottom;
-            pnlCreditCard.Location = new Point(0, 367);
+            pnlCreditCard.Location = new Point(0, 814);
             pnlCreditCard.MaximumSize = new Size(796, 371);
             pnlCreditCard.Name = "pnlCreditCard";
-            pnlCreditCard.Size = new Size(796, 105);
+            pnlCreditCard.Size = new Size(796, 26);
             pnlCreditCard.TabIndex = 64;
             pnlCreditCard.Tag = "Permanant";
             pnlCreditCard.Visible = false;
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Location = new Point(379, 102);
+            label6.Name = "label6";
+            label6.Size = new Size(37, 13);
+            label6.TabIndex = 48;
+            label6.Text = "Select";
+            // 
+            // txtCreditCardAPR
+            // 
+            txtCreditCardAPR.Location = new Point(430, 133);
+            txtCreditCardAPR.Name = "txtCreditCardAPR";
+            txtCreditCardAPR.PlaceholderText = "0.00%";
+            txtCreditCardAPR.Size = new Size(77, 29);
+            txtCreditCardAPR.TabIndex = 2;
+            txtCreditCardAPR.TextAlign = HorizontalAlignment.Center;
+            txtCreditCardAPR.KeyPress += TextBoxValidationOn_KeyPress;
+            // 
             // txtCreditCard_StartingBalance
             // 
-            txtCreditCard_StartingBalance.Location = new Point(354, 36);
+            txtCreditCard_StartingBalance.Location = new Point(288, 133);
             txtCreditCard_StartingBalance.Name = "txtCreditCard_StartingBalance";
+            txtCreditCard_StartingBalance.PlaceholderText = "0.00";
             txtCreditCard_StartingBalance.Size = new Size(77, 29);
-            txtCreditCard_StartingBalance.TabIndex = 46;
-            txtCreditCard_StartingBalance.Text = "0000000";
+            txtCreditCard_StartingBalance.TabIndex = 1;
+            txtCreditCard_StartingBalance.TextAlign = HorizontalAlignment.Center;
+            txtCreditCard_StartingBalance.KeyPress += TextBoxValidationOn_KeyPress;
             // 
             // label48
             // 
             label48.AutoSize = true;
-            label48.Location = new Point(232, 40);
+            label48.Location = new Point(165, 137);
             label48.Name = "label48";
             label48.Size = new Size(121, 21);
             label48.TabIndex = 45;
@@ -630,32 +679,11 @@
             // label46
             // 
             label46.AutoSize = true;
-            label46.Location = new Point(445, 40);
+            label46.Location = new Point(379, 137);
             label46.Name = "label46";
             label46.Size = new Size(52, 21);
             label46.TabIndex = 41;
             label46.Text = "APR%";
-            // 
-            // txtCreditCard_APR
-            // 
-            txtCreditCard_APR.Location = new Point(503, 36);
-            txtCreditCard_APR.Mask = "##.##%";
-            txtCreditCard_APR.Name = "txtCreditCard_APR";
-            txtCreditCard_APR.Size = new Size(59, 29);
-            txtCreditCard_APR.TabIndex = 40;
-            // 
-            // btnCreditCard_Save
-            // 
-            btnCreditCard_Save.BackColor = Color.FromArgb(95, 93, 156);
-            btnCreditCard_Save.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
-            btnCreditCard_Save.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            btnCreditCard_Save.ForeColor = Color.Cyan;
-            btnCreditCard_Save.Location = new Point(314, 330);
-            btnCreditCard_Save.Name = "btnCreditCard_Save";
-            btnCreditCard_Save.Size = new Size(166, 37);
-            btnCreditCard_Save.TabIndex = 39;
-            btnCreditCard_Save.Text = "Save";
-            btnCreditCard_Save.UseVisualStyleBackColor = false;
             // 
             // groupBox2
             // 
@@ -691,7 +719,6 @@
             picCreditCard_Check.TabStop = false;
             picCreditCard_Check.Tag = "Credit Card:Check";
             picCreditCard_Check.Click += PreferedPaymentMethod_Click;
-            picCreditCard_Check.MouseEnter += PreferedPaymentMethod_MouseEnter;
             // 
             // picCreditCard_DebitCard
             // 
@@ -704,7 +731,6 @@
             picCreditCard_DebitCard.TabStop = false;
             picCreditCard_DebitCard.Tag = "Credit Card:Debit";
             picCreditCard_DebitCard.Click += PreferedPaymentMethod_Click;
-            picCreditCard_DebitCard.MouseEnter += PreferedPaymentMethod_MouseEnter;
             // 
             // picCreditCard_OnlineBanking
             // 
@@ -717,7 +743,6 @@
             picCreditCard_OnlineBanking.TabStop = false;
             picCreditCard_OnlineBanking.Tag = "Credit Card:Online Banking";
             picCreditCard_OnlineBanking.Click += PreferedPaymentMethod_Click;
-            picCreditCard_OnlineBanking.MouseEnter += PreferedPaymentMethod_MouseEnter;
             // 
             // lblPaymentMethodHighligter2
             // 
@@ -733,7 +758,7 @@
             // 
             picCardSelectedImage.BorderStyle = BorderStyle.FixedSingle;
             picCardSelectedImage.Image = Properties.Resources.CreditCardLogos;
-            picCardSelectedImage.Location = new Point(348, 95);
+            picCardSelectedImage.Location = new Point(348, 32);
             picCardSelectedImage.Name = "picCardSelectedImage";
             picCardSelectedImage.Size = new Size(98, 67);
             picCardSelectedImage.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -756,6 +781,14 @@
             // pnlLoan
             // 
             pnlLoan.BorderStyle = BorderStyle.FixedSingle;
+            pnlLoan.Controls.Add(label5);
+            pnlLoan.Controls.Add(label3);
+            pnlLoan.Controls.Add(label2);
+            pnlLoan.Controls.Add(label1);
+            pnlLoan.Controls.Add(dtEndDate);
+            pnlLoan.Controls.Add(dtStartDate);
+            pnlLoan.Controls.Add(btnLoanTypeScroll_Left);
+            pnlLoan.Controls.Add(btnLoanTypeScroll_Right);
             pnlLoan.Controls.Add(txtLoan_APR);
             pnlLoan.Controls.Add(label57);
             pnlLoan.Controls.Add(picLoanType);
@@ -763,29 +796,129 @@
             pnlLoan.Controls.Add(label49);
             pnlLoan.Controls.Add(label50);
             pnlLoan.Controls.Add(groupBox3);
-            pnlLoan.Controls.Add(btnLoan_Save);
             pnlLoan.Controls.Add(label4);
             pnlLoan.Dock = DockStyle.Bottom;
-            pnlLoan.Location = new Point(0, 472);
+            pnlLoan.Location = new Point(0, 840);
             pnlLoan.MaximumSize = new Size(796, 371);
             pnlLoan.Name = "pnlLoan";
-            pnlLoan.Size = new Size(796, 340);
-            pnlLoan.TabIndex = 63;
+            pnlLoan.Size = new Size(796, 37);
+            pnlLoan.TabIndex = 8;
             pnlLoan.Tag = "Permanant";
             pnlLoan.Visible = false;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.Location = new Point(303, 47);
+            label5.Name = "label5";
+            label5.Size = new Size(43, 17);
+            label5.TabIndex = 62;
+            label5.Text = "Terms";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 8.25F);
+            label3.Location = new Point(616, 122);
+            label3.Name = "label3";
+            label3.Size = new Size(51, 13);
+            label3.TabIndex = 61;
+            label3.Text = "Personal";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 8.25F);
+            label2.Location = new Point(346, 99);
+            label2.Name = "label2";
+            label2.Size = new Size(54, 13);
+            label2.TabIndex = 60;
+            label2.Text = "End Date";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 8.25F);
+            label1.Location = new Point(247, 99);
+            label1.Name = "label1";
+            label1.Size = new Size(58, 13);
+            label1.TabIndex = 59;
+            label1.Text = "Start Date";
+            // 
+            // dtEndDate
+            // 
+            dtEndDate.CalendarFont = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtEndDate.CustomFormat = "MM/dd/yyyy";
+            dtEndDate.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtEndDate.Format = DateTimePickerFormat.Custom;
+            dtEndDate.Location = new Point(328, 71);
+            dtEndDate.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
+            dtEndDate.Name = "dtEndDate";
+            dtEndDate.Size = new Size(91, 25);
+            dtEndDate.TabIndex = 2;
+            // 
+            // dtStartDate
+            // 
+            dtStartDate.CalendarFont = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtStartDate.CustomFormat = "MM/dd/yyyy";
+            dtStartDate.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtStartDate.Format = DateTimePickerFormat.Custom;
+            dtStartDate.Location = new Point(231, 71);
+            dtStartDate.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
+            dtStartDate.Name = "dtStartDate";
+            dtStartDate.Size = new Size(91, 25);
+            dtStartDate.TabIndex = 1;
+            // 
+            // btnLoanTypeScroll_Left
+            // 
+            btnLoanTypeScroll_Left.BackColor = Color.Transparent;
+            btnLoanTypeScroll_Left.BackgroundImage = Properties.Resources.Left_Pointer_Black;
+            btnLoanTypeScroll_Left.BackgroundImageLayout = ImageLayout.Zoom;
+            btnLoanTypeScroll_Left.FlatAppearance.BorderSize = 0;
+            btnLoanTypeScroll_Left.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 255, 192);
+            btnLoanTypeScroll_Left.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
+            btnLoanTypeScroll_Left.FlatStyle = FlatStyle.Flat;
+            btnLoanTypeScroll_Left.Location = new Point(557, 68);
+            btnLoanTypeScroll_Left.Name = "btnLoanTypeScroll_Left";
+            btnLoanTypeScroll_Left.Size = new Size(30, 30);
+            btnLoanTypeScroll_Left.TabIndex = 56;
+            btnLoanTypeScroll_Left.Tag = "-1";
+            btnLoanTypeScroll_Left.UseVisualStyleBackColor = false;
+            btnLoanTypeScroll_Left.Click += LoanTypeSelector_Click;
+            // 
+            // btnLoanTypeScroll_Right
+            // 
+            btnLoanTypeScroll_Right.BackColor = Color.Transparent;
+            btnLoanTypeScroll_Right.BackgroundImage = Properties.Resources.Right_Pointer_Black;
+            btnLoanTypeScroll_Right.BackgroundImageLayout = ImageLayout.Zoom;
+            btnLoanTypeScroll_Right.FlatAppearance.BorderSize = 0;
+            btnLoanTypeScroll_Right.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 255, 192);
+            btnLoanTypeScroll_Right.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
+            btnLoanTypeScroll_Right.FlatStyle = FlatStyle.Flat;
+            btnLoanTypeScroll_Right.Location = new Point(696, 68);
+            btnLoanTypeScroll_Right.Name = "btnLoanTypeScroll_Right";
+            btnLoanTypeScroll_Right.Size = new Size(30, 30);
+            btnLoanTypeScroll_Right.TabIndex = 55;
+            btnLoanTypeScroll_Right.Tag = "1";
+            btnLoanTypeScroll_Right.UseVisualStyleBackColor = false;
+            btnLoanTypeScroll_Right.Click += LoanTypeSelector_Click;
+            // 
             // txtLoan_APR
             // 
-            txtLoan_APR.Location = new Point(455, 47);
+            txtLoan_APR.Location = new Point(485, 69);
             txtLoan_APR.Name = "txtLoan_APR";
+            txtLoan_APR.PlaceholderText = "0.00%";
             txtLoan_APR.Size = new Size(59, 29);
-            txtLoan_APR.TabIndex = 54;
+            txtLoan_APR.TabIndex = 3;
+            txtLoan_APR.TextAlign = HorizontalAlignment.Center;
+            txtLoan_APR.KeyPress += TextBoxValidationOn_KeyPress;
             // 
             // label57
             // 
             label57.AutoSize = true;
             label57.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label57.Location = new Point(626, 8);
+            label57.Location = new Point(626, 33);
             label57.Name = "label57";
             label57.Size = new Size(30, 13);
             label57.TabIndex = 53;
@@ -794,24 +927,29 @@
             // picLoanType
             // 
             picLoanType.BorderStyle = BorderStyle.FixedSingle;
-            picLoanType.Location = new Point(589, 23);
+            picLoanType.Image = Properties.Resources.Personal_Loan;
+            picLoanType.Location = new Point(589, 48);
             picLoanType.Name = "picLoanType";
             picLoanType.Size = new Size(105, 71);
+            picLoanType.SizeMode = PictureBoxSizeMode.StretchImage;
             picLoanType.TabIndex = 52;
             picLoanType.TabStop = false;
+            picLoanType.Tag = "1";
             // 
             // txtLoan_StartingBalance
             // 
-            txtLoan_StartingBalance.Location = new Point(307, 47);
+            txtLoan_StartingBalance.Location = new Point(148, 69);
             txtLoan_StartingBalance.Name = "txtLoan_StartingBalance";
+            txtLoan_StartingBalance.PlaceholderText = "0.00";
             txtLoan_StartingBalance.Size = new Size(77, 29);
-            txtLoan_StartingBalance.TabIndex = 51;
-            txtLoan_StartingBalance.Text = "0000000";
+            txtLoan_StartingBalance.TabIndex = 0;
+            txtLoan_StartingBalance.TextAlign = HorizontalAlignment.Center;
+            txtLoan_StartingBalance.KeyPress += TextBoxValidationOn_KeyPress;
             // 
             // label49
             // 
             label49.AutoSize = true;
-            label49.Location = new Point(185, 51);
+            label49.Location = new Point(26, 73);
             label49.Name = "label49";
             label49.Size = new Size(121, 21);
             label49.TabIndex = 50;
@@ -820,7 +958,7 @@
             // label50
             // 
             label50.AutoSize = true;
-            label50.Location = new Point(398, 51);
+            label50.Location = new Point(428, 73);
             label50.Name = "label50";
             label50.Size = new Size(52, 21);
             label50.TabIndex = 49;
@@ -835,9 +973,9 @@
             groupBox3.Controls.Add(picLoan_DebitCard);
             groupBox3.Controls.Add(picLoan_OnlineBanking);
             groupBox3.Controls.Add(lblPaymentMethodHighligter3);
-            groupBox3.Location = new Point(63, 92);
+            groupBox3.Location = new Point(63, 150);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(668, 156);
+            groupBox3.Size = new Size(668, 146);
             groupBox3.TabIndex = 47;
             groupBox3.TabStop = false;
             // 
@@ -852,7 +990,6 @@
             picLoan_CreditCard.TabStop = false;
             picLoan_CreditCard.Tag = "Loan:Credit Card";
             picLoan_CreditCard.Click += PreferedPaymentMethod_Click;
-            picLoan_CreditCard.MouseEnter += PreferedPaymentMethod_MouseEnter;
             // 
             // picLoan_Cash
             // 
@@ -865,7 +1002,6 @@
             picLoan_Cash.TabStop = false;
             picLoan_Cash.Tag = "Loan:Cash";
             picLoan_Cash.Click += PreferedPaymentMethod_Click;
-            picLoan_Cash.MouseEnter += PreferedPaymentMethod_MouseEnter;
             // 
             // label51
             // 
@@ -886,9 +1022,8 @@
             picLoan_Check.SizeMode = PictureBoxSizeMode.StretchImage;
             picLoan_Check.TabIndex = 30;
             picLoan_Check.TabStop = false;
-            picLoan_Check.Tag = "Loan:Checking";
+            picLoan_Check.Tag = "Loan:Check";
             picLoan_Check.Click += PreferedPaymentMethod_Click;
-            picLoan_Check.MouseEnter += PreferedPaymentMethod_MouseEnter;
             // 
             // picLoan_DebitCard
             // 
@@ -901,7 +1036,6 @@
             picLoan_DebitCard.TabStop = false;
             picLoan_DebitCard.Tag = "Loan:Debit Card";
             picLoan_DebitCard.Click += PreferedPaymentMethod_Click;
-            picLoan_DebitCard.MouseEnter += PreferedPaymentMethod_MouseEnter;
             // 
             // picLoan_OnlineBanking
             // 
@@ -914,7 +1048,6 @@
             picLoan_OnlineBanking.TabStop = false;
             picLoan_OnlineBanking.Tag = "Loan:Online Banking";
             picLoan_OnlineBanking.Click += PreferedPaymentMethod_Click;
-            picLoan_OnlineBanking.MouseEnter += PreferedPaymentMethod_MouseEnter;
             // 
             // lblPaymentMethodHighligter3
             // 
@@ -924,19 +1057,6 @@
             lblPaymentMethodHighligter3.Size = new Size(135, 78);
             lblPaymentMethodHighligter3.TabIndex = 52;
             lblPaymentMethodHighligter3.Visible = false;
-            // 
-            // btnLoan_Save
-            // 
-            btnLoan_Save.BackColor = Color.FromArgb(95, 93, 156);
-            btnLoan_Save.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
-            btnLoan_Save.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            btnLoan_Save.ForeColor = Color.Cyan;
-            btnLoan_Save.Location = new Point(316, 275);
-            btnLoan_Save.Name = "btnLoan_Save";
-            btnLoan_Save.Size = new Size(166, 37);
-            btnLoan_Save.TabIndex = 40;
-            btnLoan_Save.Text = "Save";
-            btnLoan_Save.UseVisualStyleBackColor = false;
             // 
             // label4
             // 
@@ -953,7 +1073,6 @@
             // pnlAccountInformation
             // 
             pnlAccountInformation.BorderStyle = BorderStyle.FixedSingle;
-            pnlAccountInformation.Controls.Add(btnAccountSave);
             pnlAccountInformation.Controls.Add(label45);
             pnlAccountInformation.Controls.Add(label28);
             pnlAccountInformation.Controls.Add(mtbAccount_ZipCode);
@@ -972,26 +1091,13 @@
             pnlAccountInformation.Controls.Add(label22);
             pnlAccountInformation.Controls.Add(label23);
             pnlAccountInformation.Dock = DockStyle.Bottom;
-            pnlAccountInformation.Location = new Point(0, 812);
+            pnlAccountInformation.Location = new Point(0, 877);
             pnlAccountInformation.MaximumSize = new Size(796, 371);
             pnlAccountInformation.MinimumSize = new Size(796, 27);
             pnlAccountInformation.Name = "pnlAccountInformation";
-            pnlAccountInformation.Size = new Size(796, 50);
+            pnlAccountInformation.Size = new Size(796, 32);
             pnlAccountInformation.TabIndex = 62;
             pnlAccountInformation.Tag = "Permanant";
-            // 
-            // btnAccountSave
-            // 
-            btnAccountSave.BackColor = Color.FromArgb(95, 93, 156);
-            btnAccountSave.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 192, 255);
-            btnAccountSave.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            btnAccountSave.ForeColor = Color.Cyan;
-            btnAccountSave.Location = new Point(313, 302);
-            btnAccountSave.Name = "btnAccountSave";
-            btnAccountSave.Size = new Size(166, 37);
-            btnAccountSave.TabIndex = 41;
-            btnAccountSave.Text = "Save";
-            btnAccountSave.UseVisualStyleBackColor = false;
             // 
             // label45
             // 
@@ -1017,7 +1123,7 @@
             mtbAccount_ZipCode.Mask = "00000";
             mtbAccount_ZipCode.Name = "mtbAccount_ZipCode";
             mtbAccount_ZipCode.Size = new Size(72, 29);
-            mtbAccount_ZipCode.TabIndex = 18;
+            mtbAccount_ZipCode.TabIndex = 3;
             mtbAccount_ZipCode.TextAlign = HorizontalAlignment.Center;
             mtbAccount_ZipCode.ValidatingType = typeof(int);
             // 
@@ -1042,11 +1148,10 @@
             // cmbStateAbreviations
             // 
             cmbStateAbreviations.FormattingEnabled = true;
-            cmbStateAbreviations.Items.AddRange(new object[] { "Alabama (AL) ", "Alaska (AK) ", "Arizona (AZ) ", "Arkansas (AR) ", "California (CA) ", "Colorado (CO) ", "Connecticut (CT) ", "Delaware (DE) ", "Florida (FL) ", "Georgia (GA) ", "Hawaii (HI) ", "Idaho (ID) ", "Illinois (IL) ", "Indiana (IN) ", "Iowa (IA) ", "Kansas (KS) ", "Kentucky (KY) ", "Louisiana (LA) ", "Maine (ME) ", "Maryland (MD) ", "Massachusetts (MA) ", "Michigan (MI) ", "Minnesota (MN) ", "Mississippi (MS) ", "Missouri (MO) ", "Montana (MT) ", "Nebraska (NE) ", "Nevada (NV) ", "New Hampshire (NH) ", "New Jersey (NJ) ", "New Mexico (NM) ", "New York (NY) ", "North Carolina (NC) ", "North Dakota (ND) ", "Ohio (OH) ", "Oklahoma (OK) ", "Oregon (OR) ", "Pennsylvania (PA) ", "Rhode Island (RI) ", "South Carolina (SC) ", "South Dakota (SD) ", "Tennessee (TN) ", "Texas (TX) ", "Utah (UT) ", "Vermont (VT) ", "Virginia (VA) ", "Washington (WA) ", "West Virginia (WV) ", "Wisconsin (WI) ", "Wyoming (WY) ", "District of Columbia (DC) ", "Guam (GU) ", "Marshall Islands (MH) ", "Northern Mariana Islands (MP) ", "Puerto Rico (PR) ", "Virgin Islands (VI) " });
             cmbStateAbreviations.Location = new Point(261, 257);
             cmbStateAbreviations.Name = "cmbStateAbreviations";
             cmbStateAbreviations.Size = new Size(72, 29);
-            cmbStateAbreviations.TabIndex = 15;
+            cmbStateAbreviations.TabIndex = 2;
             // 
             // lblAccountInformation
             // 
@@ -1059,7 +1164,7 @@
             lblAccountInformation.Size = new Size(161, 25);
             lblAccountInformation.TabIndex = 0;
             lblAccountInformation.Text = "*Account Information";
-            lblAccountInformation.Click += AccountTypeDecisionLables_Click;
+            lblAccountInformation.Click += lblAccountInformation_Click;
             // 
             // txtAccount_Address2
             // 
@@ -1082,14 +1187,14 @@
             txtAccount_City.Location = new Point(135, 257);
             txtAccount_City.Name = "txtAccount_City";
             txtAccount_City.Size = new Size(120, 29);
-            txtAccount_City.TabIndex = 5;
+            txtAccount_City.TabIndex = 1;
             // 
             // txtAccount_Number
             // 
             txtAccount_Number.Location = new Point(135, 60);
             txtAccount_Number.Name = "txtAccount_Number";
             txtAccount_Number.Size = new Size(205, 29);
-            txtAccount_Number.TabIndex = 13;
+            txtAccount_Number.TabIndex = 0;
             // 
             // label21
             // 
@@ -1141,20 +1246,77 @@
             label23.TabIndex = 10;
             label23.Text = "Phone Number";
             // 
+            // ckbAutoPay
+            // 
+            ckbAutoPay.AutoSize = true;
+            ckbAutoPay.BackColor = Color.Transparent;
+            ckbAutoPay.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ckbAutoPay.ForeColor = Color.FromArgb(244, 237, 204);
+            ckbAutoPay.Location = new Point(289, 425);
+            ckbAutoPay.Margin = new Padding(4);
+            ckbAutoPay.Name = "ckbAutoPay";
+            ckbAutoPay.Size = new Size(78, 21);
+            ckbAutoPay.TabIndex = 6;
+            ckbAutoPay.Text = "Auto Pay";
+            ckbAutoPay.UseVisualStyleBackColor = false;
+            // 
+            // btnHouseHold
+            // 
+            btnHouseHold.FlatAppearance.BorderColor = Color.RoyalBlue;
+            btnHouseHold.FlatAppearance.BorderSize = 0;
+            btnHouseHold.FlatAppearance.MouseOverBackColor = Color.RoyalBlue;
+            btnHouseHold.FlatStyle = FlatStyle.Flat;
+            btnHouseHold.Location = new Point(131, 187);
+            btnHouseHold.Name = "btnHouseHold";
+            btnHouseHold.Size = new Size(170, 37);
+            btnHouseHold.TabIndex = 2;
+            btnHouseHold.Text = "House Hold";
+            btnHouseHold.UseVisualStyleBackColor = true;
+            btnHouseHold.Click += AccountTypeDecisionButtons_Click;
+            // 
+            // btnLoan
+            // 
+            btnLoan.FlatAppearance.BorderColor = Color.RoyalBlue;
+            btnLoan.FlatAppearance.BorderSize = 0;
+            btnLoan.FlatAppearance.MouseOverBackColor = Color.RoyalBlue;
+            btnLoan.FlatStyle = FlatStyle.Flat;
+            btnLoan.Location = new Point(313, 187);
+            btnLoan.Name = "btnLoan";
+            btnLoan.Size = new Size(170, 37);
+            btnLoan.TabIndex = 3;
+            btnLoan.Text = "Loan";
+            btnLoan.UseVisualStyleBackColor = true;
+            btnLoan.Click += AccountTypeDecisionButtons_Click;
+            // 
+            // btnCreditCard
+            // 
+            btnCreditCard.FlatAppearance.BorderColor = Color.RoyalBlue;
+            btnCreditCard.FlatAppearance.BorderSize = 0;
+            btnCreditCard.FlatAppearance.MouseOverBackColor = Color.RoyalBlue;
+            btnCreditCard.FlatStyle = FlatStyle.Flat;
+            btnCreditCard.Location = new Point(495, 186);
+            btnCreditCard.Name = "btnCreditCard";
+            btnCreditCard.Size = new Size(170, 37);
+            btnCreditCard.TabIndex = 4;
+            btnCreditCard.Text = "Credit Card";
+            btnCreditCard.UseVisualStyleBackColor = true;
+            btnCreditCard.Click += AccountTypeDecisionButtons_Click;
+            // 
             // frmBill
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackgroundImage = Properties.Resources.Black_Metal;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(796, 862);
+            ClientSize = new Size(796, 909);
+            Controls.Add(btnCreditCard);
+            Controls.Add(btnLoan);
+            Controls.Add(btnHouseHold);
+            Controls.Add(ckbAutoPay);
             Controls.Add(pnlHouseHold);
             Controls.Add(pnlCreditCard);
             Controls.Add(pnlLoan);
             Controls.Add(pnlAccountInformation);
             Controls.Add(lblPnlNewPayee_SelectedDay);
-            Controls.Add(lblCreditCard);
-            Controls.Add(lblLoan);
-            Controls.Add(lblHouseHold);
             Controls.Add(label30);
             Controls.Add(label26);
             Controls.Add(txtDisplayName);
@@ -1172,11 +1334,13 @@
             Name = "frmBill";
             StartPosition = FormStartPosition.CenterParent;
             Text = "New Account";
+            Load += frmBill_Load;
             pnlHeader.ResumeLayout(false);
             pnlImageSelector.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)picImageSelectorSelectedImage).EndInit();
             pnlHouseHold.ResumeLayout(false);
             pnlHouseHold.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
             groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)picHouseHold_Cash).EndInit();
             ((System.ComponentModel.ISupportInitialize)picHouseHold_Check).EndInit();
@@ -1210,9 +1374,6 @@
         private Button btnReturn;
         private Label lblHeader;
         private Label lblPnlNewPayee_SelectedDay;
-        private Label lblCreditCard;
-        private Label lblLoan;
-        private Label lblHouseHold;
         private Label label30;
         private Label label26;
         private TextBox txtDisplayName;
@@ -1229,7 +1390,7 @@
         private PictureBox picImageSelectorSelectedImage;
         private Button btnSelectedDay;
         private Panel pnlHouseHold;
-        private Button btnHouseHold_Save;
+        private Button btn_Save;
         private Label label32;
         private Label label33;
         private ComboBox cmbBudgetCategory;
@@ -1244,8 +1405,6 @@
         private TextBox txtCreditCard_StartingBalance;
         private Label label48;
         private Label label46;
-        private MaskedTextBox txtCreditCard_APR;
-        private Button btnCreditCard_Save;
         private GroupBox groupBox2;
         private Label label35;
         private PictureBox picCreditCard_Check;
@@ -1268,10 +1427,8 @@
         private PictureBox picLoan_DebitCard;
         private PictureBox picLoan_OnlineBanking;
         private Label lblPaymentMethodHighligter3;
-        private Button btnLoan_Save;
         private Label label4;
         private Panel pnlAccountInformation;
-        private Button btnAccountSave;
         private Label label45;
         private Label label28;
         private MaskedTextBox mtbAccount_ZipCode;
@@ -1291,5 +1448,24 @@
         private Label label23;
         private TextBox txtLoan_APR;
         private Button btnCancel;
+        private Button btnLoanTypeScroll_Right;
+        private Button btnLoanTypeScroll_Left;
+        private DateTimePicker dtStartDate;
+        private Label label3;
+        private Label label2;
+        private Label label1;
+        private DateTimePicker dtEndDate;
+        private Label label6;
+        private TextBox txtCreditCardAPR;
+        private Label label5;
+        private CheckBox ckbAutoPay;
+        private Label label7;
+        private PictureBox picLogo;
+        private CheckBox ckbPrimaryVendor;
+        private Label label8;
+        private ComboBox cmbCategoryItems;
+        private Button btnHouseHold;
+        private Button btnLoan;
+        private Button btnCreditCard;
     }
 }

@@ -85,7 +85,7 @@ namespace Steamroller_Financial_Application
             Dictionary<int, string> validationErrors = new Dictionary<int, string>();
             int errorCount = 0;
 
-            sql.Append($"SELECT * FROM TRANSACTIONS WHERE BudgetID ={globals.BudgetID} ");
+            //sql.Append($"SELECT * FROM TRANSACTIONS WHERE BudgetID ={globals.BudgetID} ");
 
             if (picSlider_1.Tag.ToString().Contains('1'))
             {

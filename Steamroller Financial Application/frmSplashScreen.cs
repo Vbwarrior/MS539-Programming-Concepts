@@ -25,7 +25,7 @@ namespace Steamroller_Financial_Application
         string inputBoxReturnValue;
         public List<string> columns = new List<string>();
         public Dictionary<string, string> conditions = new Dictionary<string, string>();
-     
+
 
 
         public frmSplashScreen(SQLiteCRUD db, GlobalDataAndFunctions globalData)
@@ -143,40 +143,38 @@ namespace Steamroller_Financial_Application
             //            this.Close();
             //#endif
             string userName = txtUserName.Text;
-            string password = txtPassword.Text;
+            string password = globals.CreateSha256Hash(txtPassword.Text);//Create Password Hash txtPassword.Text;
             List<string> Budgets = new List<string>();
-            long BudgetID = 0;
-            bool hasName = false;
+            long userID = 0;
             string BudgetName = string.Empty;
             int xCount = 0;
             Dictionary<string, string> columnsAndValues = new Dictionary<string, string>();
 
-            conditions.Clear();
-            columns.Clear();
 
             lblViolation.Visible = false;//Clear any previous error attempts
+            conditions.Clear();
+            conditions.Add("UserName", userName);
+            conditions.Add("PasswordHash", password);
 
-            hasName = data.Contains("Users", "UserName", userName);// Check if Users Exists Already
-
-            
-            if (hasName)
+            if (data.Contains("Users", conditions))//User Name and Password Found
             {
+                globals.UserID = long.Parse(data.SelectString("UserID", "Users", conditions));//Set Global UserID
+                globals.UserName = userName;
+                //Check if user has created a budget
+                conditions.Clear();
+                conditions.Add("UserId", globals.UserID.ToString());
 
-                columns.Add("BudgetID");
-                conditions.Add("UserName",userName);
-
-                
-                using (SQLiteDataReader getUsersBudgets = data.SelectReader(columns, "User_Access", conditions)) 
+                if (data.Contains("Budgets", conditions))//User Has a budget
                 {
-                    if (getUsersBudgets.HasRows)
-                    {
-                        BudgetID = getUsersBudgets.GetInt32(0);
+                    Budgets.AddRange(data.SelectList("BudgetNames", "Budgets", conditions));
 
-                    }
-                    else//Create New Budget
+                    if (Budgets.Count > 0)
                     {
-                        using (var inputBox = new InputBox("Enter Budget Name", InputBox.Style.Medium))
+                        globals.DataList = Budgets;
+                        if (Budgets.Count > 1)
                         {
+
+                            frmInputBox inputBox = new frmInputBox(globals, "Select Budget from List", frmInputBox.Style.Small, frmInputBox.Mode.ComboBox);
                             var result = inputBox.ShowDialog();
                             if (result == DialogResult.OK)
                             {
@@ -184,60 +182,45 @@ namespace Steamroller_Financial_Application
 
                             }
                         }
+                        else { BudgetName = Budgets[0]; }//Only One Budget
 
 
-                        //Add New Budget into Budgets
-                        columnsAndValues.Add("isActive", "1");
-                        columnsAndValues.Add("BudgetName", BudgetName);
-                        data.Insert_Into("Budgets", columnsAndValues);
 
-                      
-                        columns.Clear();
-                        columns.Add("ID");
-                        conditions.Clear();
-                        conditions.Add("BudgetName",BudgetName);
+                    }
+                }
+                else//No budget was found - Create New Budget
+                {
+                    var inputBox = new frmInputBox(globals, "Enter Budget Name", frmInputBox.Style.Small, frmInputBox.Mode.TextBox);
 
-
-                       
-                      
-                        using (SQLiteDataReader LastID = data.SelectReader(columns, "Budgets", conditions))
-                        {
-                            if (LastID.Read()) // Check if there are any results
-                            {
-                                long lastRowId = LastID.GetInt64(0); // Convert BudgetID into Long
-                                BudgetID = lastRowId;
-                            }
-                        }
-                     
-                        //Add User Data and Budget ID into User Access
-                        columnsAndValues.Clear();
-                        columnsAndValues.Add("UserName", userName);
-                        columnsAndValues.Add("BudgetID", BudgetID.ToString());
-                        data.Insert_Into("User_Access", columnsAndValues);
+                    var result = inputBox.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        BudgetName = inputBox.ReturnValue;
 
                     }
 
+                    //Add New Budget into Budgets
+
+                    columnsAndValues.Add("UserID", globals.UserID.ToString());
+                    columnsAndValues.Add("BudgetNames", BudgetName);
+                    columnsAndValues.Add("isActive", "1");
+
+                    data.Insert_Into("Budgets", columnsAndValues);
 
                 }
 
             }
-
-            else
+            else//User Does Not Have an Account
             {
                 lblViolation.Visible = true;
                 ++FailedLoginAttempts;
                 //Invalid Username or Password (3) attempts remaining!
                 lblViolation.Text = $"Invalid Username or Password ({3 - FailedLoginAttempts}) attempts remaining!";
 
-
                 if (FailedLoginAttempts > 2) { Application.Exit(); }
 
                 return;
             }
-            //   }
-
-            globals.BudgetID = BudgetID.ToString();
-            globals.UserName = userName;
 
             this.Close();
 

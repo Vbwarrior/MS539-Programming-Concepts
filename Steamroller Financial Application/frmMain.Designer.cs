@@ -43,25 +43,12 @@
             radioButton2 = new RadioButton();
             label13 = new Label();
             btnMainMenuPanel_MoveToSavings = new Button();
-            panel6 = new Panel();
-            lblChartData = new Label();
-            cmbChartDataToDisplay = new ComboBox();
-            label7 = new Label();
-            btnDisplayChartStyle_Pie = new Button();
-            btnDisplayChartStyle_SideBar = new Button();
-            btnDisplayChartStyle_Bar = new Button();
-            pnlChart = new Panel();
-            panel7 = new Panel();
-            label6 = new Label();
-            label5 = new Label();
-            label1 = new Label();
             spnl_RightSideBar = new SplitContainer();
             label12 = new Label();
             label8 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
             pnlBottom = new Panel();
-            label19 = new Label();
             pnlCharts = new Panel();
             label11 = new Label();
             label10 = new Label();
@@ -125,8 +112,6 @@
             spnl_LeftSideBar.Panel2.SuspendLayout();
             spnl_LeftSideBar.SuspendLayout();
             groupBox_KeyData.SuspendLayout();
-            panel6.SuspendLayout();
-            panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)spnl_RightSideBar).BeginInit();
             spnl_RightSideBar.Panel1.SuspendLayout();
             spnl_RightSideBar.Panel2.SuspendLayout();
@@ -291,137 +276,6 @@
             btnMainMenuPanel_MoveToSavings.UseVisualStyleBackColor = false;
             btnMainMenuPanel_MoveToSavings.Click += MainMenuButtons_Click;
             // 
-            // panel6
-            // 
-            panel6.BackColor = SystemColors.ControlDark;
-            panel6.BorderStyle = BorderStyle.Fixed3D;
-            panel6.Controls.Add(lblChartData);
-            panel6.Controls.Add(cmbChartDataToDisplay);
-            panel6.Controls.Add(label7);
-            panel6.Controls.Add(btnDisplayChartStyle_Pie);
-            panel6.Controls.Add(btnDisplayChartStyle_SideBar);
-            panel6.Controls.Add(btnDisplayChartStyle_Bar);
-            panel6.Controls.Add(pnlChart);
-            panel6.Controls.Add(panel7);
-            panel6.Controls.Add(label5);
-            panel6.Controls.Add(label1);
-            panel6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            panel6.Location = new Point(600, 49);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(657, 262);
-            panel6.TabIndex = 1;
-            panel6.Tag = "Permanant";
-            panel6.Visible = false;
-            // 
-            // lblChartData
-            // 
-            lblChartData.AutoSize = true;
-            lblChartData.BorderStyle = BorderStyle.FixedSingle;
-            lblChartData.Location = new Point(87, 484);
-            lblChartData.Name = "lblChartData";
-            lblChartData.Size = new Size(75, 23);
-            lblChartData.TabIndex = 9;
-            lblChartData.Text = "1000000";
-            lblChartData.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // cmbChartDataToDisplay
-            // 
-            cmbChartDataToDisplay.FormattingEnabled = true;
-            cmbChartDataToDisplay.Items.AddRange(new object[] { "Budget Alocations", "Spending By Category" });
-            cmbChartDataToDisplay.Location = new Point(1082, 122);
-            cmbChartDataToDisplay.Name = "cmbChartDataToDisplay";
-            cmbChartDataToDisplay.Size = new Size(133, 29);
-            cmbChartDataToDisplay.TabIndex = 8;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(1109, 97);
-            label7.Name = "label7";
-            label7.Size = new Size(61, 21);
-            label7.TabIndex = 7;
-            label7.Text = "Display";
-            // 
-            // btnDisplayChartStyle_Pie
-            // 
-            btnDisplayChartStyle_Pie.Location = new Point(1082, 241);
-            btnDisplayChartStyle_Pie.Name = "btnDisplayChartStyle_Pie";
-            btnDisplayChartStyle_Pie.Size = new Size(133, 33);
-            btnDisplayChartStyle_Pie.TabIndex = 6;
-            btnDisplayChartStyle_Pie.Text = "Pie Chart";
-            btnDisplayChartStyle_Pie.UseVisualStyleBackColor = true;
-            // 
-            // btnDisplayChartStyle_SideBar
-            // 
-            btnDisplayChartStyle_SideBar.Location = new Point(1082, 202);
-            btnDisplayChartStyle_SideBar.Name = "btnDisplayChartStyle_SideBar";
-            btnDisplayChartStyle_SideBar.Size = new Size(133, 33);
-            btnDisplayChartStyle_SideBar.TabIndex = 5;
-            btnDisplayChartStyle_SideBar.Text = "Side Bar Chart";
-            btnDisplayChartStyle_SideBar.UseVisualStyleBackColor = true;
-            // 
-            // btnDisplayChartStyle_Bar
-            // 
-            btnDisplayChartStyle_Bar.Location = new Point(1082, 163);
-            btnDisplayChartStyle_Bar.Name = "btnDisplayChartStyle_Bar";
-            btnDisplayChartStyle_Bar.Size = new Size(133, 33);
-            btnDisplayChartStyle_Bar.TabIndex = 4;
-            btnDisplayChartStyle_Bar.Text = "Bar Chart";
-            btnDisplayChartStyle_Bar.UseVisualStyleBackColor = true;
-            // 
-            // pnlChart
-            // 
-            pnlChart.Location = new Point(87, 58);
-            pnlChart.Name = "pnlChart";
-            pnlChart.Size = new Size(790, 423);
-            pnlChart.TabIndex = 3;
-            pnlChart.Tag = "Permanant";
-            // 
-            // panel7
-            // 
-            panel7.BorderStyle = BorderStyle.FixedSingle;
-            panel7.Controls.Add(label6);
-            panel7.Location = new Point(882, 60);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(180, 384);
-            panel7.TabIndex = 2;
-            // 
-            // label6
-            // 
-            label6.BackColor = Color.Black;
-            label6.Dock = DockStyle.Top;
-            label6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.ForeColor = Color.White;
-            label6.Location = new Point(0, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(178, 33);
-            label6.TabIndex = 0;
-            label6.Text = "Key";
-            label6.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            label5.BackColor = Color.Tan;
-            label5.Dock = DockStyle.Top;
-            label5.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(0, 0);
-            label5.Name = "label5";
-            label5.Size = new Size(653, 55);
-            label5.TabIndex = 1;
-            label5.Text = "Single Chart Data";
-            label5.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.ForeColor = SystemColors.ActiveCaption;
-            label1.Location = new Point(213, 97);
-            label1.Name = "label1";
-            label1.Size = new Size(233, 21);
-            label1.TabIndex = 0;
-            label1.Text = "Controls to Be Added at runtime";
-            // 
             // spnl_RightSideBar
             // 
             spnl_RightSideBar.BorderStyle = BorderStyle.FixedSingle;
@@ -483,7 +337,7 @@
             panel2.BackColor = SystemColors.ScrollBar;
             panel2.Controls.Add(spnl_RightSideBar);
             panel2.Dock = DockStyle.Right;
-            panel2.Location = new Point(1694, 24);
+            panel2.Location = new Point(1209, 24);
             panel2.Name = "panel2";
             panel2.Size = new Size(10, 1032);
             panel2.TabIndex = 4;
@@ -492,26 +346,15 @@
             // pnlBottom
             // 
             pnlBottom.BackColor = SystemColors.ActiveCaptionText;
-            pnlBottom.Controls.Add(label19);
             pnlBottom.Controls.Add(pnlCharts);
-            pnlBottom.Controls.Add(panel6);
             pnlBottom.Dock = DockStyle.Bottom;
-            pnlBottom.Location = new Point(10, 868);
+            pnlBottom.Location = new Point(10, 650);
             pnlBottom.Name = "pnlBottom";
-            pnlBottom.Size = new Size(1684, 188);
+            pnlBottom.Size = new Size(1199, 406);
             pnlBottom.TabIndex = 5;
             pnlBottom.Tag = "Permanant";
+            pnlBottom.Visible = false;
             pnlBottom.Paint += pnlBottom_Paint;
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.BackColor = Color.White;
-            label19.Location = new Point(566, 227);
-            label19.Name = "label19";
-            label19.Size = new Size(171, 21);
-            label19.TabIndex = 16;
-            label19.Text = "Display Calendar/Chart";
             // 
             // pnlCharts
             // 
@@ -738,7 +581,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, newToolStripMenuItem1, editToolStripMenuItem, viToolStripMenuItem, btnDisplaySplashScreen, btnTestControl });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1704, 24);
+            menuStrip1.Size = new Size(1219, 24);
             menuStrip1.TabIndex = 6;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -766,40 +609,44 @@
             // mnuNewBill
             // 
             mnuNewBill.Name = "mnuNewBill";
-            mnuNewBill.Size = new Size(180, 22);
+            mnuNewBill.Size = new Size(141, 22);
             mnuNewBill.Text = "Bill";
             mnuNewBill.Click += mnuNewBill_Click;
             // 
             // mnuNewAccount
             // 
             mnuNewAccount.Name = "mnuNewAccount";
-            mnuNewAccount.Size = new Size(180, 22);
+            mnuNewAccount.Size = new Size(141, 22);
             mnuNewAccount.Text = "Account";
             mnuNewAccount.Click += mnuNewAccount_Click;
             // 
             // chargeToolStripMenuItem
             // 
             chargeToolStripMenuItem.Name = "chargeToolStripMenuItem";
-            chargeToolStripMenuItem.Size = new Size(180, 22);
+            chargeToolStripMenuItem.Size = new Size(141, 22);
             chargeToolStripMenuItem.Text = "Charge";
+            chargeToolStripMenuItem.Click += chargeToolStripMenuItem_Click;
             // 
             // depositToolStripMenuItem
             // 
             depositToolStripMenuItem.Name = "depositToolStripMenuItem";
-            depositToolStripMenuItem.Size = new Size(180, 22);
+            depositToolStripMenuItem.Size = new Size(141, 22);
             depositToolStripMenuItem.Text = "Deposit";
+            depositToolStripMenuItem.Click += depositToolStripMenuItem_Click;
             // 
             // budgetToolStripMenuItem
             // 
             budgetToolStripMenuItem.Name = "budgetToolStripMenuItem";
-            budgetToolStripMenuItem.Size = new Size(180, 22);
+            budgetToolStripMenuItem.Size = new Size(141, 22);
             budgetToolStripMenuItem.Text = "Budget";
+            budgetToolStripMenuItem.Click += budgetToolStripMenuItem_Click;
             // 
             // payOffPlanToolStripMenuItem
             // 
             payOffPlanToolStripMenuItem.Name = "payOffPlanToolStripMenuItem";
-            payOffPlanToolStripMenuItem.Size = new Size(180, 22);
+            payOffPlanToolStripMenuItem.Size = new Size(141, 22);
             payOffPlanToolStripMenuItem.Text = "Pay-Off Plan";
+            payOffPlanToolStripMenuItem.Click += payOffPlanToolStripMenuItem_Click;
             // 
             // editToolStripMenuItem
             // 
@@ -807,6 +654,7 @@
             editToolStripMenuItem.Name = "editToolStripMenuItem";
             editToolStripMenuItem.Size = new Size(39, 20);
             editToolStripMenuItem.Text = "Edit";
+            editToolStripMenuItem.Visible = false;
             // 
             // mnuEditBudget
             // 
@@ -846,6 +694,7 @@
             viToolStripMenuItem.Name = "viToolStripMenuItem";
             viToolStripMenuItem.Size = new Size(44, 20);
             viToolStripMenuItem.Text = "View";
+            viToolStripMenuItem.Visible = false;
             // 
             // mnuViewCalendar
             // 
@@ -924,11 +773,11 @@
             pnlMainMenu.Controls.Add(btnMainMenuPanel_OpenBudget);
             pnlMainMenu.Controls.Add(btnMainMenuPanel_DisplayReports);
             pnlMainMenu.Controls.Add(btnMainMenuPanel_MoveToSavings);
-            pnlMainMenu.Location = new Point(277, 27);
+            pnlMainMenu.Location = new Point(12, 27);
             pnlMainMenu.MaximumSize = new Size(1194, 470);
             pnlMainMenu.MinimumSize = new Size(1194, 30);
             pnlMainMenu.Name = "pnlMainMenu";
-            pnlMainMenu.Size = new Size(1194, 30);
+            pnlMainMenu.Size = new Size(1194, 470);
             pnlMainMenu.TabIndex = 12;
             pnlMainMenu.Visible = false;
             pnlMainMenu.MouseEnter += pnlMainMenu_MouseEnter;
@@ -943,6 +792,7 @@
             lblMainMenuHeader.ForeColor = Color.Gray;
             lblMainMenuHeader.Location = new Point(0, 0);
             lblMainMenuHeader.MaximumSize = new Size(1194, 35);
+            lblMainMenuHeader.MinimumSize = new Size(1194, 35);
             lblMainMenuHeader.Name = "lblMainMenuHeader";
             lblMainMenuHeader.Size = new Size(1194, 35);
             lblMainMenuHeader.TabIndex = 16;
@@ -1079,7 +929,7 @@
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(1704, 1056);
+            ClientSize = new Size(1219, 1056);
             Controls.Add(pnlBottom);
             Controls.Add(pnlMainMenu);
             Controls.Add(panel2);
@@ -1100,9 +950,6 @@
             spnl_LeftSideBar.ResumeLayout(false);
             groupBox_KeyData.ResumeLayout(false);
             groupBox_KeyData.PerformLayout();
-            panel6.ResumeLayout(false);
-            panel6.PerformLayout();
-            panel7.ResumeLayout(false);
             spnl_RightSideBar.Panel1.ResumeLayout(false);
             spnl_RightSideBar.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)spnl_RightSideBar).EndInit();
@@ -1110,7 +957,6 @@
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             pnlBottom.ResumeLayout(false);
-            pnlBottom.PerformLayout();
             pnlCharts.ResumeLayout(false);
             pnlCharts.PerformLayout();
             panel17.ResumeLayout(false);
@@ -1134,7 +980,6 @@
         private Panel panel1;
         private Panel panel2;
         private Panel pnlBottom;
-        private Label label1;
         private ToolTip ttInformation;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
@@ -1149,17 +994,6 @@
         private ToolStripMenuItem mnuViewCalendar;
         private ErrorProvider errorProvider;
         private ToolStripMenuItem mnuViewChart;
-        private Panel panel6;
-        private Label label5;
-        private Panel panel7;
-        private Label label6;
-        private Panel pnlChart;
-        private ComboBox cmbChartDataToDisplay;
-        private Label label7;
-        private Button btnDisplayChartStyle_Pie;
-        private Button btnDisplayChartStyle_SideBar;
-        private Button btnDisplayChartStyle_Bar;
-        private Label lblChartData;
         private Button button6;
         private Button button5;
         private Button button4;
@@ -1183,7 +1017,6 @@
         private Label label17;
         private Label label16;
         private GroupBox groupBox_KeyData;
-        private Label label19;
         private Button btnMainMenuPanel_MoveToSavings;
         private ToolStripMenuItem newToolStripMenuItem1;
         private ToolStripMenuItem mnuNewBill;

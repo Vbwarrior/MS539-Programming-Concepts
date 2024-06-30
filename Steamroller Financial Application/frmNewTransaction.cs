@@ -40,7 +40,7 @@ namespace Steamroller_Financial_Application
             columnData.Add("VendorName", "");
             columnData.Add("Item", "");
             columnData.Add("PaymentMethod", "");
-            columnData.Add("BudgetID", globals.BudgetID.ToString());
+          
 
             btnHousing.Focus();
         }
