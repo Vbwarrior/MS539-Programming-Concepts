@@ -86,10 +86,12 @@ namespace Steamroller_Financial_Application
 
 #if !DEBUG
 frmSplashScreen sp = new frmSplashScreen(db, globals);
-                    //reportForm.MdiParent = this;                 
+                         
             sp.ShowDialog();
 #endif
-
+            //frmSplashScreen sp = new frmSplashScreen(db, globals);
+             
+            //sp.ShowDialog();
 
         }
 
@@ -936,12 +938,14 @@ frmSplashScreen sp = new frmSplashScreen(db, globals);
 
                     break;
                 case "btnMainMenuPanel_DisplayReports":
-                    frmReports reportForm = new frmReports(db, globals);
-                    reportForm.ShowDialog();
+                    CustomExceptionHandler();
+                    //frmReports reportForm = new frmReports(db, globals);
+                    //reportForm.ShowDialog();
                     break;
                 case "btnMainMenuPanel_Transfer":
-                    frmTransfer transferForm = new frmTransfer(db, globals);
-                    transferForm.ShowDialog();
+                    CustomExceptionHandler();
+                    //frmTransfer transferForm = new frmTransfer(db, globals);
+                    //transferForm.ShowDialog();
                     break;
                 case "mnuNewBill":
                 case "btnMainMenuPanel_NewBill":

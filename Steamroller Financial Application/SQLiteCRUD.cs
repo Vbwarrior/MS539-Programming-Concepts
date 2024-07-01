@@ -792,13 +792,9 @@ namespace SQLiteClassLib
 
             if (reader.HasRows)
             {
-                // Check if multiple results are found
-                if (reader.Read() && reader.HasRows)
-                {
-                    result = "Multiples Found";
-                }
-                else
-                {
+               
+                if (reader.Read())
+                {                    
                     result = reader[column].ToString();
                 }
             }

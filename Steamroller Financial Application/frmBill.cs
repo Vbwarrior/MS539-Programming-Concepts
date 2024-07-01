@@ -211,7 +211,7 @@ namespace Steamroller_Financial_Application
                 pnlHouseHold.Location = new Point(0, 360);
                 pnlHouseHold.Height = 400;
                 pnlHouseHold.BringToFront();
-               
+                
             }
             else if (selection.Name == "btnLoan")
             {
@@ -223,8 +223,8 @@ namespace Steamroller_Financial_Application
             }
             else if (selection.Name == "btnCreditCard")
             {
-                Bills.Add("CategoryID", "17");
-                Bills.Add("SubGroupID", "97");
+                Bills["CategoryID"] ="17";
+                Bills["SubGroupID"]= "97";
                 pnlCreditCard.Visible = true;
                 pnlCreditCard.Location = new Point(0, 360);
                 pnlCreditCard.Height = 400;

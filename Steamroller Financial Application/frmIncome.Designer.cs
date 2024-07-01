@@ -59,6 +59,7 @@
             picSavings.TabIndex = 0;
             picSavings.TabStop = false;
             toolTip1.SetToolTip(picSavings, "Primary Savings");
+            picSavings.Click += picSavings_Click;
             // 
             // picChecking
             // 
@@ -71,6 +72,7 @@
             picChecking.TabIndex = 1;
             picChecking.TabStop = false;
             toolTip1.SetToolTip(picChecking, "Primary Checking");
+            picChecking.Click += picChecking_Click;
             // 
             // panel1
             // 
@@ -151,7 +153,6 @@
             label1.Size = new Size(38, 15);
             label1.TabIndex = 0;
             label1.Text = "From:";
-            label1.Click += label1_Click;
             // 
             // pnlHeader
             // 

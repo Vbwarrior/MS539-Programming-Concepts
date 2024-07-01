@@ -42,7 +42,7 @@
             radioButton1 = new RadioButton();
             radioButton2 = new RadioButton();
             label13 = new Label();
-            btnMainMenuPanel_MoveToSavings = new Button();
+            btnMainMenuPanel_Transfer = new Button();
             spnl_RightSideBar = new SplitContainer();
             label12 = new Label();
             label8 = new Label();
@@ -263,18 +263,18 @@
             label13.Text = "Key";
             label13.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // btnMainMenuPanel_MoveToSavings
+            // btnMainMenuPanel_Transfer
             // 
-            btnMainMenuPanel_MoveToSavings.BackColor = SystemColors.ActiveCaptionText;
-            btnMainMenuPanel_MoveToSavings.BackgroundImage = Properties.Resources.TransferFunds2;
-            btnMainMenuPanel_MoveToSavings.BackgroundImageLayout = ImageLayout.Zoom;
-            btnMainMenuPanel_MoveToSavings.Location = new Point(11, 272);
-            btnMainMenuPanel_MoveToSavings.Name = "btnMainMenuPanel_MoveToSavings";
-            btnMainMenuPanel_MoveToSavings.Size = new Size(235, 181);
-            btnMainMenuPanel_MoveToSavings.TabIndex = 22;
-            ttInformation.SetToolTip(btnMainMenuPanel_MoveToSavings, "Add Savings");
-            btnMainMenuPanel_MoveToSavings.UseVisualStyleBackColor = false;
-            btnMainMenuPanel_MoveToSavings.Click += MainMenuButtons_Click;
+            btnMainMenuPanel_Transfer.BackColor = SystemColors.ActiveCaptionText;
+            btnMainMenuPanel_Transfer.BackgroundImage = Properties.Resources.TransferFunds2;
+            btnMainMenuPanel_Transfer.BackgroundImageLayout = ImageLayout.Zoom;
+            btnMainMenuPanel_Transfer.Location = new Point(11, 272);
+            btnMainMenuPanel_Transfer.Name = "btnMainMenuPanel_Transfer";
+            btnMainMenuPanel_Transfer.Size = new Size(235, 181);
+            btnMainMenuPanel_Transfer.TabIndex = 22;
+            ttInformation.SetToolTip(btnMainMenuPanel_Transfer, "Add Savings");
+            btnMainMenuPanel_Transfer.UseVisualStyleBackColor = false;
+            btnMainMenuPanel_Transfer.Click += MainMenuButtons_Click;
             // 
             // spnl_RightSideBar
             // 
@@ -772,7 +772,7 @@
             pnlMainMenu.Controls.Add(btnMainMenuPanel_DisPlayCalendar);
             pnlMainMenu.Controls.Add(btnMainMenuPanel_OpenBudget);
             pnlMainMenu.Controls.Add(btnMainMenuPanel_DisplayReports);
-            pnlMainMenu.Controls.Add(btnMainMenuPanel_MoveToSavings);
+            pnlMainMenu.Controls.Add(btnMainMenuPanel_Transfer);
             pnlMainMenu.Location = new Point(12, 27);
             pnlMainMenu.MaximumSize = new Size(1194, 470);
             pnlMainMenu.MinimumSize = new Size(1194, 30);
@@ -1017,7 +1017,7 @@
         private Label label17;
         private Label label16;
         private GroupBox groupBox_KeyData;
-        private Button btnMainMenuPanel_MoveToSavings;
+        private Button btnMainMenuPanel_Transfer;
         private ToolStripMenuItem newToolStripMenuItem1;
         private ToolStripMenuItem mnuNewBill;
         private Button btnMainMenuPanel_OpenBudget;

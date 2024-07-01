@@ -18,11 +18,12 @@ namespace Steamroller_Financial_Application
         private SQLiteCRUD data;//Refrence to Database Instance from Main Form
         private GlobalDataAndFunctions globals;
         public Dictionary<string, string> columnData = new Dictionary<string, string>();
+        public Dictionary<string, string> conditions = new Dictionary<string, string>();
         public List<Button> createdButtons = new List<Button>();
         public int AdditionalHeight;
         private int maxitemHaloSizeWidth = 621;
         private bool eventsEnabled = false;
-
+        private string BudgetID;
         public frmNewTransaction(SQLiteCRUD db, GlobalDataAndFunctions globalData)
         {
             InitializeComponent();
@@ -30,17 +31,19 @@ namespace Steamroller_Financial_Application
             data = db;
             globals = globalData;
 
+            BudgetID = data.SelectString("BudgetID", "Budgets", globals.UserID.ToString());
         }
 
         private void NewTransaction_Load(object sender, EventArgs e)
         {
-            columnData.Add("Date", DateTime.Now.ToString("MM/dd/yy"));
-            columnData.Add("Category", "");
+            columnData.Add("TransactionDate", DateTime.Now.ToString("MM/dd/yy"));
+            columnData.Add("CategoryID", "");
+            columnData.Add("BudgetID", BudgetID);
             columnData.Add("Amount", "");
             columnData.Add("VendorName", "");
-            columnData.Add("Item", "");
-            columnData.Add("PaymentMethod", "");
-          
+            columnData.Add("SubGroupID", "");
+            columnData.Add("PaymentMethodID", "");
+
 
             btnHousing.Focus();
         }
@@ -54,7 +57,7 @@ namespace Steamroller_Financial_Application
         {
             Button xButton = sender as Button;
             string xTag = xButton.Tag.ToString();
-
+            string category;
             eventsEnabled = false;
             txtAmount.Text = string.Empty;
             txtPayTo.Text = string.Empty;
@@ -62,10 +65,10 @@ namespace Steamroller_Financial_Application
             lblCategoryHalo.Location = new Point(xButton.Location.X - 5, xButton.Location.Y - 5);
             lblCategoryHalo.Visible = true;
             lblCategoryHalo.Size = lblCategoryHalo.MinimumSize;
-            columnData["Category"] = xTag;
+            category = xTag;
             lblItemsHalo.Visible = false;
 
-            getCategoryItems();
+            getCategoryItems(category);
         }
         private void paymentMethod_Click(object sender, EventArgs e)
         {
@@ -81,11 +84,11 @@ namespace Steamroller_Financial_Application
             lblPaymentMethodHalo.Location = new Point(xButton.Location.X - 5, xButton.Location.Y - 5);
             lblPaymentMethodHalo.Visible = true;
             lblPaymentMethodHalo.Size = lblPaymentMethodHalo.MinimumSize;
-            columnData["PaymentMethod"] = xTag;
+            columnData["PaymentMethodID"] = xTag;
             xButton.BackColor = lblPaymentMethodHalo.BackColor;
         }
 
-        private void getCategoryItems()
+        private void getCategoryItems(string category)
         {
             //Get CategoryID from Categories
             List<string> columns = new List<string>();
@@ -95,10 +98,17 @@ namespace Steamroller_Financial_Application
             List<string> categoryItems = new List<string>();
 
             //Get List of SubGroup Items with Category Name from BudgetItems
-            conditions.Add("Category", columnData["Category"]);
-            orderBy.Add("SubGroup", "ASC");
-            categoryItems.AddRange(data.SelectList("SubGroup", "BudgetItems", conditions, orderBy));//Get List of Items from Database
+            conditions.Clear();
+            conditions.Add("CategoryName", category);
+            string categoryID = data.SelectString("CategoryID", "Categories", conditions);
 
+            columnData["CategoryID"] = categoryID;
+
+            conditions.Clear();
+            conditions.Add("CategoryID", categoryID);
+            conditions.Add("IsActive", "1");
+            orderBy.Add("SubCategoryName", "ASC");
+            categoryItems.AddRange(data.SelectList("SubCategoryName", "CategorySubGroups", conditions, orderBy));//Get List of Items 
             //Create Buttons for Each Item with click_event  item_Click
             createButtons(categoryItems);
 
@@ -221,8 +231,18 @@ namespace Steamroller_Financial_Application
 
             lblItemsHalo.Width = xButton.Width + 10;
             lblItemsHalo.Height = xButton.Height + 10;
-            columnData["Item"] = xTag;
+
             lblItemsHalo.Visible = true;
+
+            conditions.Clear();
+            conditions.Add("CategoryID", columnData["CategoryID"]);
+            conditions.Add("IsActive", "1");
+
+            string subGroupID = data.SelectString("SubGroupID", "CategorySubGroups", conditions);
+            columnData["SubGroupID"] = subGroupID;
+
+
+
 
             txtAmount.Focus();
 
@@ -250,14 +270,27 @@ namespace Steamroller_Financial_Application
 
             if (!(ValidateData())) { return; }
 
-             data.Insert_Into("Transactions", columnData);
+            data.Insert_Into("Transactions", columnData);
 
             txtAmount.Text = string.Empty;
             txtPayTo.Text = string.Empty;
 
             lblCategoryHalo.Visible = false;
             lblItemsHalo.Visible = false;
+            lblPaymentMethodHalo.Visible = false;
+
             DestroyButtons();
+           
+            //Reset Data Input
+            columnData.Clear();
+            columnData.Add("TransactionDate", DateTime.Now.ToString("MM/dd/yy"));
+            columnData.Add("CategoryID", "");
+            columnData.Add("BudgetID", BudgetID);
+            columnData.Add("Amount", "");
+            columnData.Add("VendorName", "");
+            columnData.Add("SubGroupID", "");
+            columnData.Add("PaymentMethodID", "");
+
         }
 
         private bool ValidateData()
@@ -266,7 +299,7 @@ namespace Steamroller_Financial_Application
             List<string> errMsg = new List<string>();
             StringBuilder displayedErrorMsg = new StringBuilder();
 
-            if (string.IsNullOrEmpty(columnData["Category"]))
+            if (string.IsNullOrEmpty(columnData["CategoryID"]))
             {
                 errMsg.Add("Select Category");
                 lblCategoryHalo.Size = lblCategoryHalo.MaximumSize;
@@ -275,7 +308,7 @@ namespace Steamroller_Financial_Application
             }
 
 
-            if (string.IsNullOrEmpty(columnData["Item"]))
+            if (string.IsNullOrEmpty(columnData["SubGroupID"]))
             {
                 errMsg.Add("Select the category item.");
                 lblItemsHalo.Size = new Size(lblTopBar.Width, lblBottomBar.Location.Y - lblTopBar.Location.Y);
@@ -319,7 +352,7 @@ namespace Steamroller_Financial_Application
                 isValid = false;
             }
 
-            if (string.IsNullOrEmpty(columnData["PaymentMethod"]))
+            if (string.IsNullOrEmpty(columnData["PaymentMethodID"]))
             {
                 errMsg.Add("Select payment type.");
                 lblPaymentMethodHalo.Size = lblPaymentMethodHalo.MaximumSize;

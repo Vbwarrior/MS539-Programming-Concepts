@@ -47,11 +47,8 @@ namespace Steamroller_Financial_Application
             lblCategoryName = new Label();
             label4 = new Label();
             picControlKnob = new PictureBox();
-            button3 = new Button();
             txtAmount = new TextBox();
-            button2 = new Button();
             lblGreenBar = new Label();
-            button1 = new Button();
             lblRedBar = new Label();
             lblOrangeBar = new Label();
             ttBudget = new ToolTip(components);
@@ -186,11 +183,8 @@ namespace Steamroller_Financial_Application
             pnlBudgetCategory_Alocator.Controls.Add(lblCategoryName);
             pnlBudgetCategory_Alocator.Controls.Add(label4);
             pnlBudgetCategory_Alocator.Controls.Add(picControlKnob);
-            pnlBudgetCategory_Alocator.Controls.Add(button3);
             pnlBudgetCategory_Alocator.Controls.Add(txtAmount);
-            pnlBudgetCategory_Alocator.Controls.Add(button2);
             pnlBudgetCategory_Alocator.Controls.Add(lblGreenBar);
-            pnlBudgetCategory_Alocator.Controls.Add(button1);
             pnlBudgetCategory_Alocator.Controls.Add(lblRedBar);
             pnlBudgetCategory_Alocator.Controls.Add(lblOrangeBar);
             pnlBudgetCategory_Alocator.Location = new Point(757, 217);
@@ -254,6 +248,7 @@ namespace Steamroller_Financial_Application
             btnAddItemsToCategory.TabIndex = 13;
             ttBudget.SetToolTip(btnAddItemsToCategory, "Add new item to selected category.");
             btnAddItemsToCategory.UseVisualStyleBackColor = true;
+            btnAddItemsToCategory.Visible = false;
             // 
             // label12
             // 
@@ -288,7 +283,7 @@ namespace Steamroller_Financial_Application
             // 
             // picControlKnob
             // 
-            picControlKnob.BackColor = Color.Transparent;
+            picControlKnob.BackColor = Color.DimGray;
             picControlKnob.Image = Properties.Resources.SliderControlKnob;
             picControlKnob.Location = new Point(91, 123);
             picControlKnob.Name = "picControlKnob";
@@ -299,21 +294,6 @@ namespace Steamroller_Financial_Application
             picControlKnob.MouseDown += picControlKnob_MouseDown;
             picControlKnob.MouseMove += picControlKnob_MouseMove;
             picControlKnob.MouseUp += picControlKnob_MouseUp;
-            // 
-            // button3
-            // 
-            button3.BackgroundImage = Properties.Resources.Black_Metal;
-            button3.BackgroundImageLayout = ImageLayout.Stretch;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button3.ForeColor = Color.FromArgb(255, 192, 128);
-            button3.Location = new Point(467, 247);
-            button3.Name = "button3";
-            button3.Size = new Size(62, 26);
-            button3.TabIndex = 9;
-            button3.Text = "Name";
-            button3.UseVisualStyleBackColor = true;
             // 
             // txtAmount
             // 
@@ -328,21 +308,6 @@ namespace Steamroller_Financial_Application
             txtAmount.Text = "0";
             txtAmount.TextAlign = HorizontalAlignment.Center;
             // 
-            // button2
-            // 
-            button2.BackgroundImage = Properties.Resources.Black_Metal;
-            button2.BackgroundImageLayout = ImageLayout.Stretch;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button2.ForeColor = Color.Orchid;
-            button2.Location = new Point(360, 247);
-            button2.Name = "button2";
-            button2.Size = new Size(62, 26);
-            button2.TabIndex = 8;
-            button2.Text = "Name";
-            button2.UseVisualStyleBackColor = true;
-            // 
             // lblGreenBar
             // 
             lblGreenBar.BackColor = Color.FromArgb(128, 255, 0);
@@ -350,23 +315,6 @@ namespace Steamroller_Financial_Application
             lblGreenBar.Name = "lblGreenBar";
             lblGreenBar.Size = new Size(15, 10);
             lblGreenBar.TabIndex = 2;
-            // 
-            // button1
-            // 
-            button1.AutoSize = true;
-            button1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            button1.BackgroundImage = Properties.Resources.Black_Metal;
-            button1.BackgroundImageLayout = ImageLayout.Stretch;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button1.ForeColor = Color.Aquamarine;
-            button1.Location = new Point(253, 247);
-            button1.Name = "button1";
-            button1.Size = new Size(50, 25);
-            button1.TabIndex = 7;
-            button1.Text = "Name";
-            button1.UseVisualStyleBackColor = true;
             // 
             // lblRedBar
             // 
@@ -393,7 +341,7 @@ namespace Steamroller_Financial_Application
             btnTaxes.Name = "btnTaxes";
             btnTaxes.Size = new Size(100, 100);
             btnTaxes.TabIndex = 17;
-            btnTaxes.Tag = "Taxes";
+            btnTaxes.Tag = "Taxes & Fees";
             ttBudget.SetToolTip(btnTaxes, "Taxes & Fees");
             btnTaxes.UseVisualStyleBackColor = true;
             btnTaxes.Click += Category_Click;
@@ -421,7 +369,7 @@ namespace Steamroller_Financial_Application
             btnTravel.Name = "btnTravel";
             btnTravel.Size = new Size(100, 100);
             btnTravel.TabIndex = 12;
-            btnTravel.Tag = "Travel";
+            btnTravel.Tag = "Travel & Leisure";
             ttBudget.SetToolTip(btnTravel, "Travel & Leisure");
             btnTravel.UseVisualStyleBackColor = true;
             btnTravel.Click += Category_Click;
@@ -449,7 +397,7 @@ namespace Steamroller_Financial_Application
             btnPersonalCare.Name = "btnPersonalCare";
             btnPersonalCare.Size = new Size(100, 100);
             btnPersonalCare.TabIndex = 14;
-            btnPersonalCare.Tag = "Personal Care";
+            btnPersonalCare.Tag = "Personal Care & Grooming";
             ttBudget.SetToolTip(btnPersonalCare, "Personal Care & Grooming");
             btnPersonalCare.UseVisualStyleBackColor = true;
             btnPersonalCare.Click += Category_Click;
@@ -463,7 +411,7 @@ namespace Steamroller_Financial_Application
             btnsavings.Name = "btnsavings";
             btnsavings.Size = new Size(100, 100);
             btnsavings.TabIndex = 15;
-            btnsavings.Tag = "Savings";
+            btnsavings.Tag = "Savings & Investments";
             ttBudget.SetToolTip(btnsavings, "Savings & Investments");
             btnsavings.UseVisualStyleBackColor = true;
             btnsavings.Click += Category_Click;
@@ -477,7 +425,7 @@ namespace Steamroller_Financial_Application
             btnEducation.Name = "btnEducation";
             btnEducation.Size = new Size(100, 100);
             btnEducation.TabIndex = 16;
-            btnEducation.Tag = "Education";
+            btnEducation.Tag = "Education & After School Care";
             ttBudget.SetToolTip(btnEducation, "Education & After School Care");
             btnEducation.UseVisualStyleBackColor = true;
             btnEducation.Click += Category_Click;
@@ -505,7 +453,7 @@ namespace Steamroller_Financial_Application
             btnMedicalAndHealthCare.Name = "btnMedicalAndHealthCare";
             btnMedicalAndHealthCare.Size = new Size(100, 100);
             btnMedicalAndHealthCare.TabIndex = 19;
-            btnMedicalAndHealthCare.Tag = "Medical ";
+            btnMedicalAndHealthCare.Tag = "Medical Care";
             ttBudget.SetToolTip(btnMedicalAndHealthCare, "Health Care");
             btnMedicalAndHealthCare.UseVisualStyleBackColor = true;
             btnMedicalAndHealthCare.Click += Category_Click;
@@ -546,7 +494,7 @@ namespace Steamroller_Financial_Application
             btnGroceries.Name = "btnGroceries";
             btnGroceries.Size = new Size(100, 100);
             btnGroceries.TabIndex = 22;
-            btnGroceries.Tag = "Groceries";
+            btnGroceries.Tag = "Food";
             ttBudget.SetToolTip(btnGroceries, "Groceries & Household Supplies");
             btnGroceries.UseVisualStyleBackColor = true;
             btnGroceries.Click += Category_Click;
@@ -574,7 +522,7 @@ namespace Steamroller_Financial_Application
             btnPets.Name = "btnPets";
             btnPets.Size = new Size(100, 100);
             btnPets.TabIndex = 24;
-            btnPets.Tag = "Pets";
+            btnPets.Tag = "Pet Care & Accessories";
             ttBudget.SetToolTip(btnPets, "Pet Care & Accessories");
             btnPets.UseVisualStyleBackColor = true;
             btnPets.Click += Category_Click;
@@ -588,7 +536,7 @@ namespace Steamroller_Financial_Application
             btnGifts.Name = "btnGifts";
             btnGifts.Size = new Size(100, 100);
             btnGifts.TabIndex = 25;
-            btnGifts.Tag = "Gifts";
+            btnGifts.Tag = "Gifts & Contributions";
             ttBudget.SetToolTip(btnGifts, "Gifts & Contributions");
             btnGifts.UseVisualStyleBackColor = true;
             btnGifts.Click += Category_Click;
@@ -649,9 +597,6 @@ namespace Steamroller_Financial_Application
         private Label lblRedBar;
         private PictureBox picControlKnob;
         private TextBox txtAmount;
-        private Button button1;
-        private Button button2;
-        private Button button3;
         private Label label3;
         private Panel pnlBudgetCategory_Alocator;
         private Label lblAssignedAmount;

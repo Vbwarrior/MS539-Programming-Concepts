@@ -53,7 +53,7 @@ namespace Steamroller_Financial_Application
         private void btnSearchDatabase_Click(object sender, EventArgs e)
         {
             //BuildSelectStatment();//Load Filter Data in SQLQuery
-            //using (SQLiteDataReader reader = data.FetchData(sqlQuery))//Execurte Query
+            //using (SQLiteDataReader reader = data.SelectReader(sqlQuery))//Execurte Query
             //{
 
             //    dgDataDisplay.Rows.Clear();

@@ -310,7 +310,7 @@
             btnCash.Name = "btnCash";
             btnCash.Size = new Size(76, 51);
             btnCash.TabIndex = 18;
-            btnCash.Tag = "Cash";
+            btnCash.Tag = "1";
             toolTip1.SetToolTip(btnCash, "Cash");
             btnCash.UseVisualStyleBackColor = false;
             btnCash.Click += paymentMethod_Click;
@@ -344,7 +344,7 @@
             btnOnlineBanking.Name = "btnOnlineBanking";
             btnOnlineBanking.Size = new Size(76, 51);
             btnOnlineBanking.TabIndex = 22;
-            btnOnlineBanking.Tag = "Online Banking";
+            btnOnlineBanking.Tag = "5";
             toolTip1.SetToolTip(btnOnlineBanking, "Online Banking");
             btnOnlineBanking.UseVisualStyleBackColor = false;
             btnOnlineBanking.Click += paymentMethod_Click;
@@ -363,7 +363,7 @@
             btnCheck.Name = "btnCheck";
             btnCheck.Size = new Size(76, 51);
             btnCheck.TabIndex = 19;
-            btnCheck.Tag = "Check";
+            btnCheck.Tag = "2";
             toolTip1.SetToolTip(btnCheck, "Cash");
             btnCheck.UseVisualStyleBackColor = false;
             btnCheck.Click += paymentMethod_Click;
@@ -382,7 +382,7 @@
             btnCreditCard.Name = "btnCreditCard";
             btnCreditCard.Size = new Size(76, 51);
             btnCreditCard.TabIndex = 20;
-            btnCreditCard.Tag = "Charge";
+            btnCreditCard.Tag = "3";
             toolTip1.SetToolTip(btnCreditCard, "Cash");
             btnCreditCard.UseVisualStyleBackColor = false;
             btnCreditCard.Click += paymentMethod_Click;
@@ -401,7 +401,7 @@
             btnDebitCard.Name = "btnDebitCard";
             btnDebitCard.Size = new Size(76, 51);
             btnDebitCard.TabIndex = 21;
-            btnDebitCard.Tag = "Debit Card";
+            btnDebitCard.Tag = "6";
             toolTip1.SetToolTip(btnDebitCard, "Cash");
             btnDebitCard.UseVisualStyleBackColor = false;
             btnDebitCard.Click += paymentMethod_Click;
